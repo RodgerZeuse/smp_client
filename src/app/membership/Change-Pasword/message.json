@@ -1,0 +1,10 @@
+{
+    "errors":{
+        "changePasswordError":"Your current password was incorrect.",
+        "changePasswordSuccess":"Password is successfully changed.",
+        "passworError":"Enter the password and password must be", 
+        "passwordMatchError":"Passwords must be same",
+        "currentPassword":"Enter the current password."
+    }
+    
+}

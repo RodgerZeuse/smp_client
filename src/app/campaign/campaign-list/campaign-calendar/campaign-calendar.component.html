@@ -1,0 +1,79 @@
+<div *ngIf="campaignCalendar.isMessageBoxShow" class="custom-modal">
+  <campaign-details [campaign]="campaign"></campaign-details>
+</div>
+<ng-template #customCellTemplate let-day="day" let-locale="locale">
+  <div class="cal-cell-top">
+    <span class="cal-day-number">{{ day.date | calendarDate:'monthViewDayNumber':locale }}</span>
+    <span class="cal-day-badge" *ngIf="day.badgeTotal > 0">{{ day.badgeTotal }}</span>
+  </div>
+  <div *ngIf="day.events.length > 0  " class="event-class">
+
+    <div *ngFor="let event of day.events" mwlDraggable style="position:relative" [dropData]="{event: event}">
+      <img src="{{icons.canceledIcon}}" *ngIf="event.meta.state=='Canceled'" class="cancel-icon">
+      <img [ngClass]=" campaignCalendar.isMousePointerActive ? 'pointer-event-disable' : 'pointer-event-active'"
+        (mousedown)="releazePointer()" class="{{event.meta.state}} hello siz-img" (mouseenter)="handleEvent('ShowDetails', event)"
+        *ngIf="event.meta.mediaFiles[0] && event.meta.mediaFiles[0].name " src="{{imagePath+event.meta.mediaFiles[0].name}}">
+
+      <img [ngClass]="campaignCalendar.isMousePointerActive ? 'pointer-event-disable' : 'pointer-event-active'"
+        (mousedown)="releazePointer()" class="{{event.meta.state}} siz-img" (mouseenter)="handleEvent('ShowDetails', event)"
+        *ngIf="!event.meta.mediaFiles[0] ||(event.meta.mediaFiles[0] && !event.meta.mediaFiles[0].name)" src="{{icons.groupIcon}}">
+
+    </div>
+  </div>
+</ng-template>
+
+<div class="button-bar">
+  <div class="btn-group">
+    <div class="btn btn-primary bor-w" mwlCalendarPreviousView [view]="campaignCalendar.calendarView" (click)="selectedButton('previous')"
+      [(viewDate)]="campaignCalendar.currentViewDate" [class.active]="campaignCalendar.currentViewDate < today && !todayIsActive"
+      (viewDateChange)="campaignCalendar.activeDayIsOpen = false">
+      Previous
+    </div>
+    <div class="btn btn-primary bor-w" mwlCalendarToday [(viewDate)]="campaignCalendar.currentViewDate" (click)="selectedButton('today')"
+      [class.active]="todayIsActive">
+      Today
+    </div>
+    <div class="btn btn-primary bor-w" mwlCalendarNextView [view]="campaignCalendar.calendarView" (click)="selectedButton('next')"
+      [(viewDate)]="campaignCalendar.currentViewDate" [class.active]="campaignCalendar.currentViewDate > today && !todayIsActive"
+      (viewDateChange)="campaignCalendar.activeDayIsOpen = false">
+      Next
+    </div>
+  </div>
+
+  <h3 style="margin-left: 2%;">{{ campaignCalendar.currentViewDate | calendarDate:(campaignCalendar.calendarView +
+    'ViewTitle'):'en' }}</h3>
+  <div class="btn-group" style="margin-left: 2%;">
+    <div class="btn btn-primary bor-w" (click)="campaignCalendar.calendarView = campaignCalendar.CalendarView.Month"
+      [class.active]="campaignCalendar.calendarView === campaignCalendar.CalendarView.Month">
+      Month
+    </div>
+    <div class="btn btn-primary bor-w" (click)="campaignCalendar.calendarView = campaignCalendar.CalendarView.Week"
+      [class.active]="campaignCalendar.calendarView === campaignCalendar.CalendarView.Week">
+      Week
+    </div>
+    <div class="btn btn-primary bor-w" (click)="campaignCalendar.calendarView = campaignCalendar.CalendarView.Day"
+      [class.active]="campaignCalendar.calendarView === campaignCalendar.CalendarView.Day">
+      Day
+    </div>
+  </div>
+</div>
+<br>
+
+<div [ngSwitch]="campaignCalendar.calendarView">
+  <mwl-calendar-month-view [viewDate]="campaignCalendar.currentViewDate" *ngSwitchCase="campaignCalendar.CalendarView.Month"
+    [events]="campaignCalendar.calendarEvents" [refresh]="campaignCalendar.refresh" (beforeViewRender)="beforeMonthViewRender($event)"
+    [activeDayIsOpen]="campaignCalendar.activeDayIsOpen" (dayClicked)="showDayEvents($event.day)" [cellTemplate]="customCellTemplate"
+    (eventTimesChanged)="rescheduleCampaignDate($event)" tooltip="Hello" (eventClicked)="handleEvent('ShowDetails', $event.event)">
+  </mwl-calendar-month-view>
+  <mwl-calendar-week-view *ngSwitchCase="campaignCalendar.CalendarView.Week" [hourSegments]="6" [viewDate]="campaignCalendar.currentViewDate"
+    [events]="campaignCalendar.calendarEvents" [refresh]="campaignCalendar.refresh" (eventTimesChanged)="rescheduleCampaignDateAndTime($event)"
+    (eventClicked)="handleEvent('ShowDetails', $event.event)">
+  </mwl-calendar-week-view>
+  <mwl-calendar-day-view *ngSwitchCase="campaignCalendar.CalendarView.Day" [hourSegments]="6" [viewDate]="campaignCalendar.currentViewDate"
+    [events]="campaignCalendar.calendarEvents" [refresh]="campaignCalendar.refresh" (eventTimesChanged)="rescheduleCampaignTime($event)"
+    (eventClicked)="handleEvent('ShowDetails', $event.event)">
+  </mwl-calendar-day-view>
+</div>
+
+
+

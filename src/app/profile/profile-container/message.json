@@ -1,0 +1,7 @@
+{
+    "errors": {
+        "firstNameError":"Enter the first name.",
+        "lastNameError":"Enter the last name.",
+        "nameLength":"Name at least 3 characters long.."
+    }
+}

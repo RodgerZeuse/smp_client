@@ -1,0 +1,38 @@
+.example-container {
+     display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+  }
+  table {
+    width: 100%;
+  }
+  .icon-img{
+   
+width: 35px;
+
+  }
+  .search-card-wrapper{
+    padding: 0;
+  } 
+  .mat-select-value {
+    max-width: none !important;
+    width: none !important;
+  }
+.userName{
+  width: 95%;
+}
+.login-card{
+  width: 95%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 15px;
+  /* height: 50px; */
+}
+.w-100{
+  width: 95% !important;
+}
+.hh:hover{
+  background-color: grey;
+  color: white;
+}

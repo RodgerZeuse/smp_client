@@ -1,0 +1,20 @@
+{
+    "groupRights": {
+        "create": "CREATE",
+        "updatemy": "UPDATE_MY",
+        "deleteany": "DELETE_ANY",
+        "updateany": "UPDATE_ANY",
+        "deletemy": "DELETE_MY",
+        "viewmy": "VIEW_MY",
+        "showarchive":"SHOW_ARCHIVE",
+        "movetoarchive":"MOVE_TO_ARCHIVE",
+        "reschedulemy":"RESCHEDULE_MY",
+        "rescheduleany":"RESCHEDULE_ANY",
+        "managesmaccounts":"MANAGE_SM_ACCOUNTS",
+        "managestatus":"MANAGE_STATUS",
+        "addcomments": "ADD_COMMENTS",
+        "addststus": "ADD_STATUS",
+        "viewany": "VIEW_ANY",
+        "managecompany": "MANAGE_COMPANY"
+    }
+}

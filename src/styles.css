@@ -1,0 +1,217 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~ng-pick-datetime/assets/style/picker.min.css";
+@import "../node_modules/angular-calendar/css/angular-calendar.css";
+@import 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css';
+@import "../node_modules/font-awesome/css/font-awesome.css";
+
+body{
+   background-image: url(/assets/images/login-bg.jpg);
+ 
+  background-size: cover;
+  margin: 0;
+}
+
+.mat-tooltip {
+  font-size: 14px !important;
+  white-space: pre-line;
+}
+
+.mat-tab-label-active{
+  background-color: #3f51b5;
+  color: white;
+  opacity: 1 !important;
+}
+
+.navlist{
+    float: right;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    color: darkslategray;
+    margin-top: 20px;
+}
+.nlist{
+    margin-left: 30px;
+}
+.header{
+
+    border-bottom: 1px solid rgba(0,0,0,.03);
+    background: rgba(0,0,0,.03);
+    height: 45px;
+    align-content: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgba(0,0,0,.54);
+    margin-bottom: 20px;
+  
+    } 
+    .example-card {
+    
+      margin-top: 20px;
+      margin-bottom: 50px;
+      /* padding: 0 !important; */
+      width: 95%;
+      margin-left: auto;
+      margin-right: auto;
+    } 
+    
+    .btn-control{
+      display: flex;
+      justify-content: space-between;
+      margin-right: 20px;
+    }
+    .mt-15{
+      margin-top: 40px;
+      width: 95% !important;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+              }
+    .mt-50{
+      margin-top: 50px;
+    }
+    .mt-20{
+      margin-top: 20px;
+    }
+    .mb-20{
+      margin-bottom: 20px;
+    }
+    .mb-10{
+      margin-bottom: 10px;
+    }
+    .ml-10{
+      margin-left: 10px
+    }
+    .w-100{
+      width: 100%;
+    }
+    .mb-0{
+      margin-bottom: 0;
+    }
+    .pb-0{
+      padding-bottom: 0
+    }
+    .pb-10{
+      padding-bottom: 10px;
+    }
+    .pt-10{
+     padding-top: 10px;
+    }
+    .position-relative{
+      position: relative;
+    }
+    .position-absolute{
+      position: absolute;
+    }
+    .sm-img{
+      height:30px;
+      width:30px;
+    }
+    .mat-menu-panel.myMenu{
+      max-width: none;
+      width: 60vw;
+      margin-left: -8px;
+      margin-top: 20px;
+    }
+
+
+    /* .cdk-global-overlay-wrapper {
+      align-items: flex-start !important;
+      justify-content: flex-end !important
+    }  */
+  
+ .mt-30{
+  width: 91%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 15px;
+ }
+ .single-crop-box{
+  border:1px solid #3f51b5;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.1)
+}
+.rb{
+  background: #3f51b5;
+}.rt{
+  background: #3f51b5;
+}.lt{
+  background: #3f51b5;
+}.lb{
+  background: #3f51b5;
+}
+.crop-box.FB{
+  border:1px solid #4267b2;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.1)
+}
+.crop-box.IG{
+  border:1px solid #fb3958;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.1)
+}
+.crop-box.PI{
+  border:1px solid rgb(189, 8, 28);
+  position: absolute;
+  background: rgba(0, 0, 0, 0.1)
+}
+.crop-box.TW{
+  border:1px solid #1da1f2;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.1)
+}
+.crop-box.IN{
+  border:1px solid #007785;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.1)
+}
+.FB-edge{
+  background: url("assets/images/facebook.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.IG-edge{
+  background: url("assets/images/instagram.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.IN-edge{
+  background: url("assets/images/linkedin.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.PI-edge{
+  background: url("assets/images/pinterest.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.TW-edge{
+  background: url("assets/images/twitter.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+/* .FB{
+  background: #4267b2;
+}
+.PI{
+  background: rgb(189, 8, 28);
+}
+.TW{
+  background:#1da1f2;
+}
+.IN{
+  background: #007785;
+}
+.IG{
+  background: #fb3958;
+} */
+.custom-dialog-container .mat-dialog-container{
+  padding-left: 0
+}
+.mat-drawer-backdrop.mat-drawer-shown{
+  background-color: transparent!important;
+}
+.app-them-color{
+  color: #303f9f;
+}

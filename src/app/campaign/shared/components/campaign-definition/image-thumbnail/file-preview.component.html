@@ -1,0 +1,3 @@
+<img *ngIf="fileToPlaceThumbnail.thumbnailName" class="selected-imgs" (click)="openImagePopup()" src="{{thumbnailSrc | async}}"> 
+<img *ngIf="fileToPlaceThumbnail.thumbnailFile" (click)="openImagePopup()" class="selected-imgs" src="{{(thumbnailSrc | async)}}">
+<!-- {{thumbnailFile | json}} -->

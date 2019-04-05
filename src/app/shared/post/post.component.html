@@ -1,0 +1,22 @@
+<!-- {{post | json}} -->
+<mat-card *ngIf="post">
+  <mat-card-content>
+      <div class="post-header">
+          <div *ngIf ="post.socialMediaInfo">
+                <img class="network-image" [src]="post.socialMediaInfo.thumbnail">
+                <span>{{post.socialMediaInfo.name}}</span>
+          </div>
+          <div>
+               <img class="network-image" [src]="post.network == 'FB' ? icons.fbIcon : post.network == 'TW' ? icons.twitterIcon : post.network == 'IG' ? icons.instaIcon : post.network == 'PI' ? icons.pinterestIcon : post.network == 'YT' ? icons.youtubeIcon : post.network == 'IN' ? icons.linkedinIcon : ''">
+            <span>{{post.network == 'FB' ? 'FACEBOOK' : post.network == 'TW' ? 'TWITTER' : post.network == 'IG' ? 'INSTAGARAM' : post.network == 'PI' ? 'PINTEREST' : post.network == 'YT' ? 'YOUTUBE' : post.network == 'IN' ? 'LINKEDIN' : ''}}</span>
+          </div>
+           
+        </div>
+      <div *ngIf="post.mediaFiles && post.mediaFiles.length > 0">
+          <img class="postImg" *ngFor="let img of post.mediaFiles" src="{{imageUrl + img.name}}">
+      </div>
+      <div *ngIf="!post.description">
+           {{ post.description}}
+    </div>
+  </mat-card-content>
+</mat-card>

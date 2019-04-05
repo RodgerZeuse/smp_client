@@ -1,0 +1,18 @@
+<form [formGroup]="paymentInformationForm">
+        <div class="container">
+                <mat-form-field >
+                        <mat-icon>credit_card</mat-icon>
+                        <input matInput placeholder="&emsp;&emsp;Credit card number" [textMask]="{mask: cardMask}" formControlName="cardNumber"  id="cardNumber" name="cardNumber" #cardNumber [(ngModel)]= user.cardNumber /><br>
+                </mat-form-field> 
+                        <mat-error class="error-message" *ngIf="!paymentInformationForm.get('cardNumber').valid && paymentInformationForm.get('cardNumber').dirty ">Invalid card number</mat-error>
+                <mat-form-field>
+                        <input [(ngModel)]=user.expiryDate formControlName="expiryDate" name="expiryDate" [textMask]="{mask: dateMask}" #expiryDate id="expiryDate" matInput  placeholder="&emsp;&emsp;Choose expiry date">
+                </mat-form-field>   
+                        <mat-error class="error-message" *ngIf="!paymentInformationForm.get('expiryDate').valid && (paymentInformationForm.get('expiryDate').dirty )">Invalid expiry date.</mat-error>
+                <mat-form-field>
+                        <mat-icon>credit_card</mat-icon>
+                        <input matInput placeholder="&emsp;&emsp;CVV" formControlName="cardCvv" type="text" [textMask]="{mask: cvvMask}" name="cardCvv"  id="cardCvv" #cardCvv [(ngModel)]= user.cardCvv  >
+                </mat-form-field>
+                        <mat-error class="error-message" *ngIf="!paymentInformationForm.get('cardCvv').valid && paymentInformationForm.get('cardCvv').dirty ">Invalid CVV</mat-error>
+        </div>
+</form>

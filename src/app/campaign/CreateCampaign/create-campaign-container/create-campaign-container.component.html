@@ -1,0 +1,29 @@
+
+<my-attached-social-networks 
+[myAttachedSocialAccounts$]="socialAccountsStore.ConnectedAccounts" 
+  [selectedSocialAccountsArtifactsArray$]="selectedSocialAccountsArtifactsArray$"
+  (onSelectSocialAccountArtifact)="addSelectedSocialAccountArtifact($event)"
+  (onRemoveAccountsPage)="onRemoveAccountsArtifact($event)">
+</my-attached-social-networks>
+
+<campaign-definition 
+(onChangeDescription)="onChangeDescription($event)"
+(onRemoveMediaFile)="onRemoveMediaFile($event)"
+(onAddMediaFile)="onAddMediaFile($event)"
+(onCropImage)="onCropImage($event)"
+(onAddOrRemoveTags)="onAddOrRemoveTags($event)"
+[campaign$]="inputCampaign$"
+[customStatuses$]="campaignStatusStore.publishableStatuses"
+[selectedSocialNetwork$]="selectedNetworks$"
+(onCancelCampaign)="refreshAllVariables($event)"
+(onCampaignSave)="onCreate($event)">
+
+</campaign-definition>
+
+  <post-list   [posts$]="postsArrayToShow$">
+</post-list>
+
+
+
+
+

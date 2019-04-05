@@ -1,0 +1,48 @@
+table {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+
+    text-align: center;
+  }
+  .icon-img{
+   
+width: 35px;
+
+  }
+  .disconnect{
+    color: #721c24;
+    text-transform: capitalize;
+  }
+  .connected{
+    color: #155724;
+    text-transform: capitalize;
+  }
+  .text-table{
+    width:35px
+  }
+  th.mat-header-cell{
+    text-align: center;
+  }
+  th.mat-header-cell:first-child {
+  padding-left: 0;
+  width: 200px;
+  }
+  th.mat-header-cell:last-child {
+    padding-right: 0;
+    width: 200px;
+    }
+    td.mat-cell:first-child{
+      padding-left: 0;
+    }
+    td.mat-cell:last-child{
+      padding-right: 0;
+    }
+    .mat-header-cell {
+      font-size: 14px;
+      font-weight: 600;
+  }
+   mat-chip-list {
+    display: inline-block !important;
+    text-transform: capitalize;
+  }

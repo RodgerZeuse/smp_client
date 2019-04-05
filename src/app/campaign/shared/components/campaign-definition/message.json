@@ -1,0 +1,11 @@
+{
+    "errors": {
+        "mediaFilesMaxError": "You can choose only 5 media files for a  campaign.",
+        "mediaFilesPintrestError":"Please select at least one image for pinterest campaign",
+        "mediaFilesForScheduleError":"Please select at least one page to schedule a campaign",
+        "mediaFilesForDateTime":"The time you've entered is invalid. It seems you're trying to post something before the current date and time.",
+        "titleError":"Title is",
+        "descriptionError":"Description is",
+        "descriptionError2":""
+    }
+}

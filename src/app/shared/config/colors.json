@@ -1,0 +1,24 @@
+{
+  "colors": {
+    "red": {
+      "primary": "#ff0000",
+      "secondary": "#e60000"
+    },
+    "blue": {
+      "primary": "#1e90ff",
+      "secondary": "#D1E8FF"
+    },
+    "yellow": {
+      "primary": "#ffff00",
+      "secondary": "#ffff1a"
+    },
+    "green": {
+      "primary": "#009900",
+      "secondary": "#00e600"
+    },
+    "pink": {
+      "primary": "#ff4d6a",
+      "secondary": "#ff6680"
+    }
+  }
+}

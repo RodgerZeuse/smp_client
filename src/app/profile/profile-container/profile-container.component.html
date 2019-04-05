@@ -1,0 +1,13 @@
+<mat-grid-list cols="5" rowHeight="600px">
+  <mat-grid-tile [colspan]="2" [rowspan]="1" class="noshadow">
+    <!-- <mat-card class="w-90"> -->
+      <profile-info (profilePic)="profilePic($event)"></profile-info>
+    <!-- </mat-card> -->
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]="3" [rowspan]="1">
+    <mat-card class="w-80">
+      
+      <eidt-profile (onUpdate)="onUpdate($event)"></eidt-profile>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>

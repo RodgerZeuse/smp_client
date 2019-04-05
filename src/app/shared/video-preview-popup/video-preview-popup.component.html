@@ -1,0 +1,14 @@
+<div class="outer-div">
+    <!-- {{img | json}} -->
+    <mat-icon (click)="close()" class="close-icon">cancel</mat-icon>
+    <video *ngIf="img.type=='video/mp4' && !img.thumbnailName" class="img" controls>
+        <source [src]="img.src">
+    </video>
+    <video class="img" *ngIf="img.type=='video/mp4' && !img.src" controls>
+        <source [src]="imagePath+img.name">
+
+    </video>
+
+    <img class="img" *ngIf="!img.tumbnailName && (img.type=='image/png' || img.type=='image/jpeg')" src="{{img.src}}">
+    <img class="img server" *ngIf="img.tumbnailName && (img.type=='image/png' || img.type=='image/jpeg') " src="{{img.src}}">
+</div>

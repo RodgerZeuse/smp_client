@@ -1,0 +1,22 @@
+.selected-imgs{
+    border: black 1px solid;
+  height :80px;
+  width : 100px;
+  }
+  .video-front-layer{
+    padding-top: 25px;
+    padding-left: 35px;
+    height: 80px;
+    position: absolute;
+    background: black;
+    z-index: 0;
+    width: 100px;
+    margin-top: 0px;
+    opacity: 0.4;
+    cursor: pointer;
+}
+.play-icon{
+  color: white;
+  font-size: xx-large;
+  cursor: pointer;
+}

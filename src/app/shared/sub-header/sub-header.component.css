@@ -1,0 +1,9 @@
+.sub-header-card{
+    background-color: #303f9f;
+    color: rgba(255, 255,255, .7);
+}
+.sub-header-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

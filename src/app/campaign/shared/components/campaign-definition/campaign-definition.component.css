@@ -1,0 +1,199 @@
+
+#dropzone {
+  border:1px solid blue;
+  width:300px;
+  height:100px;
+  display: flex;
+}
+.example-container {
+    display: flex;
+    flex-direction: column;
+    /* border: 1px solid gray; */
+    /* border-radius: 5px; */
+    padding: 10px
+  }
+  mat-card-content{
+    margin-bottom:40px;
+  }
+  .example-container > * {
+    width: 100%;
+  }
+ 
+  .btn-size{
+    text-align: center;
+    width: 100px !important;
+  }
+ 
+ 
+  mat-card-title{
+margin: 0
+  }
+  .btn-file{
+    float: left
+  }
+  /* .selected-imgs{
+    width: 100px;
+    height: 100px;
+  } */
+  .mat-card-image:first-child {
+    width: auto !important;
+    margin-top: 0px;
+  }
+  .clear-icon{
+    /* width: 15px; */
+    height: 15px;
+    cursor: pointer;
+    display: block;
+    padding-left: 40px;
+    position: absolute;
+    right: -7px;
+    top: -7px;
+    z-index: 2;
+  }
+  .header{
+align-content: center;
+align-items: center;
+display: flex;
+justify-content: center; 
+padding: 8px 20px; color:rgba(0, 0, 0, 0.54); 
+background: rgba(0,0,0,.03);
+box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+  
+}
+.cdk-overlay-container {
+  position: relative !important;
+  /* z-index: 1090; */
+  right: 0 !important;
+}
+.card-flex{
+  display: flex;
+}
+.open-calander{
+  padding-top: 5px;
+  padding-right: 10px;
+  color: lightslategray;
+}
+ .selected-imgs{
+  border: black 1px solid;
+height :inherit;
+width : inherit;
+}
+.container{
+margin: 5px;
+}
+.custom-status{
+  display: inline-block;
+    position: relative;
+    text-align: left;
+    width: 50%;
+}
+.custom-status-color{
+  display: inline-block;
+    position: relative;
+    text-align: left;
+    width: 50%;
+    /* background-color: rgb(33, 223, 166); */
+    height: 20px;
+    border: 2px solid;
+    padding: 8px;
+}
+.status-text{
+  margin-top: 9px;
+  position: absolute;
+}
+
+/* .video-front-layer{
+    height: 91px;
+    position: absolute;
+    background: white;
+    z-index: 17;
+    width: 100px;
+    margin-top: 9px;
+    opacity: 0.1;
+} */
+.images-ration{
+  height: 100px;
+  width: 100px;
+  margin-right: 10px;
+  position: relative;
+}
+.align-content-center{
+  display: inherit
+}
+.calendar-input{
+  border-radius: 2px;
+  text-align: center;
+}
+/* .example-card{
+  width: 85% !important;
+  margin-left: 15px !important;
+} */
+.drop-icon-button{
+  min-width: 30px;
+  padding-right: 0;
+  border-radius: 0;
+  padding-left: 0;
+}
+.border-radius-zero{
+  border-radius:0px;
+
+}
+.hashtags-chip{
+  background: black;
+  color: white
+}
+.hashtag-cross{
+  color: white !important  ;
+}
+.media-file{
+  border-radius:20px;
+  background: #3f51b5;
+}
+.white-text{
+  color: white;
+}
+.date-div{
+  display: flex;
+}
+.media-icon{
+cursor: pointer;
+}
+.custom-dialog-container{
+  padding-left: 0;
+}
+.border-none{
+  border: none;
+}
+.upload-image-container{
+  display: flex;
+  justify-content: space-between;
+}
+.crop-icon,.preview-image,.tag-icon{
+  font-size: 16px;
+  margin-top: 4px;
+}
+.drop-container{
+  position:absolute;
+  right: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 5;
+}
+.drop-wrapper{
+  width: 50%;
+  /* height: 40%; */
+  margin: auto;
+  border: 6px dotted #343424;
+  /* text-align: center; */
+  margin-top: 201px;
+  /* align-content: center; */
+  position: relative;
+  background: rgba(255,255,255, 0.2);
+  padding: 10% 20% 10% 20%;
+
+}
+.mat-drop{
+  font-size: 100px;
+}

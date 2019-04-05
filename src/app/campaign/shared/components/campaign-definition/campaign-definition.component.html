@@ -1,0 +1,137 @@
+<div class="drop-container" (drop)="drop($event)" (dragenter)="dragenter($event)" (dragover)="dragover($event)" *ngIf="dropActive">
+  <div class="drop-wrapper" (drop)="drop($event)">
+    <mat-icon class="mat-drop" color="primary">add_circle</mat-icon>
+  </div>
+</div>
+<mat-card (dragenter)="dragenter($event)" (dragover)="dragover($event)" class="example-card">
+
+  <mat-card-content>
+    <!-- {{campaignViewModel.campaignStatuses | json}} -->
+    <form #createCampaignForm="ngForm" novalidate>
+    <div *ngIf="(profileStore.userAccountType === 'company' || profileStore.haveAccess(groupRights.managestatus))">
+        <mat-form-field class="custom-status" >
+            <mat-select placeholder="Select custom status" [(value)]="campaignViewModel.campaignStatuses">
+              <mat-option>None</mat-option>
+              <mat-option *ngFor="let status of customStatuses$" [value]="status">{{status.status.statusName}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+            <div *ngIf="!campaignViewModel.campaignStatuses" class="custom-status-color">
+                <!-- <span class="status-text" *ngIf="campaignViewModel.campaignStatuses" >{{campaignViewModel.campaignStatuses.status.statusName}}</span> -->
+            </div>
+          <div *ngIf="campaignViewModel.campaignStatuses" class="custom-status-color" [ngStyle]="{'background-color': campaignViewModel.campaignStatuses.status.statusColor}">
+              <span class="status-text" *ngIf="campaignViewModel.campaignStatuses" >{{campaignViewModel.campaignStatuses.status.statusName}}</span>
+          </div>
+    </div>
+
+      <mat-form-field class="example-container">
+        <input matInput class=" " (focus)="isTitleChanged($event)" title='Title for search your post' type="text" placeholder="Title"
+          id="title" #title="ngModel" ngModel [(ngModel)]="campaignViewModel.title" minlength="1" name="title" [required]="validationModel.isTitle">
+        <mat-error class="error-message" *ngIf="title.invalid && title.touched && validationModel.isTitle">
+          {{errors.titleError}}
+          <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-container">
+        <textarea (focus)="isDescriptionChanged($event)" title='Description for your social media post' class="description  " matInput
+          type="text" placeholder="Description..." id="description" #description="ngModel" ngModel [(ngModel)]="campaignViewModel.description"
+          name="description" (keyup)="changeDescription()" [required]="validationModel.isDescription">
+
+        </textarea>
+        <mat-error class="error-message" *ngIf="description.invalid && description.touched && validationModel.isDescription">
+          {{errors.descriptionError}}
+          <strong>required</strong> {{errors.descriptionError2}} </mat-error>
+      </mat-form-field>
+
+      <mat-card-content class="card-flex">
+        <!-- <div id="dropzone" (dragenter)="dragenter($event)" (dragover)="dragover($event)" (drop)="drop($event)"> -->
+        <!-- <div class="images-ration" *ngFor="let dropboxImage of imageFromDropbox">
+          <img class="selected-imgs" style="border:2px solid" *ngIf="imageFromDropbox" src="{{dropboxImage}}">
+        </div> -->
+        <!-- <div id="abc"></div> -->
+        <!-- <img id="videoimg"> -->
+
+        <div class="images-ration" *ngFor="let file of (mediaFilesToShow$ | async); let i=index;">
+
+          <div class="images-ration" *ngIf="file.type=='image/png' || file.type=='image/jpeg'">
+            <img class="clear-icon" src="{{icons.cancelIcon}}" (click)="deleteFile(file)">
+            <file-preview (outThumbnail)="setThumbnailArray($event)" [fileToPlaceThumbnail]="file"></file-preview>
+            <!-- <img  *ngIf="file.thumbnailName"  class="selected-imgs" src="{{imagePath + file.thumbnailName}}"> -->
+
+            <div class="upload-image-container">
+              <mat-icon class="crop-icon" *ngIf="selectedSocialNetwork$ && (selectedSocialNetwork$ | async).length>0" (click)="openImageCropperPopup(file.base64File)">crop</mat-icon>
+              <!-- <mat-icon class="preview-image" *ngIf="croppedImages.length > 0 && file.isImageCropped === true" (click)="openDailogBox(i)">visibility</mat-icon> -->
+              <mat-icon class="tag-icon" (click)="imageTaggingPopup(file.base64File,i)">local_offer</mat-icon>
+            </div>
+          </div>
+          <div class="images-ration" *ngIf="file.type == 'video/mp4'">
+
+            <img class="clear-icon" src="/assets/images/cancel.png" (click)="deleteFile(file)">
+            <!-- <div *ngIf="file.serverFile" (click)="openVideoPopup(file)" class="video-front-layer"></div> -->
+
+            <video-thumbnail *ngIf="!file.thumbnailName && file.type=='video/mp4'" (outThumbnail)="setThumbnailArray($event)" [fileToPlaceThumbnail]="file">
+
+            </video-thumbnail>
+            <video-thumbnail *ngIf="file.thumbnailName && file.type=='video/mp4'" (outThumbnail)="setThumbnailArray($event)" [fileToPlaceThumbnail]="file.serverFile">
+
+            </video-thumbnail>
+
+
+          </div>
+        </div>
+      </mat-card-content>
+
+      <!-- <mat-error class="error-message" *ngIf="fileUploadingLimitError ">{{fileUploadingLimitError}}</mat-error> -->
+      <div class="btn-control">
+        <input #imageSelector style="display:none;" type="file" id="fileToUpload" name="file" (change)="callingFunctionFilesToRead($event)" accept="image/jpeg, image/png"
+          placeholder="attach file" multiple>
+        <input #videoSelector style="display:none;" type="file" id="videofileToUpload" name="file" (change)="callingFunctionFilesToRead($event)"
+          accept="video/mp4" placeholder="attach file">
+
+
+        <div style="margin-left: 10px; display:flex">
+          <button mat-icon-button class="" color="primary" value="bold">
+            <mat-icon calss="media-icon" onclick="document.getElementById('fileToUpload').click()" color="primary">camera_alt</mat-icon>
+          </button>
+          <button mat-icon-button class="" color="primary" value="bold">
+            <mat-icon calss="media-icon" onclick="document.getElementById('videofileToUpload').click()" color="primary">videocam</mat-icon>
+          </button>
+          <drop-box-selector (selectedImage)="fileRead($event)"></drop-box-selector>
+          <google-drive-selector (selectedImage)="fileRead($event)"></google-drive-selector>
+          <box-selector (selectedImage)="fileRead($event)"></box-selector>
+          <one-drive-selector (selectedImage)="fileRead($event)"></one-drive-selector>
+        </div>
+
+        <div class="align-content-center">
+          <div class="date-div" *ngIf="campaignViewModel.createButtonState!='Post Now'">
+            <input class="calendar-input" name="calendar" [(ngModel)]="campaignViewModel.scheduledAt" [min]="campaignViewModel.currentDate"
+              [owlDateTime]="dt">
+            <!-- <mat-error class="error-message" *ngIf="campaignViewModel.dateTime < campaignViewModel.currentDate && campaignViewModel.dateTime!=null">Date should be greater than current date</mat-error> -->
+            <mat-icon [owlDateTimeTrigger]="dt" class="open-calander">event</mat-icon>
+            <owl-date-time #dt></owl-date-time>
+          </div>
+
+          <button mat-raised-button color="warn" [disabled]=" !campaignViewModel.title || !campaignViewModel.description" class="btn-add  btn-size"
+            (click)="onCancel()">Cancel</button>
+
+          <mat-menu #menu="matMenu" xPosition="before">
+            <button *ngFor="let state of createCampaignStates" (click)="setCreateButtonState(state)" mat-menu-item>
+              <span style="color:cornflowerblue">{{state}}</span>
+            </button>
+          </mat-menu> &nbsp;
+          <button mat-raised-button color="primary" [disabled]=" !campaignViewModel.title || !campaignViewModel.description " class="border-radius-zero"
+            (click)="createCampaignValidation()">{{createButtonState}}</button>
+          <button class="drop-icon-button" [disabled]=" !campaignViewModel.title || !campaignViewModel.description " mat-raised-button
+            color="primary" [matMenuTriggerFor]="menu">
+            <mat-icon>keyboard_arrow_down</mat-icon>
+          </button>
+        </div>
+      </div>
+
+    </form>
+  </mat-card-content>
+  <!-- <mat-error *ngFor="let message of (alertModel$ | async).messages">{{message}}</mat-error> -->
+  <mat-error>{{(formFieldsError$ | async)}}</mat-error>
+  <!-- <mat-error *ngIf="fileUploadingLimitError">{{fileUploadingLimitError}}</mat-error> -->
+</mat-card>
+<!-- <canvas #visualization id="democanvas"></canvas> -->
+<cropper-wrapper (croppedImage)="getbase64CroppedImage($event)" [socialNetwork$]="selectedSocialNetwork$" [imageForCropper$]="imageForCropper$"></cropper-wrapper>

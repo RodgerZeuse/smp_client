@@ -1,0 +1,24 @@
+<div class="image-popup-container">
+  <div>
+      <img class="tag-img"  id='imageMap' (mousedown)='mouseDown($event)' src="{{data.img.src}}">
+      <div class="tags" id="tags-container" *ngIf="tags.length > 0">
+          <div class="tags" *ngFor="let t of tags;let i = index" style="color: #fff;border-radius: 5px;padding: 2px 5px 2px 5px;position: fixed; background :rgba(0,0,0,0.6);z-index:2" [style.left.px]="t.x" [style.top.px]="t.y" >
+              <div class="tag-container">
+                  {{t.tag_text}}
+                  <span (click)="removeTag(i)" class="close-icon">X</span>
+              </div>                    
+              
+
+          
+        </div>
+      </div>
+  </div>
+
+  <div id='mapper' >
+    <div class="map-input">
+      <input type="text" name="tag" id="tags-container" (keyup.enter)="addTags($event)" [(ngModel)]="tag">
+    </div>
+</div>
+<button mat-raised-button color="primary" class="tag-btn" *ngIf="tags.length <= 0" disabled>Publish Tags</button>
+  <button mat-raised-button color="primary" class="tag-btn" *ngIf="tags.length > 0"  (click)="publishTags()">Publish Tags</button> 
+</div>

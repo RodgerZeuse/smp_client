@@ -1,0 +1,7 @@
+<!-- <canvas id="canvas"></canvas> -->
+<div id="video" (click)="openVideoPopup(vidObj)" class="video-front-layer">
+    <mat-icon class="play-icon">play_circle_filled_white</mat-icon>
+</div>
+<img id="test"  *ngIf="!fileToPlaceThumbnail.thumbnailName"  class="selected-imgs" src="{{(thumbnailSrc | async)}}">
+<img id="test" *ngIf="fileToPlaceThumbnail.thumbnailName" class="selected-imgs" src="{{thumbnailSrc.value}}">
+<div *ngIf='' id="showVideo"></div>

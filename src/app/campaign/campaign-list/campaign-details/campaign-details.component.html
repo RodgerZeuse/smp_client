@@ -1,0 +1,81 @@
+<div class="w-50p">
+
+  <mat-card-header class="w-100">
+    <div style=" margin-right: auto">
+      <h5 style="margin-bottom: 0;line-height: 1.7; margin-right: auto">{{campaign.title}}</h5>
+    </div>
+
+  </mat-card-header>
+  <mat-card-content class="d-f ">
+
+    <div class="font-s">
+      <b>Created at : </b>
+      <p class="m-b"> {{campaign.createdAt|date:'short'}}
+      </p>
+    </div>
+
+    <div class="font-s">
+      <b>Scheduled at : </b>
+      <p class="m-b">{{campaign.scheduledAt|date:'short'}}</p>
+    </div>
+    <div class="font-s">
+      <b>state : </b>
+      <p class="m-b">{{campaign.state}}</p>
+    </div>
+
+
+  </mat-card-content>
+
+  <mat-card-content>
+    <div class="font-s1">
+      <b style="margin-right: 10px;">Description : </b>
+      <p class="mr-0">{{campaign.description}}</p>
+    </div>
+
+    <!-- <div class="font-s1 ">
+      <b style="margin-right: 10px;"> Hash Tags : </b>
+      <p class="mr-0">{{campaign.hashTags}}</p>
+    </div> -->
+  </mat-card-content>
+  <mat-card-content>
+    <div class="page-card">
+
+      <mat-chip-list>
+        <span class="selected-pages-span" *ngFor="let accountObj of campaign.posts">
+          <div mat-card-avatar *ngIf="accountObj.socialMediaInfo && accountObj.socialMediaInfo.thumbnail " [ngStyle]="{'background-image': 'url(' + accountObj.socialMediaInfo.thumbnail + ')'}"
+            class="page-image">
+            <img *ngIf="accountObj.socialMediaAccounts && accountObj.socialMediaAccounts.type=='FB'" class="social-icon" src="{{icons.fbIcon}}">
+            <img *ngIf="accountObj.socialMediaAccounts && accountObj.socialMediaAccounts.type=='IG'" class="social-icon" src="{{icons.instaIcon}}">
+            <span class="page-icon-span">
+              <mat-icon *ngIf="accountObj.socialMediaInfo && accountObj.socialMediaInfo.type=='pages'" class="mat-page">flag</mat-icon>
+              <mat-icon *ngIf="accountObj.socialMediaInfo && accountObj.socialMediaInfo.type=='groups'" class="mat-page">group</mat-icon>
+            </span>
+          </div>
+          <div mat-card-avatar *ngIf="!accountObj.socialMediaInfo.thumbnail " class="group-icon page-image">
+            <img *ngIf="accountObj.socialMediaAccounts && accountObj.socialMediaAccounts.type=='FB'" class="social-icon" src="{{icons.fbIcon}}">
+            <img *ngIf="accountObj.socialMediaAccounts && accountObj.socialMediaAccounts.type=='IG'" class="social-icon" src="{{icons.instaIcon}}">
+            <img *ngIf="accountObj.socialMediaAccounts && accountObj.socialMediaAccounts.type=='YT'" class="social-icon" src="{{icons.youtubeIcon}}">
+            <span class="page-icon-span">
+              <mat-icon *ngIf="accountObj.socialMediaInfo && accountObj.socialMediaInfo.type=='pages'" class="mat-page">flag</mat-icon>
+              <mat-icon *ngIf="accountObj.socialMediaInfo && accountObj.socialMediaInfo.type=='groups'" class="mat-page">group</mat-icon>
+              <i *ngIf="accountObj.socialMediaInfo && accountObj.socialMediaInfo.type=='boards'" class="material-icons mat-page">dashboard</i>
+            </span>
+          </div>
+
+
+          <mat-chip class="mat-pages" [color]="accountObj.socialMediaAccounts && accountObj.socialMediaAccounts.type=='FB' ? 'primary':'accent'" selected>
+            {{accountObj.socialMediaInfo.name}}
+          </mat-chip>
+        </span>
+      </mat-chip-list>
+    </div>
+
+  </mat-card-content>
+  <div class="image-container" *ngIf="campaign.mediaFiles">
+    <div *ngFor="let p of campaign.mediaFiles">
+      <img class="image-thumbnail" *ngIf="p.type!='video/mp4'" src="{{imagePath+p.name}}">
+      <img class="image-thumbnail" *ngIf="p.type=='video/mp4'" src="{{imagePath+p.thumbnail}}">
+    </div>
+  </div>
+
+</div>

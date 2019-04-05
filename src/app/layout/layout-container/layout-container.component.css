@@ -1,0 +1,80 @@
+.example-container {
+    /* position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0; */
+    background: #eee;
+    height: 100vh;
+    margin: 0;
+  }
+  .side-menu{
+      width:250px;
+      background-color: #2d323e;
+
+  }
+  .loader-div{
+    position: fixed;
+    z-index: 5;
+    background: rgba(0,0,0,0.6);
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    align-items: center;
+    display: flex;
+    padding-left: 50%;
+  }
+.colr{
+    color: rgba(255, 255,255, .7);
+    background-color: #303f9f;
+    justify-content: space-between;
+}
+/* .snav{
+    
+} */
+.profileimg{
+  width: 30px;
+  height: 30px;
+  border-radius:50%; 
+}
+.contentheader{
+    justify-content: space-between;
+}
+.profile-detail{
+    position: absolute;
+    right: 5px;
+    top: 48px;
+    z-index: 40;
+}
+.postion{
+    position: relative;
+}
+.active-head{
+    display: flex;
+    padding: 10px;
+}
+.right-sidenav{
+    width:350px;
+}
+.active-text{
+    text-align: center;
+    width:100%;
+}
+.close-icon{
+   float: right;
+}
+.activity{
+    font-weight: bolder;
+}
+.rt-model{
+    width:300px;
+    position: fixed;
+    right:0;
+    top:10px;
+    background: white;
+    color:black;
+    z-index: 2;
+    padding: 10px;
+    box-shadow: 1px 2px 5px 3px grey;
+}

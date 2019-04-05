@@ -1,0 +1,10 @@
+{
+    "errors":{
+        "forgetPasswordError":"Email is not register.",
+        "forgetPasswordSuccess":"Please check your email for recover password.",
+        "emailError":"Enter an email.",
+        "emailFormatError":"Email must be in propper format.",
+        "passworError":"Enter the Password."
+    }
+    
+}

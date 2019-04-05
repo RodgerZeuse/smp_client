@@ -1,0 +1,61 @@
+<div class="search-container">
+    <mat-accordion>
+        <mat-expansion-panel class="login-card mt-15" (opened)="criteriaIsHidden=true" (closed)="criteriaIsHidden=false">
+            <mat-expansion-panel-header class="mat-expansion-header">
+                <h3 class="collapse-heading">
+                    Search Campaign
+                </h3>
+                <mat-chip-list style="margin-left:10px" *ngIf="!criteriaIsHidden">
+                    <div *ngIf="searchCampaign && searchCampaign.title">Title : <mat-chip>{{searchCampaign.title}}</mat-chip>
+                    </div>
+                    <div *ngIf="searchCampaign && searchCampaign.state">state : <mat-chip>{{searchCampaign.state}}</mat-chip>
+                    </div>
+                    <div *ngIf="searchCampaign && searchCampaign.createdStartDate && !searchCampaign.createdEndDate">Created
+                        at : <mat-chip>
+                            {{searchCampaign.createdStartDate|date:short}}</mat-chip>
+                    </div>
+                    <div *ngIf="searchCampaign && searchCampaign.createdStartDate && searchCampaign.createdEndDate">Created
+                        from : <mat-chip> {{searchCampaign.createdStartDate|date:short}} to
+                            {{searchCampaign.createdEndDate|date:short}}</mat-chip>
+                    </div>
+                    <div *ngIf="searchCampaign && searchCampaign.scheduledStartDate && !searchCampaign.scheduledEndDate">Scheduled
+                        at : <mat-chip>{{searchCampaign.scheduledStartDate|date:short}}</mat-chip>
+                    </div>
+                    <div *ngIf="searchCampaign && searchCampaign.scheduledStartDate && searchCampaign.scheduledEndDate">Scheduled
+                        from : <mat-chip>{{searchCampaign.scheduledStartDate|date:short}} to
+                            {{searchCampaign.scheduledEndDate|date:short}}</mat-chip>
+                    </div>
+                </mat-chip-list>
+                <!-- profileStore.userAccountType === 'individual' || -->
+                <div class="create-campaing" *ngIf="(profileStore.userAccountType === 'company' ||  profileStore.haveAccess(groupRights.create))">
+                    <button *ngIf="profileStore.createCampaign" mat-fab color="primary" class="create-campaign-button"
+                        (click)="gotoCreateCampaign()">
+                        <mat-icon class="create-icon">create</mat-icon>
+                    </button>
+                </div>
+            </mat-expansion-panel-header>
+            <search-campaign (search)="searchCampaigns($event)" (searchForCampaign)="searchForCampaign($event)"
+                (toogleArchive)="toogleArchive($event)"></search-campaign>
+        </mat-expansion-panel>
+    </mat-accordion>
+
+</div>
+<mat-card class="login-card mt-15">
+    <mat-card-content>
+        <button mat-button mat-raised-button (click)="openCalendarView()">
+            <mat-icon class="example-tab-icon">calendar_today</mat-icon>Calender
+        </button>
+        <button mat-button mat-raised-button (click)="openListView()">
+            <mat-icon class="example-tab-icon">format_list_bulleted</mat-icon>List
+        </button>
+        <button mat-button mat-raised-button (click)="openTimelineView()">
+            <mat-icon class="example-tab-icon">timeline</mat-icon>Timeline
+        </button>
+
+        <campaign-calendar (selectedDate)="updateSelectedDate($event)" *ngIf="swithViews.isCalendarOpen" (remove)="removeCampaign($event)"
+            (changeDate)="rescheduleCampaign($event)" [campaigns]="campaignStore.campaignForListView"></campaign-calendar>
+        <campaign-list [showSelectionOnCampaign]="isArchiveOn" (onConfirmArchiveSelection)="onConfirmArchiveSelection($event)"
+            (remove)="removeCampaign($event)" *ngIf="swithViews.isListOpen" [campaigns]="campaignStore.campaignForListView"></campaign-list>
+        <campaign-timeline *ngIf="swithViews.isTimelineOpen" (remove)="removeCampaign($event)" [campaigns]="campaignStore.campaignForListView"></campaign-timeline>
+    </mat-card-content>
+</mat-card>

@@ -1,0 +1,19 @@
+<div *ngIf="(profileStore.userAccountType === 'company' || profileStore.haveAccess(groupRights.movetoarchive))">
+<div><label *ngIf="!isAllowSelection" (click)="allowSelection()">
+<strong class="app-them-color">Select</strong>
+</label>
+
+<label class="cancel" *ngIf="isAllowSelection" (click)="allowSelection()">
+  <strong>Cancel</strong>
+</label>
+  <label  *ngIf="isAllowSelection" (click)="selectAll()">
+    <strong class="app-them-color">Select All</strong>
+  </label>
+  
+  <label  class="margin-left" (click) ="onConfirmArchiveMove()" *ngIf="isAllowSelection">
+      <strong class="app-them-color">Move To Archive</strong>
+    </label>
+</div>
+
+</div>
+

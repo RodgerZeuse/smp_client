@@ -1,0 +1,32 @@
+
+.outerDiv{
+    display: flex;
+  }
+  
+  .innerDiv{
+    width: 47%;
+  }
+  
+  .innerDiv1{
+    width: 47%;
+  margin-right: 3%;
+  }
+
+ .mt-15{
+  width: 91% !important;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 15px;
+  text-align: left;
+ }
+ .innerDiv2{
+   width: 50%;
+ }
+ .ml-15{
+   margin-left: 15px;
+   width: 25%
+ }
+ .ml-15-w{
+  margin-left: 18px;
+  width: 24%
+}

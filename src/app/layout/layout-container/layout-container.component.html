@@ -1,0 +1,53 @@
+<div class="loader-div" *ngIf="profileStore.loader">
+  <mat-spinner ></mat-spinner>
+</div>
+<div class="rt-model" *ngIf="profileStore.isCampaignCreate">
+    create campaign successfully
+  </div>
+
+<mat-sidenav-container class="example-container">
+  <mat-sidenav mode="side" #sidenav [(opened)]="opened" class="side-menu">
+      <mat-toolbar class="colr" >
+         <h1>SMP</h1>
+         <button class="snav"  mat-icon-button (click)="toggleMenu()"><mat-icon>menu</mat-icon></button>
+         </mat-toolbar>
+    <sidenav>
+    </sidenav>
+  </mat-sidenav>
+  <mat-sidenav opened mode="over" class="right-sidenav" *ngIf="isActiveLogOpen" position="end">
+    <div class="active-head">
+
+        <div class="active-text">
+          <span class="activity">Activity</span>
+          <div class="close-icon" (click)="closeActiveLog()">X</div>
+          </div>
+       
+    </div>
+    <activity-log></activity-log>
+  </mat-sidenav>
+  <!-- <mat-sidenav opened mode="over" class="right-sidenav" *ngIf="isCommentsShow" position="end">
+    <div class="active-head">
+
+        <div class="active-text">
+          <span class="activity">Comments</span>
+          <div class="close-icon" (click)="closeActiveLog()">X</div>
+          </div>
+       
+    </div>
+    <comment-contanier></comment-contanier>
+  </mat-sidenav> -->
+  <mat-sidenav-content>
+      <mat-toolbar class="contentheader">
+        
+        <h1>  <button class="snav"  mat-icon-button (click)="toggleMenu()" *ngIf="isMenuClose"><mat-icon>menu</mat-icon></button> {{currentRouteName}}</h1>
+          <div class="postion">
+          <img id="profileDiv" mat-card-sm-image class="profileimg" (click)="showProfileDetail()" src={{profileStore.profilePicture}} alt="Photo of a Shiba Inu">
+        <div id="profileDiv" *ngIf="isProfileDetial" class="profile-detail">
+            <profile-card ></profile-card>
+        </div>
+        <p (click)="openActiveLog()">Show Active Log</p>
+      </div>
+        </mat-toolbar>
+        <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

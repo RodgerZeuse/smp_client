@@ -1,0 +1,17 @@
+{
+    "specificError":{
+        "login":"Email or password is incorrect.",
+        "addUser":" Email already exists.",
+        "changePasswordError":"Your current password was incorrect.",
+        "changePasswordSuccess":"Password is successfully changed.",
+        "forgetPasswordError":"Email is not register.",
+        "forgetPasswordSuccess":"Please check your email for recover password.",
+        "resetPasswordSuccess": "Password is successfully reset.",
+        "deleteCampaignPopup": "Are you sure you want to delete ",
+        "rightsForEditPopup": "You don't have a right to edit the campaign.",
+        "rightsForDeletePopup": "You don't have a right to delete the campaign..",
+        "rightsForDeleteAndEditPopup":"You don't have a right to edit or delete the campaign.",
+        "openDialogMessage":"Please refresh your connection with attached social media account",
+        "campaignDeleteDialog":"Are you sure you want to delete this campaign ?"
+    }
+}

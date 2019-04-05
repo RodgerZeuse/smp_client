@@ -1,0 +1,21 @@
+
+<div class="camp-feedback-container">
+
+
+<div *ngIf="campaignPost  && (campaignPost | async).length > 0">
+  <div *ngFor="let p of (campaignPost | async)">
+      <post [post]="p"></post>
+  </div>
+ 
+</div>
+<div class="comments-cintainer">
+    <div class="comments-header">
+      Comments
+    </div>
+    <div >
+        <comments-contanier (commentReply)="commentReply($event)" (newComment)="newComment($event)" [type]="commentsType" [campaignComments$]="campaign$"></comments-contanier>
+    </div>
+   
+</div>
+
+</div>

@@ -1,0 +1,52 @@
+
+.box-div{
+    margin-top:9px;
+    margin-left:20px;
+    visibility: hidden;
+}
+
+.mat-button{
+    height:30px;
+    width:100px;
+    line-height: 1.5;
+    margin-left: 5%;
+    margin-top: 10%;
+}
+.box-img{
+height:20px;
+width:75px;
+margin-top: -4px;
+}
+.box-container-con{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: rgba(0,0,0,.3);
+
+}
+
+.box-net-wrapper-active{
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(0,0,0,.3);
+    z-index: 5;
+}
+
+.box-net{
+  width: 50%;
+    margin: auto;
+    margin-top: 10%;
+}
+
+.box-net-wrapper-disabled{
+    left: 0;
+}
+
+
+
+

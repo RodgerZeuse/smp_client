@@ -1,0 +1,32 @@
+.container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .container > * {
+    width: 100%;
+  }
+  .register-component-wrapper{
+    width: 40%;
+    margin-left:auto;
+    margin-right:auto;
+  }
+ 
+/* ::ng-deep .mat-step-header .mat-step-icon {
+  background-color: #bb092d;
+  color: rgba(255,255,255,.87);
+} */
+.login-style{
+  font-size: 20px;
+    margin: 16px 0 32px;
+    font-family: Roboto,'Helvetica Neue',Arial,sans-serif;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 45px;
+    display: block;
+}
+.btn-wrapper{
+  display:flex;
+  justify-content: space-between;
+}

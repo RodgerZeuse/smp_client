@@ -1,0 +1,45 @@
+.selected-imgs{
+    
+    display: block;
+    max-width:230px;
+    max-height:95px;
+    width: auto;
+    height: auto;
+    border: 3px solid lightgray !important;
+    border-radius: 3px;
+    padding: 3px;
+      
+}
+.new-selected-imgs{
+    
+    display: block;
+    max-width:230px;
+    max-height:95px;
+    width: auto;
+    height: auto;
+    border: 3px solid rgb(39, 7, 153) !important;
+    border-radius: 3px;
+    padding: 3px;
+      
+}
+.social-icon{
+    height: 40px;
+    margin-top: -45px !important;
+    margin-left: -35px;
+}
+.artifact-icon{
+    width: 35px;
+    margin-right: 5px;
+    border:2px solid #8b2;
+    border-radius: 15px;  
+}
+.artifact-div{
+    margin-top: -35px !important;
+    margin-bottom: 15px !important;
+}
+.files-div{
+    display: flex;
+}
+.files{
+margin-right: 10px;
+}

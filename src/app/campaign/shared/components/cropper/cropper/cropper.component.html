@@ -1,0 +1,14 @@
+<div class="canvas-container">
+  <canvas  #visualization id="mycanvas" width={{imgWidth}} height={{imgHeight}} ></canvas>
+  <div class="overlay" id="overlay">
+
+  </div>
+</div>
+<!-- <input type="button" (click)="cropImage()" value="crop"> -->
+<div class="d-fl">
+<button mat-stroked-button color="primary" (click)="ImagePreview()">Preview</button>
+<div>
+<button mat-raised-button (click)="popUpClose()">Cancel</button>
+<button mat-raised-button color="primary" (click)="emitCropedImages()">Crop</button> 
+</div>
+</div>

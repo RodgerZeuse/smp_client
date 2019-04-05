@@ -1,0 +1,15 @@
+.example-container{
+    width: 100% !important;
+}
+mat-form-field{
+    width: 100%;
+}
+.media-img{
+    width: 30px;
+    margin-right: 10px;
+   
+}
+.dist-end{
+    display: flex;
+    justify-content: space-between;
+}

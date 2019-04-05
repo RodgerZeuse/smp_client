@@ -1,0 +1,9 @@
+{
+    "errors":{
+        "login":"Email or password is incorrect.",
+        "emailError":"Enter an Email.",
+        "emailFormatError":"Email must be in propper format.",
+        "passworError":"Enter the Password."
+    }
+    
+}

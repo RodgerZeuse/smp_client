@@ -1,0 +1,177 @@
+<div *ngIf="!campaigns">
+  <h2 style="color:#303f9f"> There is no record to display</h2>
+</div>
+<archive-selection *ngIf="!showSelectionOnCampaign"
+(onConfirmArchive)="onConfirmArchive($event)" 
+(onSelectAll)="onSelectAll($event)" 
+(onAllowOrCancelSelection)="onAllowOrCancelSelection($event)"
+[isAllowSelection]="isAllowSelection">
+</archive-selection>
+
+<table mat-table class="w-90" matSort [dataSource]="dataSource">
+
+  <!-- <ng-container *ngIf="isAllowSelection" matColumnDef="checkboxSelection">
+    <th mat-header-cell *matHeaderCellDef class="checkbox"></th>
+    <td mat-cell *matCellDef="let element;let i=index">
+      <mat-checkbox></mat-checkbox>
+    </td>
+  </ng-container> -->
+
+
+  <ng-container  matColumnDef="checkboxSelection">
+      <th  mat-header-cell mat-sort-header *matHeaderCellDef class="title"></th>
+      <td mat-cell *matCellDef="let element" class="title">
+          <input *ngIf="element.state=='Posted'" (click)="onSelectionSingleCampaignForArchive(element.id)" 
+          [checked]="element.isSelected" type="checkbox" name="select"  >
+          <input *ngIf="element.state!='Posted'"   
+          [checked]="element.isSelected" type="checkbox" name="select" disabled >
+          <!-- {{interminate}} -->
+          <!-- <input  type="radio" name="select" class="mat-checkbox__native-control" [checked]="element.isSelected" -->
+          <!-- (click)="selectDelAll()"> -->
+      </td>
+    </ng-container>
+
+  <ng-container matColumnDef="type">
+    <th mat-header-cell *matHeaderCellDef class="plateform">Plateform</th>
+    <td mat-cell *matCellDef="let element;let i=index" class="plateform">
+      <div class="my-img" *ngIf="element.posts.length > 0">
+        <div *ngIf="networkCount(element.posts,'FB')>=1" (mouseleave)="openCard=-1" (mouseenter)="showDetailMessageBox(element,i)">
+          <div matBadge="{{networkCount(element.posts,'FB')}}" matBadgePosition="before" matBadgeColor="accent">
+            <img class="icon-img" src="{{icons.fbIcon}}">
+
+          </div>
+        </div>
+
+        <div *ngIf="networkCount(element.posts,'IG')>=1" (mouseenter)="showDetailMessageBox(element,i)" (mouseleave)="openCard=-1">
+          <div matBadge="{{networkCount(element.posts,'IG')}}" matBadgePosition="before" matBadgeColor="accent">
+            <img class="icon-img" src="{{icons.instaIcon}}">
+          </div>
+        </div>
+
+        <div *ngIf="networkCount(element.posts,'YT')>0" (mouseleave)="openCard=-1" (mouseenter)="showDetailMessageBox(element,i)">
+          <div matBadge="{{networkCount(element.posts,'YT')}}" matBadgePosition="before" matBadgeColor="accent">
+            <img class="icon-img" src="{{icons.youtubeIcon}}">
+          </div>
+        </div>
+
+        <div *ngIf="networkCount(element.posts,'PI')>0" (mouseleave)="openCard=-1" (mouseenter)="showDetailMessageBox(element,i)">
+          <div matBadge="{{networkCount(element.posts,'PI')}}" matBadgePosition="before" matBadgeColor="accent">
+            <img class="icon-img" src="{{icons.pinterestIcon}}">
+          </div>
+        </div>
+
+
+        <div *ngIf="networkCount(element.posts,'TW')>0" (mouseleave)="openCard=-1" (mouseenter)="showDetailMessageBox(element,i)">
+          <div matBadge="{{networkCount(element.posts,'TW')}}" matBadgePosition="before" matBadgeColor="accent">
+            <img class="icon-img" src="{{icons.twitterIcon}}">
+          </div>
+        </div>
+
+        <div *ngIf="networkCount(element.posts,'LI')>0" (mouseleave)="openCard=-1" (mouseenter)="showDetailMessageBox(element,i)">
+          <div matBadge="{{networkCount(element.posts,'LI')}}" matBadgePosition="before" matBadgeColor="accent">
+            <img class="icon-img" src="{{icons.linkedinIcon}}">
+          </div>
+        </div>
+
+        <mat-card class="menu-position1" xPosition="after" yPosition="above" *ngIf="openCard == i">
+          <campaign-details [campaign]="campaign"></campaign-details>
+        </mat-card>
+      </div>
+
+      <div class="my-img" (mouseleave)="openCard=-1" (mouseenter)="showDetailMessageBox(element,i)" *ngIf="element.posts.length==0">
+        <img class="icon-img" src='{{icons.groupIcon}}'>
+      </div>
+
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="title">
+    <th mat-header-cell mat-sort-header *matHeaderCellDef class="title">Title</th>
+    <td mat-cell *matCellDef="let element" class="title">
+      <p class="titlePara">{{element.title|slice:0:19}}
+        <b *ngIf='element.title && element.title.length>20' matTooltip="{{element.title}}" matTooltipClass="mat-tooltip">...</b>
+      </p>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="description">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header class="desc">Description</th>
+    <td mat-cell *matCellDef="let element" class="desc">
+      <p class="descpara">{{element.description|slice:0:50}}
+        <b *ngIf='element.description && element.description.length>50' matTooltip="{{element.description}}" matTooltipClass="mat-tooltip">...</b>
+      </p>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="campaignStatus">
+    <th mat-header-cell *matHeaderCellDef class="title">Custom Status</th>
+    <td mat-cell *matCellDef="let element" class="title">
+      <div *ngIf="element.campaignStatuses">
+        <mat-chip-list *ngIf="element.campaignStatuses && element.campaignStatuses.status && element.campaignStatuses.status.statusName">
+          <mat-chip class="w-125" [ngStyle]="{'background-color': element.campaignStatuses.status.statusColor}" selected>
+            {{element.campaignStatuses.status.statusName}}
+          </mat-chip>
+          <b *ngIf="element.campaignStatuses" matTooltipClass="mat-tooltip"></b>
+        </mat-chip-list>
+      </div>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="mediaFiles">
+    <th mat-header-cell *matHeaderCellDef>Files</th>
+    <td mat-cell *matCellDef="let element;" class="mediafiles">
+      <div *ngIf="element.mediaFiles;" class="mediafiles">
+        <mat-chip color="primary" selected>
+          {{element.mediaFiles.length}}
+        </mat-chip>
+      </div>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="createdAt">
+    <th mat-header-cell mat-sort-header *matHeaderCellDef class="date">Created Date</th>
+    <td mat-cell *matCellDef="let element" class="date"> {{element.createdAt|date:'short'}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="state">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header class="status" style="padding-left: 20px;">state</th>
+    <td mat-cell *matCellDef="let element" class="status">
+      <mat-chip-list>
+        <mat-chip class="w-90p" color="{{element.state=='Draft'?'red':element.state=='Scheduled'?'primary':element.state=='Posted'?'green':'warn'}}"
+          selected>
+          {{element.state}}
+        </mat-chip>
+        <img class="mlt-25" (mouseenter)="openDialog(element.posts)" *ngIf="element.state=='Canceled'" src="{{icons.infoIcon}}">
+      </mat-chip-list>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="scheduledAt">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header class="date">Sceduled Date</th>
+    <td mat-cell *matCellDef="let element" class="date"> {{element.scheduledAt|date:'short'}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="remove">
+    <th mat-header-cell *matHeaderCellDef class="remove"> </th>
+    <td mat-cell *matCellDef="let element" class="remove">
+     <div *ngIf="(element.ownerId==profileStore.userId && profileStore.haveAccess(groupRights.deletemy)) || profileStore.haveAccess(groupRights.deleteany) || profileStore.userAccountType == 'company'">
+      <delete-campaign *ngIf="element.state!='Posting.....' && element.state!='In Queue'" [campaign]="(element)" (removeCampain)="removeCampaign($event)"></delete-campaign>
+   </div>
+  </td>
+  </ng-container>
+
+  <ng-container matColumnDef="edit">
+    <th mat-header-cell *matHeaderCellDef class="edit"></th>
+    <td mat-cell *matCellDef="let element" class="edit">
+      <div *ngIf="(element.ownerId==profileStore.userId && profileStore.haveAccess(groupRights.updatemy)) || profileStore.haveAccess(groupRights.updateany) || profileStore.userAccountType == 'company'">
+          <mat-icon *ngIf="element.state=='Draft' || element.state=='Scheduled'" (click)="editCampaign(element)">
+              edit</mat-icon>
+      </div>
+      <div *ngIf="(element.ownerId==profileStore.userId && profileStore.haveAccess(groupRights.reschedulemy)) || profileStore.haveAccess(groupRights.rescheduleany) || profileStore.userAccountType == 'company'">
+        <i class="fa fa-fw fa-repeat" *ngIf="(element.state=='Posted' || element.state=='Canceled') && !showSelectionOnCampaign" (click)="rescheduleCampaign(element)"></i>
+      </div>      
+    </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

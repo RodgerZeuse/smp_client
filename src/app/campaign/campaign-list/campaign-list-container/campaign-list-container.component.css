@@ -1,0 +1,44 @@
+.mt-15{
+    width: 95% !important;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15px;
+    text-align: left;
+   }
+  
+   .search-container{
+       position: relative;
+   }
+   .create-campaing{
+       position: absolute;
+       left: 15px;
+       top: -27px;
+   }
+   .create-campaign-button{
+       width:35px;
+       height: 35px;
+   }
+   .create-icon{
+       margin-top: -22px;
+   }
+.search-container{
+    margin-top: 35px;
+}
+.collapse-heading{  
+    font-size: 22px;
+    margin-bottom: 0;
+}
+.mat-expansion-header{
+    position: relative;
+}
+.mat-chip{
+    background-color: #3f51b5;
+    color: white;
+}
+.example-tab-icon{
+    margin-right: 10px;
+}
+
+.mat-button{
+    margin-left: .5%;
+}

@@ -1,0 +1,20 @@
+.postImg{
+    height:300px;
+    width: 300px;
+}
+.post-header{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    align-items: center;
+}
+.mat-card{
+    width: 80%!important;
+    margin: auto;
+    margin-bottom: 30px;
+}
+.network-image{
+    height: 30px;
+    width: 30px;
+    margin-right: 10px;
+}

@@ -1,0 +1,59 @@
+<mat-card class="login-card">
+  <mat-card-content>
+    <form [formGroup]="groupForm" (ngSubmit)="addOrUpdateGroup()">
+      <h2>{{dialogBoxType}} Group</h2>
+      <div class="container">
+
+        <div class="form-group">
+          <mat-form-field>
+            <input matInput placeholder="Group Name" type="text" [(ngModel)]="securityGroup.name" formControlName="name"
+              required>
+          </mat-form-field>
+          <br>
+
+          <!-- <mat-form-field> -->
+          <!-- <mat-select placeholder="Select users" [(ngModel)]="securityGroup.registerUsers" formControlName="registerUsers" multiple required>
+              <div *ngFor="let user of users">
+              <mat-option value="{{user.id}}">{{user.firstName}}</mat-option>
+            </div>
+            </mat-select> 
+         </mat-form-field>-->
+          <mat-list>
+            <mat-selection-list [(ngModel)]="securityGroup.registerUsers" formControlName="registerUsers">
+              <mat-list-option *ngFor="let user of users" [checkboxPosition]="before" [value]="user.id">
+                {{user.firstName}}
+              </mat-list-option>
+              
+            </mat-selection-list>
+          </mat-list>
+          <br>
+
+          <!-- <mat-form-field> -->
+            <!-- <mat-select placeholder="Select permissions" [(ngModel)]="securityGroup.systemsPermissions" formControlName="systemsPermissions" multiple required>
+              <div *ngFor="let permission of permissions">
+              <mat-option value="{{permission.id}}">{{permission.desc}}</mat-option>
+            </div>
+            </mat-select> 
+          </mat-form-field>-->
+            <mat-list>
+              <mat-selection-list [(ngModel)]="securityGroup.systemsPermissions" formControlName="systemsPermissions">
+                <mat-list-option *ngFor="let permission of permissions" [checkboxPosition]="before" [value]="permission.id">
+                  {{permission.desc}}
+                </mat-list-option>
+              </mat-selection-list>
+            </mat-list>
+            <br>
+        </div>
+      </div>
+      
+      <div class="container">
+        <div class="form-group" style="margin-top: 30px">
+          <mat-card-actions style="text-align: center">
+            <button mat-raised-button color="Basic" type="reset" (click)="closeDialog()" class="btn btn-default">Cancel</button>
+            <button mat-raised-button style="margin-left: 7px" color="primary" type="submit" [disabled]="groupForm.invalid">Submit</button>
+          </mat-card-actions>
+        </div>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

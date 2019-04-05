@@ -1,0 +1,247 @@
+.example-header-image {
+  /* background-image: url('/assets/sort-down.png'); */
+  background-size: cover;
+  margin-bottom: 10px;
+  border: 2px solid rgb(148, 148, 148);
+  margin-right: 15px;
+  position: relative;
+}
+
+.menu-div {
+  position: absolute;
+  background: white;
+  z-index: 2;
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
+}
+
+.group-icon {
+  background-image: url('/assets/images/group.png');
+}
+
+.board-icon {
+  background-image: url('/assets/images/dashboard.png');
+}
+
+.page-icon {
+  background-image: url('/assets/images/flag.png');
+}
+
+.dis-flex {
+  display: flex;
+  width: 95%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 7px;
+}
+
+.selected-artifat-card {
+  display: flex;
+  width: 95%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 7px;
+  z-index: 0;
+}
+
+.social-icon {
+  position: relative;
+  margin-left: 22px;
+  margin-top: 22px;
+  width: 17px;
+}
+
+.page-title {
+  font-size: 10px;
+}
+
+.is-page-selected {
+  border: 3px solid #8b2;
+}
+
+.mat-card-accounts {
+  padding: 15px !important;
+  height: 95%;
+}
+
+mat-card-content {
+  margin: 0 !important;
+}
+
+.pages-list {
+  padding-left: 5px;
+  margin: 5px;
+}
+
+.example-container {
+  position: absolute;
+  top: 78px;
+  /* bottom: 0; */
+  right: 0;
+  right: 0;
+  box-shadow: -2px 2px 18px -4px black;
+}
+
+.example-sidenav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  background: rgba(255, 0, 0, 0.5);
+}
+
+.mat-pages {
+  padding-left: 35px;
+  margin-left: -31px !important;
+  z-index: -1;
+  /* padding-right: 35px; */
+}
+
+/* .example-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+  } */
+
+.page-card {
+  margin-left: 30px;
+  margin-top: 20px;
+  /* width: 85%; */
+}
+
+.example-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.page-image {
+  position: relative;
+  background-size: cover;
+  border: 3px solid #8b2;
+}
+
+.cross-icon {
+  margin-left: -10px;
+}
+
+.page-cross-icon {
+  margin-left: -22px;
+  cursor: pointer;
+  /* margin-top: -5px; */
+  width: 15px;
+  height: 15px;
+}
+
+/* .page-menu{
+    border-radius: 15px;
+   
+  } */
+
+.selected-pages-span {
+  margin-left: 10px;
+  display: flex;
+  margin-top: auto;
+  margin-bottom: 4px;
+  ;
+}
+
+.fb-page-menu {
+  color: #3f51b5;
+}
+
+.insta-page-menu {
+  color: #ff4081;
+}
+
+.page-icon-span {
+  position: absolute;
+  bottom: -6px;
+  height: 20px;
+  width: 20px;
+  color: white;
+  background: #303f9f;
+  border-radius: 50%;
+  /* padding-left: 5px; */
+  /* padding-top: 5px; */
+  /* padding: 3px 1px 1px 1px; */
+  left: -6px;
+}
+
+.board-icon-span {
+  position: absolute;
+  bottom: -6px;
+  height: 20px;
+  width: 20px;
+  color: white;
+  background: #ca0909;
+  border-radius: 50%;
+  /* padding-left: 5px; */
+  /* padding-top: 5px; */
+  /* padding: 3px 1px 1px 1px; */
+  left: -6px;
+}
+
+.page-icon-span-insta {
+  position: absolute;
+  bottom: -6px;
+  height: 20px;
+  width: 20px;
+  color: white;
+  background: #ff4081;
+  border-radius: 50%;
+  /* padding-left: 5px; */
+  /* padding-top: 5px; */
+  /* padding: 3px 1px 1px 1px; */
+  left: -6px;
+}
+
+.mat-page {
+  /* height: 11px; */
+  font-size: 15px;
+  margin-left: 3px;
+  margin-top: 3px;
+}
+
+.mat-button {
+  margin-right: auto;
+  margin-left: 16px;
+}
+
+.hyperlink {
+  color: #303f9f;
+  cursor: pointer;
+}
+
+.mat-menu-item {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  user-select: none;
+  cursor: pointer;
+  outline: 0;
+  border: none;
+  -webkit-tap-highlight-color: transparent;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  line-height: 48px;
+  height: 48px;
+  padding: 0 16px;
+  text-align: left;
+  text-decoration: none;
+  max-width: 100%;
+  position: relative;
+}
+
+.mat-pinterest-icon {
+  background: #cb2027 !important;
+  color: white;
+}
+
+.page-icon-span-twitter, .mat-page-icon-span-twitter {
+  background: #55ACEE;
+  color: #fff;
+}

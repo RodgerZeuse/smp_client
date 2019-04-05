@@ -1,0 +1,23 @@
+.camp-feedback-container{
+    /* display: flex;
+    justify-content: space-between; */
+    width: 70%;
+    margin-left: 4%;
+
+}
+.comments-cintainer{
+    /* width: 350px;
+    position: relative;
+    background: #fafafa; */
+    width: 350px;
+    position: fixed;
+    background: #fafafa;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+.comments-header{
+    padding: 20px 10px 20px 10px;
+    color: #fff;
+    background-color: #303f9f;
+}

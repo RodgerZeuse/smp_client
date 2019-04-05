@@ -1,0 +1,18 @@
+{
+    "socialConfig":{
+        "boxLink": "http://192.168.1.126:3001/api/campaigns/boxAuthorization?access_token=",
+        "boxClienId": "2fghlv0xf4x7q2rmn3mpco5iyshhdzmu",
+        "boxClientSecret": "aD5wlobSaNrx0uy4RRCR95O3unpeOzlP",
+        "googleDriveDeveloperKey": "AIzaSyCUa6kGslaIqc1Yb2LupAjc9u7r_E45cd4",
+        "googleDriveClientId": "632250236712-34frrvi19rm1cslmjoc3leepnirtesi7.apps.googleusercontent.com",
+        "googleDriveAppId": "632250236712",
+        "googleDriveLink": "https://www.googleapis.com/auth/drive",
+        "oneDriveClienId": "e6cb63e3-69bd-4e39-b4fc-16a35aaad0a8",
+        "oneDriveEndPointHint": "api.onedrive.com",
+        "facebookAppId":"196750267603734",
+        "twitterLink":"http://192.168.1.126:3001/api/SocialMediaAccounts/session/connect",
+        "pinterestAppId": "4992454659651162634",
+        "pinterestSrc":"//assets.pinterest.com/sdk/sdk.js",
+        "youtubeClientId":"55355956330-s67si6qqh9sonjirmrvipkskevqddtkm.apps.googleusercontent.com"
+    }
+}

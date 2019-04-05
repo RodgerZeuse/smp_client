@@ -1,0 +1,264 @@
+/* .menu-position{
+    margin-left: 40px;
+    position: absolute !important;
+  }
+
+  .close-icon{
+    right: -300px;
+    left: auto !important;
+  }
+
+  .right-div{
+    font-size: 13px;
+    line-height: 0;
+    margin-top: 5px;
+
+  }
+  .left-div{
+    font-size: 13px;
+    line-height: 0;
+    margin-top: 5px;
+   
+
+  }
+  .image-container{
+    position: relative;
+    display: flex;
+  }
+
+  .image-thumbnail{
+    border: black solid 1px;
+    margin-left: 2px;
+    height: 55px;
+    width: 55px;
+  }
+  .chip-s{
+    height: 35px;
+    padding: 0;
+    align-items: center;
+       padding-right: 10px;
+       margin: 10px;
+  }
+
+  .page-image {
+    position:relative;
+    background-size: cover;
+    border:3px solid #8b2;
+  }
+
+ 
+  .social-icon{
+    position: relative;
+   border-radius:50%; 
+    width: 34px;
+    height: 34px;
+  }
+  .mat-page{
+    font-size: 15px;
+    margin-left: 3px;
+    margin-top: 3px;
+}
+
+  .icon-s{
+    padding: 0;
+    display: flex;
+    align-items: center;
+  }
+  .font-s{
+    font-size: 13px;
+    line-height:1 !important ;
+    height: auto;
+    margin: 0;
+    margin-bottom: 5px;
+    width: 150px;
+ 
+  }
+
+ .btn-0{
+   border: 0;
+   padding: 0;
+ }
+ .mat-grid-tile .mat-figure{
+ 
+  left: inherit !important;
+  display: block !important ;
+
+ }
+ .flag-s{
+  left: 42px;
+  z-index: 1;
+  top: 18px;
+  padding: 0;
+ }
+ .mat-chip-list-wrapper {
+   margin: 0 !important;
+ }
+.sty-h{
+display: flex !important; 
+justify-content: flex-start;
+margin: 0;
+
+
+}
+.font-s1{
+  font-size: 13px;
+  line-height:1 !important ;
+  height: auto;
+  margin: 0;
+  margin-top: 5px;
+  width: 100%;
+ 
+}
+.icon-sty{
+  display: inline-flex;
+  margin-bottom: 5px;
+  margin-left: 5px;
+  margin-top: 5px;
+} */
+
+.w-50p{
+  width: 100%;
+  height: 100%;
+ padding: 0;
+}
+.w-100{
+  width: 100%;
+  background-color:#303f9f;
+  color: white;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+}
+.m-b{
+ 
+    border-bottom: 1px solid;
+    margin: 0;
+   
+}
+.d-f{
+  display: flex;
+  justify-content:space-between;
+  height: 80px;
+  margin-bottom: 0;
+  margin-left: 15px;
+margin-right: 15px;
+}
+.font-s{
+ 
+  font-size: 13px;
+  height: 60px;
+  margin-top: 14px;
+  line-height: 2;
+  padding-left: 10px;
+  margin-right: 10px;
+  }
+  .font-s1{
+    display: flex;
+    font-size: 13px;
+   height: 35px;
+    line-height: 2;
+    padding-left: 10px;
+   
+    }
+    .image-container{
+      position: relative;
+      display: flex;
+      margin-bottom: 5px;
+    }
+  
+    .image-thumbnail{
+      border: black solid 1px;
+      margin-left: 20px;
+      height: 55px;
+      width: 55px;
+      
+    }
+    .close1{
+      margin-top: 5px;
+    margin-right: 10px;
+    background-color: transparent;
+    border-radius: 50%;
+    border: 1px solid;
+    width: 27px;
+    margin-right: 5px;
+
+    }
+    .social-icon{
+      position: relative;
+      margin-left: 19px;
+      margin-top: 19px;
+      width: 16px;
+    }
+    .page-icon-span{
+      position: absolute;
+      bottom: -6px;
+      height: 18px;
+      width: 18px;
+      color: white;
+      background: #303f9f;
+      border-radius: 50%;
+      /* padding-left: 5px; */
+      /* padding-top: 5px; */
+      /* padding: 3px 1px 1px 1px; */
+      left: -6px;
+    }
+    .page-icon-span-insta{
+      position: absolute;
+      bottom: -6px;
+      height: 18px;
+      width: 18px;
+      color: white;
+      background: #ff4081;
+      border-radius: 50%;
+      /* padding-left: 5px; */
+      /* padding-top: 5px; */
+      /* padding: 3px 1px 1px 1px; */
+      left: -6px;
+    }
+    .mat-page{
+      /* height: 11px; */
+      font-size: 15px;
+      margin-left: 3px;
+      margin-top: 3px;
+}
+.group-icon{
+  background-image: url('/assets/images/group.png');
+}
+.mat-pages{
+  padding-left: 35px;
+  margin-left: -31px !important;
+  /* z-index: -1; */
+  font-size: 10px;
+ 
+} 
+.selected-pages-span{
+      margin-left: 5px;
+      display: flex;
+        }    
+  .page-image {
+          position:relative;
+          background-size: cover;
+          border:3px solid #8b2;
+          z-index: 1;
+          width: 35px;
+          height: 35px;
+          margin-top: 2px;
+        } 
+  .page-card{
+          margin-left: 15px;
+          margin-top: 20px;
+          /* width: 85%; */
+        }
+.page-cross-icon{
+          margin-left: -22px;
+          cursor: pointer;
+          /* margin-top: -5px; */
+          width: 15px;
+          height: 15px;
+        }
+        .mr-0{
+          margin-right: 0;
+          display: flex;
+          flex-wrap: wrap;
+        }

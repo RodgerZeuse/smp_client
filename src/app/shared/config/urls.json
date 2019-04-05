@@ -1,0 +1,6 @@
+{
+    "END_POINT_URL": "http://192.168.1.126:3001/",
+    "IMAGE_DOWNLOAD_END_POINT_URL": "http://192.168.1.126:3001/api/Containers/pics/download/",
+    "IMAGE_UPLOAD_END_POINT_URL": "http://192.168.1.126:3001/api/Containers/pics/upload",
+    "CROPPED_IMAGE_UPLOAD_END_POINT_URL":"http://192.168.1.126:3001/api/Containers/fileUpload"
+}

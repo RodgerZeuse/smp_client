@@ -1,0 +1,58 @@
+<div>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        <h2>Select Pages and Groups</h2>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div *ngIf="viewPages && viewPages.length>0">
+        <h3>Pages are</h3>
+        <div *ngFor="let smPage of viewPages">
+          <mat-checkbox [(ngModel)]="smPage.isSelected">{{smPage.name}}</mat-checkbox>
+        </div>
+      </div>
+
+      <div *ngIf="viewGroups && viewGroups.length>0">
+        <h3>Groups are</h3>
+        <div *ngFor="let viewGroup of viewGroups">
+          <mat-checkbox [(ngModel)]="viewGroup.isSelected">{{viewGroup.name}}</mat-checkbox>
+        </div>
+      </div>
+
+      <div *ngIf="viewBoards && viewBoards.length>0">
+        <h3>Boards are</h3>
+        <div *ngFor="let viewBoard of viewBoards">
+          <mat-checkbox [(ngModel)]="viewBoard.isSelected">{{viewBoard.name}}</mat-checkbox>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <mat-error *ngIf="dataNotSelected">Select at least one page, group or board</mat-error>
+      <button mat-button color="promary"  (click)="updatePages()">Ok</button>
+      <button mat-button color="promary" (click)="deleteAccount()">Cancle</button>
+    </mat-card-actions>
+  </mat-card>
+  
+  <mat-card *ngIf="platform === 'YT'" class="custom-popup">
+    <mat-card-header>
+      <mat-card-title>
+        <h2>Select Channels</h2>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div *ngIf="youtubeChannels && youtubeChannels.length>0">
+        <h3>Channels are</h3>
+        <div *ngFor="let c of youtubeChannels">
+          <mat-checkbox [(ngModel)]="c.isSelected">{{c.snippet.title}}</mat-checkbox>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <mat-error *ngIf="dataNotSelected">Select at least one page, group or board</mat-error>
+      <button mat-button color="promary"  (click)="updatePages()">Ok</button>
+      <button mat-button color="promary" (click)="deleteAccount()">Cancle</button>
+    </mat-card-actions>
+  </mat-card>
+
+</div>

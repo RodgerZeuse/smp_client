@@ -1,0 +1,89 @@
+
+
+
+
+
+ <div class="w-850">
+  
+    <mat-grid-list cols="5" rowHeight="600px">
+        <mat-grid-tile [colspan]="1" [rowspan]="1" >
+        <div style="height:580px; width: 99%">
+                 <div class="same-all">
+                        <input type="checkbox" (change)="changeCropBox(isChecked)" [checked]="isChecked"> Same for all
+                        <mat-form-field class="w-95" >
+                            <mat-select placeholder="Please select ratio" [(ngModel)]="selectedRatio" (selectionChange)="changeRatio($event)">
+                              <mat-option value="free">Free</mat-option>
+                              <mat-option value="1/1">1:1</mat-option>
+                              <mat-option  value="2/3">2:3</mat-option>
+                              <mat-option  value="4/3">4:3</mat-option>
+                              <mat-option  value="16/9">16:9</mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                 </div>
+                      <mat-list role="list">
+                        <mat-list-item class="side-tabs" role="listitem" *ngFor="let p of data.platform" (click)="selectdTab(p)" [ngClass]="selectedTab === p ? 'active' : ''">
+                            <img class="attached-networks-img" [src]="p === 'FB' ? icons.fbIcon : p === 'IG' ? icons.instaIcon : p === 'TW' ? icons.twitterIcon : p === 'PI' ? icons.pinterestIcon : p === 'IN' ? 
+                            icons.linkedinIcons : '' "> <span class="tab-text">{{p === 'FB' ? 'Facebook' : p === 'IG' ? 'Instagram' : p === 'TW' ? 'Twitter' : p === 'IN' ? 'Linked in' : p === 'PI' ? 'Pinterest' : ''}}</span>
+                        </mat-list-item>
+                      </mat-list>
+               
+        </div>
+              
+        </mat-grid-tile>
+   
+    
+        <mat-grid-tile  [colspan]="3" [rowspan]="1" >
+         
+              <div style="height:600px;width: 100%">
+                 
+                    <cropper [selectedRatio]="selectedRatio" [selectedTab]="selectedTab" [options]="data" (previewImage)="imagePreview($event)" [isPlatformShow]="isChecked"  (cropImages)="getCroppedImage($event)"></cropper>
+            
+                 
+              </div>
+               
+               
+        
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="1" [rowspan]="1" >
+          
+            <div  class="img-s">
+                <div class="preview-view" *ngFor="let img of croppedImg" [ngClass]="img.type ? img.type + 'img' : ''">
+                    <img src="{{img.src}}" class="img-d">
+                    <img class="platform-img" *ngIf="img.type" [src]="img.type ==='FB' ? icons.fbIcon : img.type ==='IG' ? icons.instaIcon : img.type ==='PI' ? icons.pinterestIcon : img.type ==='TW' ? icons.twitterIcon : img.type ==='IN' ? icons.linkedinIcon : ''">
+                </div>
+            </div>
+           
+        </mat-grid-tile>
+    
+    </mat-grid-list>
+      
+</div>
+
+<!-- 
+<div class="w-850">
+
+    <mat-card-content style="width: 100px; height: 100%;">
+        <input type="checkbox" (change)="changeCropBox(isChecked)" [checked]="isChecked"> 
+    </mat-card-content>
+
+
+    <mat-card-content style="width: 500px; height: 100%;">
+        <cropper  [options]="data" [isPlatformShow]="isChecked"  (cropImages)="getCroppedImage($event)"></cropper></mat-card-content>
+
+    
+    <mat-card-content style="width: 250px; height: 100%;"></mat-card-content>
+
+    
+
+
+
+
+</div> -->
+
+
+
+  
+
+
+
+  

@@ -1,0 +1,18 @@
+.invitation-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .invitation-container > * {
+    width: 100%;
+  }
+  .mat-stroked-button:not([disabled]) {
+    border-color: rgba(0,0,0,.12);
+}
+.invitation-buttons-container{
+    display: flex;
+    justify-content: space-between;
+}
+.input-field{
+  width:100%!important;
+}

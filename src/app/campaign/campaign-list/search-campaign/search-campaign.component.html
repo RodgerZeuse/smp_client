@@ -1,0 +1,92 @@
+<mat-form-field class="innerDiv1">
+  <input matInput placeholder="Enter text to search" type="text" [(ngModel)]='searchCampaignModel.title'>
+</mat-form-field>
+<mat-form-field class="innerDiv2">
+  <mat-select [(ngModel)]='searchCampaignModel.state' placeholder="state">
+    <mat-option value="Draft">
+      Draft
+    </mat-option>
+    <mat-option value="Scheduled">
+      Scheduled
+    </mat-option>
+    <mat-option value="Posted">
+      Posted
+    </mat-option>
+    <mat-option value="InQueue">
+      In Queue
+    </mat-option>
+    <mat-option value="Canceled">
+      Canceled
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<div class="outerDiv">
+  <div class="innerDiv1">
+    <label>Created Date : </label>
+    <mat-form-field class="ml-15">
+      <input [(ngModel)]='searchCampaignModel.createdStartDate' matInput [matDatepicker]="picker">
+      <mat-datepicker-toggle matPrefix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="ml-15">
+      <mat-select [(ngModel)]='searchCampaignModel.createdAtCriteria' (ngModelChange)="createdSearchCriteria()">
+        <mat-option value="createSelectedDate">
+          On date
+        </mat-option>
+        <mat-option value="createBetweenDates">
+          Between dates
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="ml-15" *ngIf="createdDateBetween">
+      <input [(ngModel)]='searchCampaignModel.createdEndDate' matInput [matDatepicker]="picker">
+      <mat-datepicker-toggle matPrefix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </div>
+
+  <div class="innerDiv2">
+    <label>Scheduled Date : </label>
+    <mat-form-field class="ml-15-w">
+      <input [(ngModel)]='searchCampaignModel.scheduledStartDate' matInput [matDatepicker]="pi">
+      <mat-datepicker-toggle matPrefix [for]="pi"></mat-datepicker-toggle>
+      <mat-datepicker #pi></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="ml-15-w">
+      <mat-select [(ngModel)]='searchCampaignModel.scheduledAtCriteria' (ngModelChange)="scheduledSearchCriteria()">
+        <mat-option value="scheduledSelectedDate">
+          On date
+        </mat-option>
+        <mat-option value="scheduledBetweenDates">
+          Between dates
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="ml-15-w" *ngIf="scheduledDateBetween">
+      <input [(ngModel)]='searchCampaignModel.scheduledEndDate' matInput [matDatepicker]="pi">
+      <mat-datepicker-toggle matPrefix [for]="pi"></mat-datepicker-toggle>
+      <mat-datepicker #pi></mat-datepicker>
+    </mat-form-field>
+
+    <div *ngIf="(profileStore.userAccountType === 'company' || profileStore.haveAccess(groupRights.showarchive))">
+      <section class="example-section">
+        <mat-slide-toggle class="example-margin" (change)="showArchive()" [checked]="isArchiveOn" >
+          Show Archive
+        </mat-slide-toggle>
+      </section>
+    </div>
+
+
+  </div>
+</div>
+
+
+<mat-card-actions style="margin-left:1%">
+  <button mat-raised-button (click)="searchCampaign()" color="primary">Search</button>
+  <button mat-raised-button (click)="clearCriteria()">Clear</button>
+</mat-card-actions>

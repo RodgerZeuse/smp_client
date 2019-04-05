@@ -1,0 +1,63 @@
+<!-- [inputSelectedSocialAccountsArrayWithPages$]="inputSelectedSocialAccountsArrayWithPages" -->
+<!-- (onNewAccountPageSelection)="onNewAccountPageSelection($event)" -->
+<div *ngIf="(profileStore.userAccountType === 'company' || profileStore.haveAccess(groupRights.addcomments))" class="show-commnets" (click)="openCommnetsBar()">
+  View comments
+</div>
+<!-- {{(persistCampaign$ | async) |json}} -->
+<my-attached-social-networks 
+[myAttachedSocialAccounts$]="socialAccountsStore.ConnectedAccounts"
+ [selectedSocialAccountsArtifactsArray$]="selectedSocialAccountsArtifactsArray$"
+  (onSelectSocialAccountArtifact)="addSelectedSocialAccountArtifact($event)" 
+  (onRemoveAccountsPage)="onRemoveAccountsArtifact($event)">
+</my-attached-social-networks>
+
+
+<!-- [platforms$]="selectedNetworks$" -->
+<campaign-definition 
+
+(onChangeDescription)="onChangeDescription($event)"
+(onRemoveMediaFile)="onRemoveMediaFile($event)"
+(onAddMediaFile)="onAddMediaFile($event)"
+(onCropImage)="onCropImage($event)"
+(onThumbnailAdd)="addThumbnailInNewFile($event)"
+(onAddOrRemoveTags)="onAddOrRemoveTags($event)"
+[campaign$]="persistCampaign$"
+
+[customStatuses$]="campaignStatusStore.publishableStatuses"
+[selectedSocialNetwork$]="selectedNetworks$"
+(onCampaignSave)="onUpdate($event)">
+
+</campaign-definition>
+<post-list [posts$]="postsArrayToShow$"></post-list>
+
+<mat-sidenav opened mode="over" class="comment-right-sidenav" *ngIf="isCommentsShow" position="end">
+  <div class="comment-head">
+
+    <div class="comment-body">
+      <span class="text">Comments</span>
+      <div class="close-icon" (click)="closeCommnetsBar()">X</div>
+    </div>
+
+  </div>
+  <comments-contanier (commentReply)="commentReply($event)" (newComment)="newComment($event)" [type]="commentsType" [campaignComments$]="campaignComments$"></comments-contanier>
+</mat-sidenav>
+
+<campaign-activity class="mt-15" [campaignId]="this.editCampaignViewModel.id"></campaign-activity>
+
+<!-- (onNewMediaRemove)="onNewMediaRemoveFromDefinition($event)"
+(onInputMediaRemove)="onInputMediaRemoveFromDefinition($event)"  
+
+(onNewMediaFileSelect)="onNewMediaSelectionFromDefinition($event)"
+
+  (onNewImageCropped)="onNewImageCropped($event)" 
+  (onInputImageCropped)="onInputImageCropped($event)" 
+
+  (outThumbnailArray)="getThumbnailArray($event)"
+  
+
+  (onCampaignSave)="updateCampaign($event)" 
+  [campaign$]="persistCampaign$"
+ 
+  
+  (onNewImageTagsEdit)="onNewImageTagsEdit($event)"
+  (onInputImageTagsEdit)="onInputImageTagsEdit($event)" -->

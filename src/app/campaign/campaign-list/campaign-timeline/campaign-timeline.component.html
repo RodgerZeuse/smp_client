@@ -1,0 +1,103 @@
+<div *ngIf="!campaigns">
+  <h2 style="color:#303f9f"> There is no record to display</h2>
+</div>
+
+<div class="page" *ngIf="campaigns">
+  <div class="page__demo">
+    <div class="main-container page__container">
+      <div class="timeline">
+        <div class="timeline__group">
+          <span class="timeline__year">{{campaign.scheduledAt|date:'LLLL'}}</span>
+          <div *ngFor="let showDate of shownDates">
+            <div class="timeline__box" *ngFor="let campaign of getCampaignsOfDate(showDate);let i=index">
+              <div class="timeline__date">
+                <span class="timeline__day">{{campaign.scheduledAt|date:'dd'}}</span>
+                <span class="timeline__month">{{campaign.scheduledAt|date:'hh:mm:aa'}}</span>
+              </div>
+              <div class="timeline__post">
+                <table>
+                  <tr>
+                    <td style="display:flex;margin-bottom: 15px;">
+                      <div *ngIf="networkCount(campaign.posts,'FB')>=1" (mouseleave)="openCard=-1" (mouseenter)="showDetailMessageBox(campaign,i)">
+                        <div matBadge="{{networkCount(campaign.posts,'FB')}}" matBadgePosition="before" matBadgeColor="accent">
+                          <img class="icon-img" src="{{icons.fbIcon}}">
+                          <span class="page-icon-span">
+                            <mat-icon *ngIf="campaign.posts[0].socialMediaInfo.type=='pages'" class="mat-page">flag</mat-icon>
+                            <mat-icon *ngIf="campaign.posts[0].socialMediaInfo.type=='groups'" class="mat-page">group</mat-icon>
+                          </span>
+                        </div>
+                      </div>
+
+                      <div *ngIf="networkCount(campaign.posts,'IG')>=1" (mouseenter)="showDetailMessageBox(campaign,i)"
+                        (mouseleave)="openCard=-1">
+                        <div matBadge="{{networkCount(campaign.posts,'IG')}}" matBadgePosition="before" matBadgeColor="accent">
+                          <img class="icon-img" src="{{icons.instaIcon}}">
+                          <span class="page-icon-span">
+                            <mat-icon *ngIf="campaign.posts[0].socialMediaInfo.type=='pages'" class="mat-page">flag</mat-icon>
+                            <mat-icon *ngIf="campaign.posts[0].socialMediaInfo.type=='groups'" class="mat-page">group</mat-icon>
+                          </span>
+                        </div>
+                      </div>
+
+                      <div *ngIf="networkCount(campaign.posts,'YT')>0" (mouseleave)="openCard=-1" (mouseenter)="showDetailMessageBox(campaign,i)">
+                        <div matBadge="{{networkCount(campaign.posts,'YT')}}" matBadgePosition="before" matBadgeColor="accent">
+                          <img class="icon-img" src="{{icons.youtubeIcon}}">
+                        </div>
+                      </div>
+
+                      <div *ngIf="networkCount(campaign.posts,'PI')>0" (mouseleave)="openCard=-1" (mouseenter)="showDetailMessageBox(campaign,i)">
+                        <div matBadge="{{networkCount(campaign.posts,'PI')}}" matBadgePosition="before" matBadgeColor="accent">
+                          <img class="icon-img" src="{{icons.pinterestIcon}}">
+                          <span class="page-icon-span">
+                            <!-- <mat-icon *ngIf="campaign.posts[0].socialMediaInfo.type=='boards'" class="mat-page">dashboard</mat-icon> -->
+                            <i class="material-icons mat-page">
+                              dashboard
+                            </i>
+                          </span>
+                        </div>
+                      </div>
+
+                      <div *ngIf="networkCount(campaign.posts,'TW')>0" (mouseleave)="openCard=-1" (mouseenter)="showDetailMessageBox(campaign,i)">
+                        <div matBadge="{{networkCount(campaign.posts,'TW')}}" matBadgePosition="before" matBadgeColor="accent">
+                          <img class="icon-img" src="{{icons.twitterIcon}}">
+                        </div>
+                      </div>
+
+                      <div *ngIf="networkCount(campaign.posts,'LI')>0" (mouseleave)="openCard=-1" (mouseenter)="showDetailMessageBox(campaign,i)">
+                        <div matBadge="{{networkCount(campaign.posts,'LI')}}" matBadgePosition="before" matBadgeColor="accent">
+                          <img class="icon-img" src="{{icons.linkedinIcon}}">
+                        </div>
+                      </div>
+                    </td>
+                    <div>
+                      <td style="padding-right: 50px"> {{campaign.title}}</td>
+                      <td style="width: 44vw">{{campaign.description}}</td>
+                      <div *ngIf="(campaign.ownerId==profileStore.userId && profileStore.haveAccess(groupRights.deletemy)) || profileStore.haveAccess(groupRights.deleteany) || profileStore.userAccountType == 'company'">
+                        <td style="width: 5vw;">
+                          <delete-campaign *ngIf="campaign.state!='Post Now'" [campaign]="(campaign)" (removeCampain)="removeCampaign($event)"></delete-campaign>
+                        </td>
+                      </div>
+                        
+                      <td>
+                       <div *ngIf="(campaign.ownerId==profileStore.userId && profileStore.haveAccess(groupRights.updatemy)) || profileStore.haveAccess(groupRights.updateany) || profileStore.userAccountType == 'company'">
+                          <mat-icon *ngIf="campaign.state=='Draft' || campaign.state=='Scheduled'" (click)="editCampaign(campaign)"> edit</mat-icon>
+                      </div>
+
+                      <div *ngIf="(campaign.ownerId==profileStore.userId && profileStore.haveAccess(groupRights.reschedulemy)) || profileStore.haveAccess(groupRights.rescheduleany) || profileStore.userAccountType == 'company'">
+                          <i class="fa fa-fw fa-repeat" *ngIf="campaign.state=='Posted' || campaign.state=='Canceled'" (click)="editCampaign(campaign)"></i>
+                      </div>
+                    </td> 
+                    </div>
+                  </tr>
+                </table>
+              </div>
+              <mat-card class="menu-position" xPosition="after" yPosition="above" *ngIf="openCard==i">
+                <campaign-details [campaign]="campaignForDetails"></campaign-details>
+              </mat-card>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

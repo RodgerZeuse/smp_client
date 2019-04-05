@@ -1,0 +1,50 @@
+<mat-card class="login-card">  
+    <mat-card-content>
+        <mat-grid-list  cols="6" rowHeight="60px" >
+        <div class="example-container">
+            <mat-grid-tile [colspan]="2" [rowspan]="1" >
+              <mat-form-field class="userName">
+   <input   matInput placeholder="Search user name" type="text" 
+       name="accountsUserName" [(ngModel)]="accountsUserName"  >
+      </mat-form-field>
+    </mat-grid-tile> 
+
+<mat-grid-tile [colspan]="2" [rowspan]="1"  >
+<mat-form-field class="w-100">
+     <mat-select  placeholder="Select platforms" [(ngModel)]="clearPlatforms" multiple> 
+
+        
+      <mat-option  value="IG" (click)="instagramSelected()" >Instagram</mat-option>
+            <mat-option  value="FB" (click)="facebookSelected()"  >Facebook</mat-option>
+            <mat-option value="YT" (click)= "youtubeSelected()" >Youtube</mat-option> 
+    </mat-select>
+  </mat-form-field>
+</mat-grid-tile>
+
+
+<mat-grid-tile [colspan]="1" [rowspan]="1">
+    <mat-form-field class="w-100">
+  <mat-select  placeholder="Select status" [(ngModel)]="clearStatus" multiple> 
+
+        
+    <!-- <mat-option  value="anyState" (click)="anyState()" >All Status</mat-option> -->
+          <mat-option  value="Connect" (click)="connectSelected()"  >Connected</mat-option>
+          <mat-option value="DisConnect" (click)= "disconnectSelected()" >Disconnected</mat-option> 
+  </mat-select>  
+  <!-- <mat-slide-toggle>
+       {{Status}}
+            </mat-slide-toggle> -->
+          </mat-form-field>
+          </mat-grid-tile>
+
+<mat-grid-tile [colspan]="1" [rowspan]="1"  >
+    <button mat-raised-button class="hh" (click)="clearSearches()">Clear</button>
+    &nbsp;
+    <button mat-raised-button color="primary" (click)="search()">Search</button>
+</mat-grid-tile>
+
+</div>
+</mat-grid-list>
+  </mat-card-content>
+</mat-card>
+

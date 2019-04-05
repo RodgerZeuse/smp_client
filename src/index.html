@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Social Media Poster</title>
+  <base href="/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- For Dropbox Chooser-->
+  <script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="2truwpjlf5zwky2"></script>
+  <!-- For Google/GAPI Picker-->
+  <script src="https://apis.google.com/js/api.js"></script>
+  <script src="https://apis.google.com/js/client.js"></script>
+  <script src="https://apis.google.com/js/platform.js"></script>
+  <!-- For Box Picker-->
+  <script src="https://cdn01.boxcdn.net/polyfills/core-js/2.5.3/core.min.js"></script>
+  <script src="https://cdn01.boxcdn.net/platform/elements/7.2.0/en-US/picker.js"></script>
+  <link rel="stylesheet" href="https://cdn01.boxcdn.net/platform/elements/7.2.0/en-US/picker.css" />
+  <!-- <script type="text/javascript" src="https://app.box.com/js/static/select.js"></script> -->
+  <!-- For OneDrive -->
+  <script type="text/javascript" src="https://js.live.net/v7.2/OneDrive.js"></script>
+
+  <script>
+    window.fbAsyncInit = function () {
+      FB.init({ appId: '196750267603734', cookie: true, xfbml: true, version: 'v3.0' });
+      FB
+        .AppEvents
+        .logPageView();
+      FB.getLoginStatus(function (response) {
+        console.log("fb login status" + response);
+        // statusChangeCallback(response);
+      });
+      function checkLoginState() {
+        FB
+          .getLoginStatus(function (response) {
+            console.log("fb check login status" + response);
+          });
+      }
+    };
+    (function (d, s, id) {
+      var js,
+        fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) {
+        return;
+      }
+      js = d.createElement(s);
+      js.id = id;
+      js.src = "https://connect.facebook.net/en_US/sdk.js";
+      fjs
+        .parentNode
+        .insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+  </script>
+<!-- <script type="text/javascript" src="//platform.linkedin.com/in.js">
+  api_key:   "77g7k13xjls3dk"
+  onLoad:    onLinkedInLoad
+  authorize: true
+  lang:      "en_US"
+</script> -->
+</head>
+
+<body>
+  <!-- <mat-sidenav-container>
+        <mat-sidenav-content> </mat-sidenav-content>
+        <mat-nav-list class="navlist">
+          <a mat-nav-list class="nlist">Home</a>
+          <a mat-nav-list class="nlist">About</a>
+          <a mat-nav-list class="nlist">Feature</a>
+          <a mat-nav-list class="nlist">Gallery</a>
+          <a mat-nav-list class="nlist">Pricing</a>
+          <a mat-nav-list class="nlist">Testimonial</a>
+          <a mat-nav-list class="nlist">Blog</a>
+          <a mat-nav-list class="nlist">Team</a>
+          <a mat-nav-list class="nlist">Contact</a>
+        </mat-nav-list>
+     
+      </mat-sidenav-container> -->
+  <app-root></app-root>
+</body>
+
+</html>

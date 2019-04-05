@@ -1,0 +1,16 @@
+<div>
+    <search-account (clearSearch)="clearSearch($events)" (searchAccount)="searchAccount($event)"></search-account>
+    <div class="position-relative w-90">
+        <div  class="position-absolute add-networks-btn">
+            <button mat-fab color="primary" (click)="showSmPlatform()">
+                <mat-icon>add</mat-icon>
+            </button>
+            <add-networks *ngIf="isNetworksListShow" (onActiveLoader)="activateLoader($event)" (isUpdateList)="updateAccountsList($event)" (networkInfo)="networkInfor($event)"></add-networks>
+            <mat-spinner *ngIf="userProfile.loader"></mat-spinner>
+        </div>
+        <my-networks (isRerender)="reRender($event)" [socialAccountsDetail$]="socialAccountsDetail$" (accountId)="selectedSmAccount($event)"></my-networks>
+    </div>
+    <div *ngIf="activeLoader" class="loader-div">
+        <mat-spinner></mat-spinner>
+      </div>
+</div>

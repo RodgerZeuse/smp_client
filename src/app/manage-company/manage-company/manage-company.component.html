@@ -1,0 +1,80 @@
+<mat-card class="example-card" style="margin-bottom: 25px !important">
+  <mat-card-content>
+    <button mat-raised-button color="primary" (click)="addCompanyUser()">
+      Add User
+    </button>
+  </mat-card-content>
+</mat-card>
+
+<table mat-table [dataSource]="socialAccountsDetail$" class="mat-elevation-z8 " style="width: 95% !important">
+
+  {{memberDetails}}
+  <!-- <div *ngIf="memberDetails$.account_Type">
+        
+      </div> -->
+  <!-- <ng-container matColumnDef="signedAccounts" class="text-table" >
+        <th style="text-align: left; padding-left: 90px;"  mat-header-cell *matHeaderCellDef> Signed Accounts </th>
+        <td mat-cell *matCellDef="let element; let i = index" style="text-align: left; padding-left: 70px">
+          <div element.selectedAccounts  class="sign-a">
+            <div *ngFor="let post of element.selectedAccounts" style="display: flex; text-align: center">
+              <div mat-card-avatar *ngIf="post.pageObj.thumbnail " [ngStyle]="{'background-image': 'url(' + post.pageObj.thumbnail + ')'}"
+                class="page-image">
+                <img *ngIf="post.socialAccountObj.type=='FB'" class="social-icon" src="{{icons.fbIcon}}">
+                <img *ngIf="post.socialAccountObj.type=='IG'" class="social-icon" src="{{icons.instaIcon}}">
+                <span class="page-icon-span">
+                  <mat-icon *ngIf="post.pageObj.type=='pages'" class="mat-page">flag</mat-icon>
+                  <mat-icon *ngIf="post.pageObj.type=='groups'" class="mat-page">group</mat-icon>
+                </span>
+              </div>
+
+              <div mat-card-avatar *ngIf="!post.pageObj.thumbnail " [ngStyle]="{'background-image': 'url(' + post.pageObj.cover.source + ')'}"
+                class="group-icon page-image">
+                <img *ngIf="post.socialAccountObj.type=='FB'" class="social-icon" src="{{icons.fbIcon}}">
+                <img *ngIf="post.socialAccountObj.type=='IG'" class="social-icon" src="{{icons.instaIcon}}">
+                <img *ngIf="post.socialAccountObj.type=='YT'" class="social-icon" src="{{icons.youtubeIcon}}">
+                <span class="page-icon-span">
+                  <mat-icon *ngIf="post.pageObj.type=='pages'" class="mat-page">flag</mat-icon>
+                  <mat-icon *ngIf="post.pageObj.type=='groups'" class="mat-page">group</mat-icon>
+                </span>
+              </div>
+              <p  class="text-s" >{{post.pageObj.name}}</p>
+            </div>
+          </div>
+          <div *ngIf="element.selectedAccounts.length==0">
+            <img class="icon-img" src='{{icons.groupIcon}}'>
+          </div>
+        </td>
+      </ng-container> -->
+
+  <ng-container matColumnDef="firstName">
+    <th class="f-name" mat-header-cell *matHeaderCellDef> First Name </th>
+    <td class="f-name" mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="lastName">
+    <th class="l-name" mat-header-cell *matHeaderCellDef> Last Name </th>
+    <td class="l-name" mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="email">
+    <th class="email" mat-header-cell *matHeaderCellDef> Email </th>
+    <td class="email" mat-cell *matCellDef="let element"> {{element.email}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="edit">
+    <th class="edit" mat-header-cell *matHeaderCellDef> </th>
+    <td class="edit" mat-cell *matCellDef="let element">
+      <mat-icon *ngIf="element.id!=profileStore.userId" (click)="updataCompanyUser(element)">edit</mat-icon>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="delete">
+    <th class="delete" mat-header-cell *matHeaderCellDef> </th>
+    <td class="delete" mat-cell *matCellDef="let element">
+      <mat-icon *ngIf="element.id!=profileStore.userId" (click)="deleteUser(element.id)" color="warn">delete</mat-icon>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

@@ -1,0 +1,22 @@
+.comment-right-sidenav{
+    width:350px;
+    /* background-color: #2d323e;
+    color: #fff; */
+    background: #fafafa;
+    /* min-height: 400px;
+max-height: 900px; */
+position: fixed;
+}
+.comment-head{
+    padding: 10px;
+    color: rgba(255, 255,255, .7);
+    background-color: #303f9f;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    width: 95%;
+}
+.comment-body{
+    display: flex;
+    justify-content: space-between;
+    overflow: hidden;
+}

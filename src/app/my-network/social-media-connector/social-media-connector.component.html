@@ -1,0 +1,8 @@
+<div class="social-media-connecter-wrapper">
+    <facebook-connector (onLoaderEnable)="showLoader($event)" *ngIf="profileStore.fb" (isUpdateList)="updateAccountsList($event)" (networkInfo)="networkInfor($event)"></facebook-connector>
+    <youtube-connector (onLoaderEnable)="showLoader($event)" *ngIf="profileStore.yt" (isUpdateList)="updateAccountsList($event)"></youtube-connector>
+    <instagram-connector (onLoaderEnable)="showLoader($event)" *ngIf="profileStore.ig" (isUpdateList)="updateAccountsList($event)" (networkInfo)="networkInfor($event)"></instagram-connector>
+    <twitter-connector (onLoaderEnable)="showLoader($event)" *ngIf="profileStore.tw" (isUpdateList)="updateAccountsList($event)"></twitter-connector>
+    <pinterest-connector (onLoaderEnable)="showLoader($event)" *ngIf="profileStore.pi" (isUpdateList)="updateAccountsList($event)" (networkInfo)="networkInfor($event)"></pinterest-connector>
+    <linkedin-connector (isLinkedin)="linkedInAith($event)" (isUpdateList)="updateAccountsList($event)" (networkInfo)="networkInfor($event)"></linkedin-connector>
+</div>

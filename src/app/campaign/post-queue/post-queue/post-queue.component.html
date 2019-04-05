@@ -1,0 +1,209 @@
+<div class="example-wrapper">
+  <h5>Manage your queue</h5>
+</div>
+
+<div class="container card">
+  <div class="row">
+    <div [ngClass]="selectedDay=='Monday' ? 'headding-background':''" (click)="selectDayToAddSlot('Monday')" class="col columns">
+      Monday
+    </div>
+
+    <div [ngClass]="selectedDay=='Tuesday' ? 'headding-background':''" (click)="selectDayToAddSlot('Tuesday')" class="col columns">
+      Tuesday
+    </div>
+
+    <div [ngClass]="selectedDay=='Wednesday' ? 'headding-background':''" (click)="selectDayToAddSlot('Wednesday')"
+      class="col columns">
+      Wednesday
+    </div>
+
+    <div [ngClass]="selectedDay=='Thursday' ? 'headding-background':''" (click)="selectDayToAddSlot('Thursday')" class="col columns">
+      Thursday
+    </div>
+    <div [ngClass]="selectedDay=='Friday' ? 'headding-background':''" (click)="selectDayToAddSlot('Friday')" class="col columns">
+      Friday
+    </div>
+    <div [ngClass]="selectedDay=='Saturday' ? 'headding-background':''" (click)="selectDayToAddSlot('Saturday')" class="col columns">
+      Saturday
+    </div>
+
+    <div [ngClass]="selectedDay=='Sunday' ? 'headding-background':''" (click)="selectDayToAddSlot('Sunday')" class="col columns">
+      Sunday
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <span *ngFor="let slot of postToQueue$.Monday">
+        <mat-list role="list">
+          <mat-list-item role="listitem">
+            <div style="display: flex; width: 9vw">
+              <div *ngIf="slot.from.hour < 12">{{slot.from.hour}}:{{slot.from.minute+" AM"}}</div>
+              <div *ngIf="slot.from.hour>12">{{slot.from.hour-12}}:{{slot.from.minute+" PM"}}</div>
+              <div *ngIf="slot.from.hour==12">{{slot.from.hour}}:{{slot.from.minute+" PM"}}</div>
+              &nbsp;to&nbsp;
+              <div *ngIf="slot.to.hour < 12">{{slot.to.hour}}:{{slot.to.minute+" AM"}}</div>
+              <div *ngIf="slot.to.hour>12">{{slot.to.hour-12}}:{{slot.to.minute+" PM"}}</div>
+              <div *ngIf="slot.to.hour==12">{{slot.to.hour}}:{{slot.to.minute+" PM"}}</div>
+            </div>
+          </mat-list-item>
+        </mat-list>
+        <div *ngIf="selectedDay=='Monday'">
+          <mat-icon color="accent" style="padding-left: 40px;" (click)="deleteSlot(slot.id)">delete</mat-icon>
+        </div>
+      </span>
+      <div *ngIf="selectedDay=='Monday'">
+        <mat-icon color="accent" style="padding-left: 40px;" (click)="addTimePopup()">add_circle</mat-icon>
+      </div>
+    </div>
+
+    <div class="col">
+      <span *ngFor="let slot of postToQueue$.Tuesday">
+        <mat-list role="list">
+          <mat-list-item role="listitem">
+            <div style="display: flex; width: 9vw">
+              <div *ngIf="slot.from.hour < 12">{{slot.from.hour}}:{{slot.from.minute+" AM"}}</div>
+              <div *ngIf="slot.from.hour>12">{{slot.from.hour-12}}:{{slot.from.minute+" PM"}}</div>
+              <div *ngIf="slot.from.hour==12">{{slot.from.hour}}:{{slot.from.minute+" PM"}}</div>
+              &nbsp;to&nbsp;
+              <div *ngIf="slot.to.hour < 12">{{slot.to.hour}}:{{slot.to.minute+" AM"}}</div>
+              <div *ngIf="slot.to.hour>12">{{slot.to.hour-12}}:{{slot.to.minute+" PM"}}</div>
+              <div *ngIf="slot.to.hour==12">{{slot.to.hour}}:{{slot.to.minute+" PM"}}</div>
+            </div>
+          </mat-list-item>
+        </mat-list>
+        <div *ngIf="selectedDay=='Tuesday'">
+          <mat-icon color="accent" style="padding-left: 40px;" (click)="deleteSlot(slot.id)">delete</mat-icon>
+        </div>
+      </span>
+      <div *ngIf="selectedDay=='Tuesday'">
+        <mat-icon color="accent" style="padding-left: 40px;" (click)="addTimePopup()">add_circle</mat-icon>
+      </div>
+    </div>
+
+    <div class="col">
+      <span *ngFor="let slot of postToQueue$.Wednesday">
+        <mat-list role="list">
+          <mat-list-item role="listitem">
+            <div style="display: flex; width: 9vw">
+              <div *ngIf="slot.from.hour < 12">{{slot.from.hour}}:{{slot.from.minute+" AM"}}</div>
+              <div *ngIf="slot.from.hour>12">{{slot.from.hour-12}}:{{slot.from.minute+" PM"}}</div>
+              <div *ngIf="slot.from.hour==12">{{slot.from.hour}}:{{slot.from.minute+" PM"}}</div>
+              &nbsp;to&nbsp;
+              <div *ngIf="slot.to.hour < 12">{{slot.to.hour}}:{{slot.to.minute+" AM"}}</div>
+              <div *ngIf="slot.to.hour>12">{{slot.to.hour-12}}:{{slot.to.minute+" PM"}}</div>
+              <div *ngIf="slot.to.hour==12">{{slot.to.hour}}:{{slot.to.minute+" PM"}}</div>
+            </div>
+          </mat-list-item>
+        </mat-list>
+        <div *ngIf="selectedDay=='Wednesday'">
+          <mat-icon color="accent" style="padding-left: 40px;" (click)="deleteSlot(slot.id)">delete</mat-icon>
+        </div>
+      </span>
+      <div *ngIf="selectedDay=='Wednesday'">
+        <mat-icon color="accent" style="padding-left: 40px;" (click)="addTimePopup()">add_circle</mat-icon>
+      </div>
+    </div>
+
+    <div class="col">
+      <span *ngFor="let slot of postToQueue$.Thursday">
+        <mat-list role="list">
+          <mat-list-item role="listitem">
+            <div style="display: flex; width: 9vw">
+              <div *ngIf="slot.from.hour < 12">{{slot.from.hour}}:{{slot.from.minute+" AM"}}</div>
+              <div *ngIf="slot.from.hour>12">{{slot.from.hour-12}}:{{slot.from.minute+" PM"}}</div>
+              <div *ngIf="slot.from.hour==12">{{slot.from.hour}}:{{slot.from.minute+" PM"}}</div>
+              &nbsp;to&nbsp;
+              <div *ngIf="slot.to.hour < 12">{{slot.to.hour}}:{{slot.to.minute+" AM"}}</div>
+              <div *ngIf="slot.to.hour>12">{{slot.to.hour-12}}:{{slot.to.minute+" PM"}}</div>
+              <div *ngIf="slot.to.hour==12">{{slot.to.hour}}:{{slot.to.minute+" PM"}}</div>
+            </div>
+          </mat-list-item>
+        </mat-list>
+        <div *ngIf="selectedDay=='Thursday'">
+          <mat-icon color="accent" style="padding-left: 40px;" (click)="deleteSlot(slot.id)">delete</mat-icon>
+        </div>
+      </span>
+      <div *ngIf="selectedDay=='Thursday'">
+        <mat-icon color="accent" style="padding-left: 40px;" (click)="addTimePopup()">add_circle</mat-icon>
+      </div>
+    </div>
+
+    <div class="col">
+      <span *ngFor="let slot of postToQueue$.Friday">
+        <mat-list role="list">
+          <mat-list-item role="listitem">
+            <div style="display: flex; width: 9vw">
+              <div *ngIf="slot.from.hour < 12">{{slot.from.hour}}:{{slot.from.minute+" AM"}}</div>
+              <div *ngIf="slot.from.hour>12">{{slot.from.hour-12}}:{{slot.from.minute+" PM"}}</div>
+              <div *ngIf="slot.from.hour==12">{{slot.from.hour}}:{{slot.from.minute+" PM"}}</div>
+              &nbsp;to&nbsp;
+              <div *ngIf="slot.to.hour < 12">{{slot.to.hour}}:{{slot.to.minute+" AM"}}</div>
+              <div *ngIf="slot.to.hour>12">{{slot.to.hour-12}}:{{slot.to.minute+" PM"}}</div>
+              <div *ngIf="slot.to.hour==12">{{slot.to.hour}}:{{slot.to.minute+" PM"}}</div>
+            </div>
+          </mat-list-item>
+        </mat-list>
+        <div *ngIf="selectedDay=='Friday'">
+          <mat-icon color="accent" style="padding-left: 40px;" (click)="deleteSlot(slot.id)">delete</mat-icon>
+        </div>
+      </span>
+      <div *ngIf="selectedDay=='Friday'">
+        <mat-icon color="accent" style="padding-left: 40px;" (click)="addTimePopup()">add_circle</mat-icon>
+      </div>
+    </div>
+
+    <div class="col">
+      <span *ngFor="let slot of postToQueue$.Saturday">
+        <mat-list role="list">
+          <mat-list-item role="listitem">
+            <div style="display: flex; width: 9vw">
+              <div *ngIf="slot.from.hour < 12">{{slot.from.hour}}:{{slot.from.minute+" AM"}}</div>
+              <div *ngIf="slot.from.hour>12">{{slot.from.hour-12}}:{{slot.from.minute+" PM"}}</div>
+              <div *ngIf="slot.from.hour==12">{{slot.from.hour}}:{{slot.from.minute+" PM"}}</div>
+              &nbsp;to&nbsp;
+              <div *ngIf="slot.to.hour < 12">{{slot.to.hour}}:{{slot.to.minute+" AM"}}</div>
+              <div *ngIf="slot.to.hour>12">{{slot.to.hour-12}}:{{slot.to.minute+" PM"}}</div>
+              <div *ngIf="slot.to.hour==12">{{slot.to.hour}}:{{slot.to.minute+" PM"}}</div>
+            </div>
+          </mat-list-item>
+        </mat-list>
+        <div *ngIf="selectedDay=='Saturday'">
+          <mat-icon color="accent" style="padding-left: 40px;" (click)="deleteSlot(slot.id)">delete</mat-icon>
+        </div>
+      </span>
+      <div *ngIf="selectedDay=='Saturday'">
+        <mat-icon color="accent" style="padding-left: 40px;" (click)="addTimePopup()">add_circle</mat-icon>
+      </div>
+    </div>
+
+    <div class="col">
+      <span *ngFor="let slot of postToQueue$.Sunday">
+        <mat-list role="list">
+          <mat-list-item role="listitem">
+            <div style="display: flex; width: 9vw">
+              <div *ngIf="slot.from.hour < 12">{{slot.from.hour}}:{{slot.from.minute+" AM"}}</div>
+              <div *ngIf="slot.from.hour>12">{{slot.from.hour-12}}:{{slot.from.minute+" PM"}}</div>
+              <div *ngIf="slot.from.hour==12">{{slot.from.hour}}:{{slot.from.minute+" PM"}}</div>
+              &nbsp;to&nbsp;
+              <div *ngIf="slot.to.hour < 12">{{slot.to.hour}}:{{slot.to.minute+" AM"}}</div>
+              <div *ngIf="slot.to.hour>12">{{slot.to.hour-12}}:{{slot.to.minute+" PM"}}</div>
+              <div *ngIf="slot.to.hour==12">{{slot.to.hour}}:{{slot.to.minute+" PM"}}</div>
+            </div>
+          </mat-list-item>
+        </mat-list>
+        <div *ngIf="selectedDay=='Sunday'">
+          <mat-icon color="accent" style="padding-left: 40px;" (click)="deleteSlot(slot.id)">delete</mat-icon>
+        </div>
+      </span>
+
+      <div *ngIf="selectedDay=='Sunday'">
+        <mat-icon color="accent" style="padding-left: 40px;" (click)="addTimePopup()">add_circle</mat-icon>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="showLoader" class="loader-div">
+    <mat-spinner></mat-spinner>
+  </div>
+
+</div>

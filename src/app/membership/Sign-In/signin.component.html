@@ -1,0 +1,86 @@
+<mat-toolbar class="bground">
+
+</mat-toolbar>
+
+<mat-grid-list cols="3" rowHeight="300px">
+    <mat-grid-tile >
+
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="1"
+    [rowspan]="2">
+
+        <mat-card class="login-card">
+            <img mat-card-sm-image class="profileimg" (click)="showProfileDetail()" src="{{appLogo.appLogo}}" alt="Logo">  
+          <mat-card-header>
+                
+              <mat-card-title class=login-style>LOGIN TO YOUR ACCOUNT</mat-card-title>
+            </mat-card-header>
+          
+            <mat-card-content>
+                <div class="example-container">
+                  
+                <mat-form-field>
+                    <input   matInput placeholder="Email Address" type="email" 
+                    [(ngModel)]= "loginData.email" pattern="[a-z0-9.]+@[a-z]+\.[a-z]{2,3}$" 
+                     #email="ngModel" ngModel  name="email" required>
+           </mat-form-field>
+                
+                <mat-error *ngIf="(email.touched && loginData.email=='')">
+                  
+                    {{errors.emailError}}
+                </mat-error>
+                <mat-error *ngIf="(loginData.email=='' && emailError)">
+                    {{errors.emailError}}
+                </mat-error>
+                <mat-error *ngIf="(email.value && !email.valid) ">
+                    {{errors.emailFormatError}}
+                  </mat-error>
+          
+                <mat-form-field>
+                  <input matInput type="password" 
+                  placeholder="Password"  
+                  name="password" 
+                  #pasword="ngModel" 
+                  [(ngModel)]="loginData.password" 
+                  (keyup.enter)="login()"  
+                  required>
+                 
+                </mat-form-field>
+                <mat-error  
+                  *ngIf="(pasword.touched && !pasword.valid) || (paswordError && !pasword.valid)">
+                    {{errors.passworError}}
+                </mat-error >
+              </div>
+            </mat-card-content>
+            <!-- <mat-error  *ngIf = "( alertModel$ | async).messages=='login failed'">
+              Email or password is incorrect.
+            </mat-error> -->
+            <mat-error  *ngFor = "let message of ( alertModel$ | async).messages">
+                {{message}}
+              </mat-error>
+            <mat-card-actions>
+              <div class="button-dis">
+                  <section class="example-section">
+                      <mat-checkbox class="example-margin" [(ngModel)]="checked">Remember Me
+                        </mat-checkbox>
+                     </section>
+                
+              <button mat-button color="primary"    [routerLink]="['/membership/forgetpassword']" routerLinkActive="active">Forget Password </button>
+            </div>
+            <button mat-raised-button (click)="login()"  [disabled]="(alertModel$ | async).isValidate" class="margin-t" color="primary">Login</button>
+            <div class="margin-top">
+            <Span class="style1">Don't have an account?</Span>
+            <br><a  [routerLink]="['/membership/signup']" class="style2">Create an account</a>
+          </div> 
+            </mat-card-actions>
+          
+          </mat-card>
+
+    </mat-grid-tile>
+   
+  </mat-grid-list>
+  <mat-grid-tile >
+
+    </mat-grid-tile>
+

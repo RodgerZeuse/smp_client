@@ -1,0 +1,48 @@
+<mat-card class="example-card">
+  <div class="files-div">
+    <!-- {{postViewModel | json}} -->
+    <img class="social-icon" *ngIf="postViewModel.network=='FB'" id="selectAccount" src="{{icons.fbIcon}}">
+    <img class="social-icon" *ngIf="postViewModel.network=='IG'" id="selectAccount" src="{{icons.instaIcon}}">
+    <img class="social-icon" *ngIf="postViewModel.network=='PI'" id="selectAccount" src="{{icons.pinterestIcon}}">
+    <img class="social-icon" *ngIf="postViewModel.network=='TW'" id="selectAccount" src="{{icons.twitterIcon}}">
+    <img class="social-icon" *ngIf="postViewModel.network=='YT'" id="selectAccount" src="{{icons.youtubeIcon}}">
+    <img class="social-icon" *ngIf="postViewModel.network=='IN'" id="selectAccount" src="{{icons.linkedinIcon}}"> {{postViewModel.description}}
+
+    <div *ngFor="let file of postViewModel.mediaFiles">
+      <!-- {{file | json}} -->
+      <img class="new-selected-imgs" *ngIf="!file.id || file.id==''" src="{{file.base64File.src}}">
+      <img class="selected-imgs" *ngIf="file.id && file.id!='' && file.type!='video/mp4'" src="{{imagePath+file.name}}">
+      <img class="selected-imgs" *ngIf="file.id && file.id!='' && file.type=='video/mp4'" src="{{imagePath+file.thumbnailName}}">
+      <!-- <img class="selected-imgs" *ngIf="(!file.id || file.id!='') && file.type=='video/mp4'" src="{{}}"> -->
+
+    </div>
+  </div>
+</mat-card>
+<!-- <span *ngFor="let uniqPlatform of uniquPlatforms">
+  <mat-card class="example-card" style="margin-top:-40px" *ngIf="uniqPlatform.mediaFiles.length>=1">
+    <img *ngIf="uniqPlatform.network=='FB'" id="selectAccount" class="social-icon" src="{{icons.fbIcon}}">
+    <img *ngIf="uniqPlatform.network=='IG'" id="selectAccount" class="social-icon" src="{{icons.instaIcon}}">
+    <img *ngIf="uniqPlatform.network=='PI'" id="selectAccount" class="social-icon" src="{{icons.pinterestIcon}}">
+    <img *ngIf="uniqPlatform.network=='TW'" id="selectAccount" class="social-icon" src="{{icons.twitterIcon}}">
+    <img *ngIf="uniqPlatform.network=='YT'" id="selectAccount" class="social-icon" src="{{icons.youtubeIcon}}">
+    <img *ngIf="uniqPlatform.network=='IN'" id="selectAccount" class="social-icon" src="{{icons.linkedinIcon}}">
+    <mat-card-content class="card-flex">
+      <div class="artifact-div">
+        <span *ngFor="let postViewModel of (postViewModelsArray$ | async)">
+          <img class="artifact-icon" matTooltip="{{postViewModel.socialMediaInfo.name}}" *ngIf="postViewModel.network==uniqPlatform.network" src="{{postViewModel.socialMediaInfo.thumbnail}}">
+        </span>
+      </div>
+
+    
+      <div class="files-div">
+        <span class="files" *ngFor="let files of uniqPlatform.mediaFiles">
+         
+          <img *ngIf="files.type=='image' || files.src" class="selected-imgs" src="{{files.src}}">
+          <img *ngIf="files.type!='video/mp4' && files.type!='image' && !files.src" class="selected-imgs" src="{{imagePath+files.name}}">
+          <img *ngIf="files.type=='video/mp4' && !files.src" class="selected-imgs " src="{{imagePath+files.thumbnail}}">
+        </span>
+      </div>
+
+    </mat-card-content>
+  </mat-card>
+</span> -->

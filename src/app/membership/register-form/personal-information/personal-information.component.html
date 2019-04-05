@@ -1,0 +1,17 @@
+<form [formGroup]="personInformationForm">
+                    <div class="container">
+                    <mat-form-field >
+                    <mat-icon>person_outline</mat-icon>
+                    <input matInput placeholder="&emsp;&emsp;First Name" formControlName="firstName" type="text" [(ngModel)]= user.firstName/><br>
+                    </mat-form-field>
+                    <mat-error class="error-message" *ngIf="!personInformationForm.get('firstName').valid && (personInformationForm.get('firstName').dirty || personInformationForm.get('firstName').touched)">Invalid first name</mat-error>
+          
+                    <mat-form-field>
+                    <mat-icon>person_outline</mat-icon>
+                    <input matInput placeholder="&emsp;&emsp;Last Name" type="text" formControlName="lastName" [(ngModel)]= user.lastName>
+                    </mat-form-field>
+                    <mat-error class="error-message" *ngIf="!personInformationForm.get('lastName').valid && (personInformationForm.get('lastName').dirty || personInformationForm.get('lastName').touched)">Invalid last name</mat-error>
+                   </div>
+    </form>
+   
+    

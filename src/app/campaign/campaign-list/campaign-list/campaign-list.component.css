@@ -1,0 +1,161 @@
+.descpara{
+  white-space: pre-line;
+  overflow: hidden;
+  width: 35ch;
+  margin: 0;
+}
+.hide{
+  display: none;
+}
+.mat-header-row{
+background: #f5f5f5;
+}
+.icon-img{
+  height: 35px;
+  width: 35px;
+}
+.my-img{
+display: flex;
+}
+
+.platform-img{
+  height: 33px;
+  width: 33px;
+  margin-right: 5px;
+  border:1px solid gray;
+  border-radius: 20px;
+}
+
+
+.plateform{
+width: 15%;
+}
+.title{
+  width: 13%;
+  }
+
+.titlePara{
+  white-space: pre-line;
+  overflow: hidden;
+  margin: 0;
+  
+  }
+.mat-tooltip
+{
+  background-color:#3f51b5;
+}
+  .desc{
+    width: 35%;
+    }
+    .state{
+      width: 8%;
+      
+      }
+      .mediafiles{
+        width: 5%
+      }
+      .date{
+        width: 11%;
+      }
+      .remove{
+        width: 3%;
+      }
+      .edit{
+        width:5%
+      }
+      .mat-table tbody tr:nth-child(2n) {
+        background-color:whitesmoke;
+      }
+      .mat-table tbody tr:nth-child(2n+1) {
+        background-color:white;
+      }
+
+      .mat-table tbody tr:hover {
+        background-color:lightgray;
+      }
+      .align-content{
+        display: flex !important;
+        align-items: center !important;
+      }
+      .menu-div-style{
+        padding:5px;
+        display: grid !important;
+        align-items: center !important;
+      }
+       
+      .w-90{
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        /* margin-top: 15px; */
+      }
+      .w-90p{
+        width: 90px;
+        display: block !important;
+        text-align: center;
+      }
+
+    .w-125{
+      width: 125px;
+      display: block !important;
+      text-align: center;
+    }
+    tr.mat-row {
+      height: 60px !important;
+  }
+
+  .mat-menu-panel.myMenu {
+    max-width: none;
+    width: 600px;
+    margin-left: 38px;
+    margin-top: 30px;
+    background-color:white ;
+    overflow: hidden;
+    padding-top: 0;
+    border: 2px solid lightgray;
+}
+.mat-chip.mat-red{
+  background-color: #f3d607;
+}
+.mat-chip.mat-green{
+  background-color: green;
+}
+.mat-menu-content{
+  padding: 0;
+}
+.menu-position1{
+  position: fixed;
+    z-index: 2;
+    left: 25%;
+    width: 500px;
+    padding: 0;
+}
+.mlt-25{
+  margin-left: -23px ;
+  z-index: 1;
+  margin-top: -25px;
+  width: 20px;
+}
+
+.modal {
+  display: none;
+}
+
+.modal.modal-open {
+  display: block;
+}
+
+.modal-body {
+  max-height: 700px;
+  overflow: auto;
+}
+
+.title small {
+  color: #eaeaea;
+}
+
+.modal {
+  min-height: 700px;
+  min-width: 700px;
+  background-color: rgba(0,0,0, .5);
+}

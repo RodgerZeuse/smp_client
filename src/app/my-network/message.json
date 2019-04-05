@@ -1,0 +1,6 @@
+{
+    "errors": {
+        "addNetworkError": "Account already exists.",
+        "disconnectNetworkPopup":"If you disconect your account. you will not be able to post your scheduled campaigns"
+    }
+}

@@ -1,0 +1,2 @@
+<button mat-fab  color="primary" (click)="addNewStatus()" ><mat-icon>add</mat-icon></button>
+<grid-campaign-status  (onEditStatus)='updateNewStatus($event)' (onDeleteStatus)="deleteCamapignStatus($event)" [loaderStatus$]="loaderStatus$" [campaignStatus]="customStatus$"></grid-campaign-status>

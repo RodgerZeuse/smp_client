@@ -1,0 +1,18 @@
+<h2 class="heading" mat-dialog-title>{{heading}}</h2>
+<p class="description" mat-dialog-title>{{description}}</p>
+<div *ngIf="detailsArray">
+<p *ngFor="let details of detailsArray" class="description" mat-dialog-title>{{details}}</p>
+</div>
+<mat-dialog-content [formGroup]="form">
+
+    <mat-form-field class="input" *ngIf="inputHeading">
+        <input matInput [placeholder]="inputHeading" formControlName="inputValue">
+    </mat-form-field>
+
+</mat-dialog-content>
+
+<mat-dialog-actions class="action-button">
+    <button class="mat-raised-button" (click)="close()">Close</button>
+    <button *ngIf="actionButtonText" class="mat-raised-button mat-primary" (click)="save()">{{actionButtonText}}</button>
+</mat-dialog-actions>
+

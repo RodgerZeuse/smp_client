@@ -1,0 +1,17 @@
+.profileimg{
+    width: 20px;
+    height: 20px;
+    border-radius:50%; 
+    
+  }
+  .profilefooter{
+      justify-content: space-between;
+      display: flex;
+      padding: 10px;
+      border-top: 1px solid grey;
+  }
+  .btn1:hover{ 
+
+        background-color:#303f9f; 
+        color: white; 
+    }

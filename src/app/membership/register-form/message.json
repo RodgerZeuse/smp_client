@@ -1,0 +1,15 @@
+{
+    "errors":{
+        "SignUpError":"User is not successfully registered!.",
+        "SignUpSuccess":"Successfully Registered!.",
+        "emailExits":"Email is already exits",
+        "emailError":"Enter an email.",
+        "emailFormatError":"Email must be in propper format.",
+        "passworError":"Enter the Password.", 
+        "passwordFormatError":"Must be alphanumeric, minimum 8 length",
+        "passwordMatchError":"Passwords must be same",
+        "companyExits":"Company already exist, try another!",
+        "companyInvalid":"Invalid company name"
+    }
+    
+}

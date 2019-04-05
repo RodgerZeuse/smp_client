@@ -1,0 +1,172 @@
+<!-- {{shouldSelectedAccountReset$ |json}} -->
+
+<mat-card *ngIf="myAttachedSocialAccounts$.length>0" class="dis-flex">
+
+    <mat-card-content *ngFor="let account of myAttachedSocialAccounts$ ; let i=index" class="">
+        <div style="position : relative">
+            <div id="selectInstaAccount" (click)="openPageMenu(i)" [ngClass]="checkAccountPageExist(account.id).length >=1 ? 'is-page-selected':''"
+                mat-card-avatar [ngStyle]="{'background-image': 'url(' + account.pictureThumbnail + ')'}" class=" example-header-image">
+
+                <img *ngIf="account.type=='FB' " id="selectAccount" matTooltip="{{account.userName}}" class="social-icon" src="{{icons.fbIcon}}">
+                <img *ngIf="account.type=='IG' " id="selectAccount" matTooltip="{{account.userName}}" class="social-icon" src="{{icons.instaIcon}}">
+                <img *ngIf="account.type=='PI' " id="selectAccount" matTooltip="{{account.userName}}" class="social-icon" src="{{icons.pinterestIcon}}">
+                <img *ngIf="account.type=='TW' " id="selectAccount" matTooltip="{{account.userName}}" class="social-icon" src="{{icons.twitterIcon}}">
+                <img *ngIf="account.type=='IN' " id="selectAccount" matTooltip="{{account.userName}}" class="social-icon" src="{{icons.linkedinIcon}}">
+                <img *ngIf="account.type=='YT' " id="selectAccount" matTooltip="{{account.userName}}" class="social-icon" src="{{icons.youtubeIcon}}">
+
+
+            </div>
+            <div class="menu-div" id="selectInstaAccount" *ngIf="accountIndex==i ">
+                <div *ngIf="account.type=='FB' || account.type=='IG'">
+                    <button [ngClass]="account.type=='FB' ? 'fb-page-menu':'insta-page-menu'" (click)=" selectSocialAccountArtifact(account, pages)"
+                        *ngFor="let pages of account.linked.smPages" mat-menu-item>
+                        <mat-icon *ngIf="account.type=='FB'" color="primary">flag</mat-icon>
+                        <mat-icon *ngIf="account.type=='IG'" color="accent">flag</mat-icon>{{pages.name}}
+                    </button>
+                </div>
+                <div *ngIf="account.type=='IG'">
+                    <button class="fb-page-menu" (click)=" selectSocialAccountArtifact(account, groups)" *ngFor="let groups of account.linked.smGroups"
+                        mat-menu-item>
+                        <mat-icon color="primary">group</mat-icon>{{groups.name}}</button>
+                </div>
+                <div *ngIf="account.type=='PI'">
+                    <button class="fb-page-menu" (click)=" selectSocialAccountArtifact(account, board)" *ngFor="let board of account.linked.boards"
+                        mat-menu-item>
+                        <mat-icon color="primary">dashboard</mat-icon>{{board.name}}</button>
+                </div>
+                <div *ngIf="account.type=='TW'">
+                    <button class="fb-page-menu" *ngFor="let profile of account.profile" (click)=" selectSocialAccountArtifact(account, profile)"
+                        mat-menu-item>
+                        <mat-icon color="primary">dashboard</mat-icon>{{profile.name}}</button>
+                </div>
+
+                <div *ngIf="account.type=='YT'">
+                        <button class="fb-page-menu" (click)=" selectSocialAccountArtifact(account, channel)" *ngFor="let channel of account.linked.channels"
+                            mat-menu-item>
+                            <mat-icon color="primary">dashboard</mat-icon>{{channel.snippet.title}}</button>
+                    </div>
+               
+                <br>
+
+            </div>
+            <!-- <div [ngClass]="checkAccountExist(account.id) ? 'is-page-selected':''" mat-card-avatar *ngIf="account.network=='YT'  && account.status=='connected'"
+            [ngStyle]="{'background-image': 'url(' + ytImagePath + ')'}" class=" example-header-image">
+            <img [matMenuTriggerFor]="ytmenu" matTooltip="{{account.userName}}" class="social-icon" src="{{ytImagePath}}">
+            <mat-menu #ytmenu="matMenu">
+                <button class="insta-page-menu" (click)=" selectSocialAccountArtifact(account, channel)" *ngFor="let channel of account.linked.channels"
+                    mat-menu-item>
+                    <mat-icon color="primary">dashboard</mat-icon>{{channel.snippet.title}}</button>
+            </mat-menu>
+        </div> -->
+            <!-- <div class="menu-div" id="selectInstaAccount" *ngIf="accountIndex==i && account.type=='IG'">
+                    <button class="insta-page-menu" (click)="setSocialAccountAndPageValue(account,pages)" *ngFor="let pages of account.pages"
+                        mat-menu-item>
+                        <mat-icon color="accent">flag</mat-icon>{{pages.name}}</button>
+                    <br>
+                </div> -->
+        </div>
+
+
+    </mat-card-content>
+
+
+
+</mat-card>
+<mat-card *ngIf="myAttachedSocialAccounts$.length==0" class="dis-flex">
+    <p> Please attach atleast one
+        <span class="hyperlink" (click)="gotoAddAccountList()">social account</span> or
+        <span class="hyperlink" (click)="gotoAddAccountList()">reconnect</span> for schedule campaign</p>
+</mat-card>
+<div class="page-card" *ngIf="selectedSocialAccountsArtifactsArray$">
+    <mat-chip-list>
+        <span class="selected-pages-span" *ngFor="let accountObj of (selectedSocialAccountsArtifactsArray$ | async);">
+            <!-- <div mat-card-avatar *ngIf="accountObj.socialAccountObj.type=='FB' && accountObj.socialAccountObj.status=='connected' && accountObj.pageObj.cover.source"
+                [ngStyle]="{'background-image': 'url(' + accountObj.pageObj.cover.source + ')'}" class="page-image">
+                <img class="social-icon" src="{{fbImagePath}}">
+            </div> -->
+            <div mat-card-avatar *ngIf="accountObj.socialAccountObj.type=='FB' && accountObj.pageObj.thumbnail && accountObj.socialAccountObj.status=='connected' "
+                [ngStyle]="{'background-image': 'url(' + accountObj.pageObj.thumbnail + ')'}" class="page-image">
+                <img class="social-icon" src="{{icons.fbIcon}}">
+                <span class="page-icon-span">
+                    <mat-icon class="mat-page">flag</mat-icon>
+                </span>
+            </div>
+            <div mat-card-avatar *ngIf="accountObj.socialAccountObj.type=='FB' && !accountObj.pageObj.cover && !accountObj.pageObj.thumbnail && accountObj.socialAccountObj.status=='connected' "
+                [ngClass]="accountObj.socialAccountObj.type=='FB' && !accountObj.pageObj.cover && !accountObj.pageObj.thumbnail && accountObj.socialAccountObj.status=='connected' ? 'group-icon':''"
+                class="page-image">
+                <img class="social-icon" src="{{icons.fbIcon}}">
+                <span class="page-icon-span">
+                    <mat-icon class="mat-page">flag</mat-icon>
+                </span>
+            </div>
+            <div mat-card-avatar *ngIf="accountObj.socialAccountObj.type=='FB' && accountObj.pageObj.cover && accountObj.socialAccountObj.status=='connected' "
+                [ngStyle]="{'background-image': 'url(' + accountObj.pageObj.cover.source + ')'}" class="page-image">
+                <img class="social-icon" src="{{icons.fbIcon}}">
+                <span class="page-icon-span">
+                    <mat-icon class="mat-page">group</mat-icon>
+                </span>
+            </div>
+
+            <div mat-card-avatar *ngIf="accountObj.socialAccountObj.type=='IG' && accountObj.pageObj.thumbnail && accountObj.socialAccountObj.status=='connected'"
+                [ngStyle]="{'background-image': 'url(' + accountObj.pageObj.thumbnail + ')'}" class="page-image">
+                <img class="social-icon" src="{{icons.instaIcon}}">
+                <span class="page-icon-span-insta">
+                    <mat-icon class="mat-page">flag</mat-icon>
+                </span>
+            </div>
+            <div mat-card-avatar *ngIf="accountObj.socialAccountObj.type=='IG' && !accountObj.pageObj.thumbnail && accountObj.socialAccountObj.status=='connected'"
+                [ngClass]="accountObj.socialAccountObj.type=='IG' && !accountObj.pageObj.thumbnail && accountObj.socialAccountObj.status=='connected' ? 'page-icon':''"
+                class="page-image">
+                <img class="social-icon" src="{{icons.instaIcon}}">
+                <span class="page-icon-span-insta">
+                    <mat-icon class="mat-page">flag</mat-icon>
+                </span>
+            </div>
+            <div mat-card-avatar *ngIf="accountObj.socialAccountObj.type=='YT' && !accountObj.pageObj.thumbnail && accountObj.socialAccountObj.status=='connected'"
+                [ngClass]="accountObj.socialAccountObj.type=='YT' && !accountObj.pageObj.thumbnail && accountObj.socialAccountObj.status=='connected' ? 'page-icon':''"
+                class="page-image">
+                <img class="social-icon" src="{{icons.youtubeIcon}}">
+                <span class="page-icon-span-insta">
+                    <mat-icon class="mat-page">flag</mat-icon>
+                </span>
+            </div>
+            <!-- <div mat-card-avatar *ngIf="accountObj.socialAccountObj.type=='YT' && accountObj.socialAccountObj.status=='connected'" [ngStyle]="{'background-image': 'url(' + accountObj.socialAccountObj.thumbnail + ')'}"
+                class="page-image">
+                <img class="social-icon" src="{{icons.youtubeIcon}}">
+            </div> -->
+            <div mat-card-avatar *ngIf="accountObj.socialAccountObj.type=='PI' && !accountObj.pageObj.thumbnail && accountObj.socialAccountObj.status=='connected' "
+                [ngClass]="accountObj.socialAccountObj.type=='PI'  && accountObj.socialAccountObj.status=='connected' ? 'board-icon':''"
+                class="page-image">
+                <img class="social-icon" src="{{icons.pinterestIcon}}">
+                <span class="board-icon-span">
+                    <mat-icon class="mat-page">dashboard</mat-icon>
+                </span>
+            </div>
+            <div mat-card-avatar *ngIf="accountObj.socialAccountObj.type=='TW' && accountObj.socialAccountObj.status=='connected' " [ngClass]="accountObj.socialAccountObj.type=='TW'  && accountObj.socialAccountObj.status=='connected' ? 'profile-icon':''"
+                class="page-image page-icon-span-twitter" [ngStyle]="{'background-image': 'url(' + accountObj.socialAccountObj.pictureThumbnail + ')'}">
+                <img class="social-icon" src="{{icons.twitterIcon}}">
+                <span class="board-icon-span page-icon-span-twitter">
+                    <mat-icon class="mat-page">dashboard</mat-icon>
+                </span>
+            </div>
+            <!-- <div mat-card-avatar *ngIf="accountObj.socialAccountObj.type=='PI' && accountObj.socialAccountObj.status=='connected'"
+                class="page-image">
+                <img class="social-icon" src="{{icons.dashboardIcon}}">
+                <img class="social-icon" src="{{icons.pinterestIcon}}">
+            </div> -->
+
+            <mat-chip class="mat-pages" matTooltipPosition="above" matTooltip="{{accountObj.socialAccountObj.userName}}" [color]="accountObj.socialAccountObj.type=='FB' ? 'primary':
+            accountObj.socialAccountObj.type=='IG' ? 'accent':
+             accountObj.socialAccountObj.type=='PI' ? 'pinterest-icon': accountObj.socialAccountObj.type=='TW' ? 'page-icon-span-twitter' : ''"
+                selected>
+              <span *ngIf="accountObj.socialAccountObj.type=='YT'">{{accountObj.pageObj.snippet.title}}</span>  
+              <span *ngIf="accountObj.socialAccountObj.type!='YT'">{{accountObj.pageObj.name}}</span>  
+
+            </mat-chip>
+            <img class="page-cross-icon" src="{{icons.cancelIcon}}" (click)="onRemoveAccountsArtifact(accountObj)">
+        </span>
+    </mat-chip-list>
+</div>
+
+
+<mat-error>{{infoMessage}}</mat-error>

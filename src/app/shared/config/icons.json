@@ -1,0 +1,28 @@
+{
+    "icons": {
+        "fbIcon": "/assets/images/facebook.png",
+        "instaIcon": "/assets/images/instagram.png",
+        "youtubeIcon": "/assets/images/youtube.png",
+        "twitterIcon": "/assets/images/twitter.png",
+        "pinterestIcon": "/assets/images/pinterest.png",
+        "linkedinIcon": "/assets/images/linkedin.png",
+        "groupIcon": "/assets/images/group.png",
+        "avatarIcon": "/assets/images/avatar.png",
+        "boxIcon": "/assets/images/box.png",
+        "cancelIcon": "assets/images/cancel.png",
+        "canceledIcon": "assets/images/canceled.png",
+        "boardIcon": "assets/images/dashboard.png",
+        "flagIcon": "assets/images/flag.png",
+        "googlDriveIcon": "assets/images/gdrive.png",
+        "infoIcon": "assets/images/info.png",
+        "noImageIcon":"assets/images/no-image.png",
+        "oneDriveIcon": "assets/images/onedrive.png"
+    },
+    "backgrounds": {
+        "loginBackground": "assets/images/login-bg.jpg"
+    },
+    "AppLogo": {
+        "appLogo": "assets/images/logo.png"
+    }
+   
+}

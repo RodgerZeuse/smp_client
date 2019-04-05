@@ -1,0 +1,37 @@
+<div class="activity-wrapper">
+    <div class="sidebar-activity-container" *ngFor="let d of data">
+        <!-- <mat-grid-tile [colspan]="1" [rowspan]="1"> -->
+                <div class="circ-img">
+                        <p class="circ-c" *ngIf="d.registerUser && !d.registerUser.profileImage">{{d.registerUser.firstName[0]}}{{d.registerUser.lastName[0]}}</p>
+                        <img src="{{imgUrl}}{{d.registerUser.profileImage}}" *ngIf="d.registerUser && d.registerUser.profileImage"
+                            class="profile-img">
+                    </div>
+        <!-- </mat-grid-tile>
+        <mat-grid-tile [colspan]="3" [rowspan]="1" > -->
+                <div class="bor-b">
+                        <p class="mb-0">
+                            <span *ngIf="d.registerUser" class="heading">{{d.registerUser.firstName}}{{d.registerUser.lastName}}
+                            </span>{{d.action}} <span *ngIf="d.name">{{d.name}}</span>
+
+                            <span class="heading" *ngIf="d.title && d.action != 'delete'"  (click)="gotoCampaign(d.campaignId)"> "{{d.title}}" </span>
+                            <span class="heading" *ngIf="d.title && d.action === 'delete'"> "{{d.title}}" </span>
+
+                        </p>
+                        <div  *ngIf="d.action === 'update' && d.name === 'Campaign'">
+                          <span class="update-container">  Change </span><span *ngIf="d.title"> <span class="update-container">Title : </span>{{d.title}},</span><span *ngIf="d.description"><span class="update-container"> Description
+                                : </span>{{d.description}},</span><span *ngIf="d.state"><span class="update-container"> State : </span>{{d.state}},</span><span
+                                *ngIf="d.scheduledAt"><span class="update-container"> Scheduled At : </span>{{d.scheduledAt}}</span><span *ngIf="d.socialMediaInfo"><span class="update-container"> Media Files
+                                        : </span><img *ngIf="d.socialMediaInfo.thumbnail" class="media-thumbnail" src="{{d.socialMediaInfo.thumbnail}}"></span>
+                        </div>
+                        <div  *ngIf="d.action === 'update' && d.name === 'Post'">
+                                <span class="update-container">  Change </span><span *ngIf="d.network"> <span class="update-container">Network : </span>{{d.network}},</span><span *ngIf="d.socialMediaInfo"><span class="update-container"> Media Files
+                                      : </span><img *ngIf="d.socialMediaInfo.thumbnail" class="media-thumbnail" src="{{d.socialMediaInfo.thumbnail}}"></span>
+                              </div>
+                        <p class="text-c">
+                            {{d.updatedOn}}
+                        </p>
+                    </div>
+
+        <!-- </mat-grid-tile> -->
+    </div>
+</div>

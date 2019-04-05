@@ -1,0 +1,34 @@
+.tag-img{
+    width:100%;
+    height:400px;
+    margin:auto;
+}
+#mapper{
+    position: relative;
+    display:none; 
+}
+.map-input{
+    width:100px;
+    
+}
+input{
+    width:100%
+}
+.tag-container{
+    position: relative;
+}
+.close-icon{
+    position: absolute;
+    top: -13px;
+    right: -10px;
+    border-radius: 50%;
+    background: rgba(255,0,0,0.6);
+    color: white;
+    width: 18px;
+    height: 18px;
+    padding: 1px 4px;
+    font-size: 12px;
+}
+.tag-btn{
+    margin-top:20px;
+}

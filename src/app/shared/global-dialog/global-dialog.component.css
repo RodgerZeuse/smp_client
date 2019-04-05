@@ -1,0 +1,17 @@
+.heading{
+    text-align: center;
+    color: #3f51b5
+}
+
+.input{
+    width: 100% !important;
+}
+.action-button{
+justify-content: center;
+}
+.description{
+    width: 500px !important;
+    font-size: 16px !important;
+    line-height: 1.5 !important;
+    text-align: center !important;
+}

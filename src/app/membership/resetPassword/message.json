@@ -1,0 +1,12 @@
+{
+    "errors":{
+        "resetPasswordSuccess": "Password is successfully reset.",
+        "resetPasswordError": "Password is not successfully reset. Try again!",
+        "enterPassword":"Enter the password.",
+        "samePassword":"Password must be same.",
+        "passwordLength":"Password at least had been 8 digit.",
+        "passwordPattern":"Password like (aBcdefg4)"
+
+    }
+    
+}
