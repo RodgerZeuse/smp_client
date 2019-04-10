@@ -1,301 +1,368 @@
-import { Injectable } from '@angular/core';
-import { forkJoin, Subject, observable } from 'rxjs';
+import { Injectable } from "@angular/core";
+import { forkJoin, Subject, observable } from "rxjs";
 import { Observable } from "rxjs/Observable";
-import { Http, RequestOptions, Headers } from '@angular/http';
-import { HttpClient } from '@angular/common/http';
+import { Http, RequestOptions, Headers } from "@angular/http";
+import { HttpClient } from "@angular/common/http";
 import { UserProfile } from "./../../../store/user-profile";
-import 'rxjs/add/operator/map';
-import { CampaignApi, ContainerApi, PostToQueueApi, PostApi, RegisterUserApi, Campaign, ExternalUsersApi, CompanyApi } from "./../../../shared/sdk";
+import "rxjs/add/operator/map";
+import {
+  CampaignApi,
+  ContainerApi,
+  PostApi,
+  RegisterUserApi,
+  Campaign
+} from "./../../../shared/sdk";
 // import { CampaignsStore } from '../../store/campaigns-store'
 // import { CampaignApi, ContainerApi, PostApi, RegisterUserApi, Campaign } from "./../../../shared/sdk";
-import { CampaignsStore } from '../../../store/campaigns-store';
-import { Post } from 'src/app/shared/sdk/models';
-import { Socket } from 'ng-socket-io';
-import { MediaFileAssetViewModel } from '../models/mediaFileAssetViewModel';
-import { relative } from 'path';
-import { CampaignListViewModel } from '../models/campaignListViewModel';
+import { CampaignsStore } from "../../../store/campaigns-store";
+import { Post } from "src/app/shared/sdk/models";
+import { Socket } from "ng-socket-io";
+import { MediaFileAssetViewModel } from "../models/mediaFileAssetViewModel";
+import { relative } from "path";
+import { CampaignListViewModel } from "../models/campaignListViewModel";
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class CampaignService {
-
   subject: Subject<any> = new Subject<any>();
   observable: Observable<any> = this.subject.asObservable();
 
-  constructor(private socket: Socket, private httpClient: HttpClient,
+  constructor(
+    private socket: Socket,
+    private httpClient: HttpClient,
     public http: Http,
-    public postToQueueApi: PostToQueueApi,
     public campaignApi: CampaignApi,
-    public companyApi: CompanyApi,
     public containerApi: ContainerApi,
     public postApi: PostApi,
     public userApi: RegisterUserApi,
     public myCampaignsStore: CampaignsStore,
-    public profileStore: UserProfile, public externalUserApi: ExternalUsersApi) { }
+    public profileStore: UserProfile
+  ) {}
 
   public createCampaign(camapaign: Campaign) {
-    camapaign.companyId = this.profileStore.company.id
-    return this.campaignApi
-      .create(camapaign)
-      .map(createdCampaign => {
+    return this.campaignApi.create(camapaign).map(
+      createdCampaign => {
         console.log("created", createdCampaign);
         return createdCampaign;
-      }, err => {
+      },
+      err => {
         return err;
-      })
+      }
+    );
   }
 
   createPosts(postsArray, createdCampaign) {
     let apiUrl: Array<any> = [];
     postsArray.forEach(element => {
       // let accountId = element.socialAccountObj.id
-      apiUrl.push(this.campaignApi.createPosts(createdCampaign.id, element))
-
+      apiUrl.push(this.campaignApi.createPosts(createdCampaign.id, element));
     });
 
-    return forkJoin(apiUrl).map(results => {
-      return results;
-    }, err => {
-      console.log("delete error", err);
-      return err
-    })
+    return forkJoin(apiUrl).map(
+      results => {
+        return results;
+      },
+      err => {
+        console.log("delete error", err);
+        return err;
+      }
+    );
   }
-
 
   uploadCroppedImage(mediaFiles: Array<MediaFileAssetViewModel>) {
     let apiCall: Array<any> = [];
     for (let i = 0; i < mediaFiles.length; i++) {
       let formData: FormData = new FormData();
-      console.log('file type in service', mediaFiles[i].file.type);
-      formData.append('uploadFile', mediaFiles[i].file, mediaFiles[i].file.name);
+      console.log("file type in service", mediaFiles[i].file.type);
+      formData.append(
+        "uploadFile",
+        mediaFiles[i].file,
+        mediaFiles[i].file.name
+      );
       let headers = new Headers();
       let options = new RequestOptions({ headers: headers });
-      let uploadFilePath = require("./../../../shared/config/urls.json").CROPPED_IMAGE_UPLOAD_END_POINT_URL;
-      apiCall.push(this.http.post(uploadFilePath + `?network=${mediaFiles[i].network}`, formData, options))
-      console.log(apiCall)
+      let uploadFilePath = require("./../../../shared/config/urls.json")
+        .CROPPED_IMAGE_UPLOAD_END_POINT_URL;
+      apiCall.push(
+        this.http.post(
+          uploadFilePath + `?network=${mediaFiles[i].network}`,
+          formData,
+          options
+        )
+      );
+      console.log(apiCall);
     }
-    return forkJoin(apiCall).map(results => {
-      return results;
-    }, err => {
-      console.log("uploading error", err);
-    });
-
+    return forkJoin(apiCall).map(
+      results => {
+        return results;
+      },
+      err => {
+        console.log("uploading error", err);
+      }
+    );
   }
 
   uploadImageNew(mediaFiles: Array<MediaFileAssetViewModel>) {
     let formData: FormData = new FormData();
     let apiCall: Array<any> = [];
     for (let i = 0; i < mediaFiles.length; i++) {
-      console.log('file type in service', mediaFiles[i].file.type);
-      formData.append('uploadFile', mediaFiles[i].file, mediaFiles[i].file.name);
+      console.log("file type in service", mediaFiles[i].file.type);
+      formData.append(
+        "uploadFile",
+        mediaFiles[i].file,
+        mediaFiles[i].file.name
+      );
       let headers = new Headers();
       let options = new RequestOptions({ headers: headers });
-      let uploadFilePath = require("./../../../shared/config/urls.json").IMAGE_UPLOAD_END_POINT_URL;
-      apiCall.push(this.http.post(uploadFilePath, formData, options))
+      let uploadFilePath = require("./../../../shared/config/urls.json")
+        .IMAGE_UPLOAD_END_POINT_URL;
+      apiCall.push(this.http.post(uploadFilePath, formData, options));
     }
-    return forkJoin(apiCall).map(results => {
-      return results;
-    }, err => {
-      console.log("uploading error", err);
-    });
+    return forkJoin(apiCall).map(
+      results => {
+        return results;
+      },
+      err => {
+        console.log("uploading error", err);
+      }
+    );
   }
 
   uploadImage(mediaFiles) {
     let formData: FormData = new FormData();
     let apiCall: Array<any> = [];
     for (let i = 0; i < mediaFiles.length; i++) {
-      console.log('file type in service', mediaFiles[i].type);
-      formData.append('uploadFile', mediaFiles[i], mediaFiles[i].name);
+      console.log("file type in service", mediaFiles[i].type);
+      formData.append("uploadFile", mediaFiles[i], mediaFiles[i].name);
       let headers = new Headers();
       let options = new RequestOptions({ headers: headers });
-      let uploadFilePath = require("./../../../shared/config/urls.json").IMAGE_UPLOAD_END_POINT_URL;
-      apiCall.push(this.http.post(uploadFilePath, formData, options))
+      let uploadFilePath = require("./../../../shared/config/urls.json")
+        .IMAGE_UPLOAD_END_POINT_URL;
+      apiCall.push(this.http.post(uploadFilePath, formData, options));
     }
-    return forkJoin(apiCall).map(results => {
-      return results;
-    }, err => {
-      console.log("uploading error", err);
-    });
+    return forkJoin(apiCall).map(
+      results => {
+        return results;
+      },
+      err => {
+        console.log("uploading error", err);
+      }
+    );
   }
 
   editCampaign(campaignId, campaign: Campaign) {
-    return this.campaignApi.findById(campaignId).switchMap((getCampaign: Campaign) => {
-      getCampaign.description = campaign.description;
-      getCampaign.hashTags = campaign.hashTags;
-      getCampaign.title = campaign.title;
-      getCampaign.scheduledAt = campaign.scheduledAt;
-      getCampaign.state = campaign.state;
-      getCampaign.campaignStatuses = campaign.campaignStatuses;
-      getCampaign.mediaFiles = campaign.mediaFiles;
-      getCampaign.type = campaign.type;
-      getCampaign.statusId = campaign.statusId;
-      return this.campaignApi.updateAttributes(campaignId, getCampaign);
-    }).map(res => {
-      console.log(res);
-      return res
-    });
+    return this.campaignApi
+      .findById(campaignId)
+      .switchMap((getCampaign: Campaign) => {
+        getCampaign.description = campaign.description;
+        getCampaign.hashTags = campaign.hashTags;
+        getCampaign.title = campaign.title;
+        getCampaign.scheduledAt = campaign.scheduledAt;
+        getCampaign.state = campaign.state;
+        getCampaign.mediaFiles = campaign.mediaFiles;
+        getCampaign.type = campaign.type;
+        return this.campaignApi.updateAttributes(campaignId, getCampaign);
+      })
+      .map(res => {
+        console.log(res);
+        return res;
+      });
   }
 
   updateCamapign(campaignId, imagesObject) {
     // campaign.mediaFiles = imagesObject;
-    return this.campaignApi.patchAttributes(campaignId, { "mediaFiles": imagesObject }).map(res => {
-      console.log(res);
-      return res;
-    }, err => {
-      console.log(err);
-    })
-  }
-
-  moveToArchive(campaignIds: Array<string>) {
-    return this.campaignApi.moveToArchive(campaignIds).map(res => {
-      return res;
-    })
-  }
-
-  getArchive() {
-    return this.userApi.getCampaignsArchive(this.profileStore.userId,
-      { include: { relation: 'posts' } }).map(res => {
-        console.log("archiveerjhgwejfuykgefgerjhfwhbfdjhsb", res);
-        this.myCampaignsStore.setCampaigns(res);
-        return res
-      });
+    return this.campaignApi
+      .patchAttributes(campaignId, { mediaFiles: imagesObject })
+      .map(
+        res => {
+          console.log(res);
+          return res;
+        },
+        err => {
+          console.log(err);
+        }
+      );
   }
 
   getCamapign() {
-    // return this.userApi.getCampaigns(this.profileStore.userId, {
-    //   include: [{
-    //     relation: 'posts',
-    //     scope:
-    //     {
-    //       fields: ['id', 'socialMediaAccountId', 'socialMediaInfo', 'network', 'error', 'state', 'mediaFiles', 'description'],
-    //       include: {
-    //         relation: 'socialMediaAccounts',
-    //         scope: { fields: ['id', 'type', 'userName', 'pictureThumbnail', 'smPages', 'smGroups', 'statusId'] }
-    //       }
-    //     }
-    //   }, { relation: "campaignStatuses" }]
-    // }).map((response: Array<Campaign>) => {
-    //   this.myCampaignsStore.setCampaigns(response);
-    //   return response;
-    // });
-    return this.campaignApi.find({
-      include: [{
-        relation: 'posts',
-        scope:
+    return this.campaignApi
+      .find({
+        include: [
           {
-            fields: ['id', 'socialMediaAccountId', 'socialMediaInfo', 'network', 'error','type', 'state', 'mediaFiles', 'description'],
-            include: {
-              relation: 'socialMediaAccounts',
-              scope: { fields: ['id', 'type', 'userName', 'pictureThumbnail', 'smPages', 'smGroups', 'statusId'] }
+            relation: "posts",
+            scope: {
+              fields: [
+                "id",
+                "socialMediaAccountId",
+                "socialMediaInfo",
+                "network",
+                "error",
+                "type",
+                "state",
+                "mediaFiles",
+                "description"
+              ],
+              include: {
+                relation: "socialMediaAccounts",
+                scope: {
+                  fields: [
+                    "id",
+                    "type",
+                    "userName",
+                    "pictureThumbnail",
+                    "smPages",
+                    "smGroups",
+                    "statusId"
+                  ]
+                }
+              }
             }
-        }
-      }, { relation: "campaignStatuses" }]
-    }).map((response: Array<Campaign>) => {
-      this.myCampaignsStore.setCampaigns(response);
-      return response;
-    });
+          }
+        ]
+      })
+      .map((response: Array<Campaign>) => {
+        this.myCampaignsStore.setCampaigns(response);
+        return response;
+      });
   }
 
   getCampaignForEdit(id: string) {
     let post = {
-      relation: 'posts',
+      relation: "posts",
       scope: {
-        fields: ['socialMediaAccountId', 'socialMediaInfo',
-          'id', 'campaignId', 'network', 'error', 'state',
-          'mediaFiles', 'description','type', 'socialMediaAccountId', 'statusId'],
-        include: [{ relation: "socialMediaAccounts" }, { relation: "campaignStatuses" }]
+        fields: [
+          "socialMediaAccountId",
+          "socialMediaInfo",
+          "id",
+          "campaignId",
+          "network",
+          "error",
+          "state",
+          "mediaFiles",
+          "description",
+          "type",
+          "socialMediaAccountId",
+          "statusId"
+        ],
+        include: [{ relation: "socialMediaAccounts" }]
       }
     };
-    return this.campaignApi.findById(id, { "include": [post, 'campaignStatuses'] }).map((response: Campaign) => {
+    return this.campaignApi.findById(id).map((response: Campaign) => {
       return response;
     });
   }
 
   getCampaignForExternalFeedBack(id: string) {
-    let post = { relation: 'posts', scope: { fields: ['socialMediaAccountId', 'socialMediaInfo', 'id', 'campaignId', 'network', 'error', 'status','type', 'mediaFiles', 'statusId'], include: [{ relation: "socialMediaAccounts" }, { relation: "campaignStatuses" }] } };
-    return this.campaignApi.findById(id, { "include": [post, { "campaignComments": "registerUser" }] }).map((response: Array<Campaign>) => {
-      return response;
-    }, error => {
-      console.log("comment error", error);
-    });
+    let post = {
+      relation: "posts",
+      scope: {
+        fields: [
+          "socialMediaAccountId",
+          "socialMediaInfo",
+          "id",
+          "campaignId",
+          "network",
+          "error",
+          "status",
+          "type",
+          "mediaFiles",
+          "statusId"
+        ],
+        include: [{ relation: "socialMediaAccounts" }]
+      }
+    };
+    return this.campaignApi
+      .findById(id, { include: [post, { campaignComments: "registerUser" }] })
+      .map(
+        (response: Array<Campaign>) => {
+          return response;
+        },
+        error => {
+          console.log("comment error", error);
+        }
+      );
   }
 
-  getAvailableSlot() {
-    return this.postToQueueApi.nextAvailableSlot(this.profileStore.userId).map(date => {
-      return date;
-    }, err => {
-      return err;
-    })
-  }
-
-  removeCampaign(campaign: CampaignListViewModel) {
+  removeCampaign(campaign: any) {
     let postsToDelete;
     let mediaFilesToDelte;
     if (campaign.mediaFiles && campaign.mediaFiles.length > 0) {
       mediaFilesToDelte = campaign.mediaFiles.map(x => x.name);
-      let thumbnailsToDelete = campaign.mediaFiles.map(x => x.thumbnailName)
+      let thumbnailsToDelete = campaign.mediaFiles.map(x => x.thumbnailName);
       mediaFilesToDelte = mediaFilesToDelte.concat(thumbnailsToDelete);
       let croppedImagestoDelete = [];
       postsToDelete = campaign.posts.map(x => x.id);
       campaign.posts.forEach(post => {
-        croppedImagestoDelete = post.mediaFiles.filter(x => x.isCropped == true).map(x => x.name);
-      })
+        croppedImagestoDelete = post.mediaFiles
+          .filter(x => x.isCropped == true)
+          .map(x => x.name);
+      });
       mediaFilesToDelte = mediaFilesToDelte.concat(croppedImagestoDelete);
     }
-    return this.campaignApi.deleteById(campaign.id).
-      flatMap((responce: any) => {
+    return this.campaignApi
+      .deleteById(campaign.id)
+      .flatMap((responce: any) => {
         this.myCampaignsStore.removeCampaign(campaign);
         if (campaign.posts.length > 0) {
           return this.removePosts(postsToDelete);
         } else {
           return Observable.of([]);
         }
-      }).flatMap((response: any) => {
+      })
+      .flatMap((response: any) => {
         if (mediaFilesToDelte.length > 0) {
           return this.removeMediaFilesfromContainer(mediaFilesToDelte);
         } else {
           return Observable.of([]);
         }
-      }).map((response: any) => {
-        return Observable.of(true);
-      }, err => {
-        return Observable.of(err);
-      });
+      })
+      .map(
+        (response: any) => {
+          return Observable.of(true);
+        },
+        err => {
+          return Observable.of(err);
+        }
+      );
   }
 
   rescheduleCampaign(id: string | number, newDate: Date) {
-    return this.campaignApi.patchAttributes(id, { 'scheduledAt': newDate }).map(res => {
-      this.myCampaignsStore.rescheduleCampaign(id, newDate);
-    });
-  }
-
-  searchArchiveCampaigns(criteria: object) {
-    let post = { include: { relation: 'posts' } };
-    if (criteria == null) {
-      return this.userApi.getCampaignsArchive(this.profileStore.userId,
-        post
-      ).map((response: Array<Campaign>) => {
-        this.myCampaignsStore.setCriteria(criteria);
-        this.myCampaignsStore.setCampaigns(response);
-        return response;
+    return this.campaignApi
+      .patchAttributes(id, { scheduledAt: newDate })
+      .map(res => {
+        this.myCampaignsStore.rescheduleCampaign(id, newDate);
       });
-    }
-    else {
-      return this.userApi.getCampaignsArchive(this.profileStore.userId, {
-        where: criteria, "include": [{ relation: 'posts' }]
-      }).map((response: Array<Campaign>) => {
-        this.myCampaignsStore.setCriteria(criteria);
-        this.myCampaignsStore.setCampaigns(response);
-        return response;
-      });
-    }
   }
 
   searchCampains(criteria: object) {
     let post = {
-      relation: 'posts', scope: {
-        fields: ['socialMediaAccountId', 'id', 'socialMediaInfo', 'network', 'error', 'state', 'mediaFiles', 'statusId'],
-        include: [{ relation: 'socialMediaAccounts', scope: { fields: ['id', 'type', 'userName', 'pictureThumbnail', 'smPages', 'smGroups'] } }, { relation: "campaignStatuses" }],
+      relation: "posts",
+      scope: {
+        fields: [
+          "socialMediaAccountId",
+          "id",
+          "socialMediaInfo",
+          "network",
+          "error",
+          "state",
+          "mediaFiles",
+          "statusId"
+        ],
+        include: [
+          {
+            relation: "socialMediaAccounts",
+            scope: {
+              fields: [
+                "id",
+                "type",
+                "userName",
+                "pictureThumbnail",
+                "smPages",
+                "smGroups"
+              ]
+            }
+          }
+        ]
       }
     };
     if (criteria == null) {
@@ -306,13 +373,12 @@ export class CampaignService {
       //   this.myCampaignsStore.setCampaigns(response);
       //   return response;
       // });
-      return this.campaignApi.find({ "include": [post, 'campaignStatuses'] }).map((response: Array<Campaign>) => {
+      return this.campaignApi.find().map((response: Array<Campaign>) => {
         this.myCampaignsStore.setCriteria(criteria);
         this.myCampaignsStore.setCampaigns(response);
         return response;
-      })
-    }
-    else {
+      });
+    } else {
       // return this.userApi.getCampaigns(this.profileStore.userId, {
       //   where: criteria, "include": [post, 'campaignStatuses']
       // }).map((response: Array<Campaign>) => {
@@ -320,12 +386,14 @@ export class CampaignService {
       //   this.myCampaignsStore.setCampaigns(response);
       //   return response;
       // });
-      return this.campaignApi.find({ where: criteria, "include": [post, 'campaignStatuses'] }).map((response: Array<Campaign>) => {
-        this.myCampaignsStore.setCriteria(criteria);
-        this.myCampaignsStore.setCampaigns(response);
-        console.log("Res", response);
-        return response;
-      })
+      return this.campaignApi
+        .find({ where: criteria })
+        .map((response: Array<Campaign>) => {
+          this.myCampaignsStore.setCriteria(criteria);
+          this.myCampaignsStore.setCampaigns(response);
+          console.log("Res", response);
+          return response;
+        });
     }
   }
 
@@ -333,14 +401,16 @@ export class CampaignService {
     if (fileNames.length >= 1) {
       let apiCall: Array<any> = [];
       for (let i = 0; i < fileNames.length; i++) {
-        apiCall.push(this.containerApi.removeFile('pics', fileNames[i]))
-
+        apiCall.push(this.containerApi.removeFile("pics", fileNames[i]));
       }
-      return forkJoin(apiCall).map(results => {
-        return results;
-      }, err => {
-        console.log("media files removing error", err);
-      });
+      return forkJoin(apiCall).map(
+        results => {
+          return results;
+        },
+        err => {
+          console.log("media files removing error", err);
+        }
+      );
     } else {
       return Observable.of(null);
     }
@@ -351,29 +421,37 @@ export class CampaignService {
     for (let i = 0; i < postsIds.length; i++) {
       apiCall.push(this.postApi.deleteById(postsIds[i]));
     }
-    return forkJoin(apiCall).map(results => {
-      return results;
-    }, err => {
-      console.log("account removing error", err);
-    });
+    return forkJoin(apiCall).map(
+      results => {
+        return results;
+      },
+      err => {
+        console.log("account removing error", err);
+      }
+    );
   }
 
   updatePosts(posts: Array<Post>) {
     let apiCall: Array<any> = [];
 
     posts.forEach((post, index) => {
-      apiCall.push(this.postApi.patchAttributes(post.id, {
-        "description": post.description,
-        "scheduleDate": post.scheduleDate,
-        "mediaFiles": post.mediaFiles,
-        "state": post.state
-      }))
-    })
-    return forkJoin(apiCall).map(results => {
-      return results;
-    }, err => {
-      console.log("post updating error", err);
+      apiCall.push(
+        this.postApi.patchAttributes(post.id, {
+          description: post.description,
+          scheduleDate: post.scheduleDate,
+          mediaFiles: post.mediaFiles,
+          state: post.state
+        })
+      );
     });
+    return forkJoin(apiCall).map(
+      results => {
+        return results;
+      },
+      err => {
+        console.log("post updating error", err);
+      }
+    );
   }
 
   sendMessage(msg: string) {
@@ -381,46 +459,22 @@ export class CampaignService {
   }
 
   getCommentsFromSocket() {
-    return this.socket
-      .fromEvent<any>("comments")
-      .map(data => data.msg);
+    return this.socket.fromEvent<any>("comments").map(data => data.msg);
   }
 
   getComments(id) {
-    return this.campaignApi.findById(id, { "include": { "campaignComments": ["registerUser", "externalUsers"] } }).map((response: Array<Campaign>) => {
-      this.myCampaignsStore.addCampaignCommnets(response);
-      return response;
-    }, error => {
-      console.log("comment error", error);
-    });
-  }
-
-  sendComment(c_id, comment) {
-    if (localStorage["userProfile"]) {
-      let profile = JSON.parse(localStorage["userProfile"]);
-      let obj = { "msg": comment, "registerUserId": profile.userId }
-      return this.campaignApi.createCampaignComments(c_id, obj).map(res => {
-        return res;
+    return this.campaignApi
+      .findById(id, {
+        include: { campaignComments: ["registerUser", "externalUsers"] }
       })
-    }
-
-  }
-
-  replyComment(c_id, comment, p_id) {
-    if (localStorage["userProfile"]) {
-      let profile = JSON.parse(localStorage["userProfile"]);
-      let obj = { "msg": comment, "registerUserId": profile.userId, "parent": p_id }
-      return this.campaignApi.createCampaignComments(c_id, obj).map(res => {
-        return res;
-      })
-    }
-
-  }
-
-  sendInvitation(id, data) {
-    data["campaignId"] = id;
-    return this.externalUserApi.create(data).map(res => {
-      return res;
-    })
+      .map(
+        (response: Array<Campaign>) => {
+          this.myCampaignsStore.addCampaignCommnets(response);
+          return response;
+        },
+        error => {
+          console.log("comment error", error);
+        }
+      );
   }
 }

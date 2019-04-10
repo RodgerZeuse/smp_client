@@ -1,10 +1,7 @@
 /* tslint:disable */
 import {
   Post,
-  MediaFileAsset,
-  Comments,
-  CampaignStatus,
-  Invites
+  MediaFileAsset
 } from '../index';
 
 declare var Object: any;
@@ -18,19 +15,16 @@ export interface CampaignInterface {
   "hashTags"?: Array<any>;
   "error"?: string;
   "name"?: string;
+  "timezone"?: string;
   "success"?: string;
+  "offset"?: string;
   "id"?: any;
   "registerUserId"?: any;
   "createdOn": Date;
   "updatedOn": Date;
   "mediaFiles"?: Array<any>;
-  "companyId"?: any;
-  "statusId"?: any;
   posts?: Post[];
   mediaFile?: MediaFileAsset[];
-  campaignComments?: Comments[];
-  campaignStatuses?: CampaignStatus;
-  invites?: Invites[];
 }
 
 export class Campaign implements CampaignInterface {
@@ -43,19 +37,16 @@ export class Campaign implements CampaignInterface {
   "hashTags": Array<any>;
   "error": string;
   "name": string;
+  "timezone": string;
   "success": string;
+  "offset": string;
   "id": any;
   "registerUserId": any;
   "createdOn": Date;
   "updatedOn": Date;
   "mediaFiles": Array<any>;
-  "companyId": any;
-  "statusId": any;
   posts: Post[];
   mediaFile: MediaFileAsset[];
-  campaignComments: Comments[];
-  campaignStatuses: CampaignStatus;
-  invites: Invites[];
   constructor(data?: CampaignInterface) {
     Object.assign(this, data);
   }
@@ -126,8 +117,16 @@ export class Campaign implements CampaignInterface {
           type: 'string',
           default: 'Campaign'
         },
+        "timezone": {
+          name: 'timezone',
+          type: 'string'
+        },
         "success": {
           name: 'success',
+          type: 'string'
+        },
+        "offset": {
+          name: 'offset',
           type: 'string'
         },
         "id": {
@@ -151,14 +150,6 @@ export class Campaign implements CampaignInterface {
           type: 'Array&lt;any&gt;',
           default: <any>[]
         },
-        "companyId": {
-          name: 'companyId',
-          type: 'any'
-        },
-        "statusId": {
-          name: 'statusId',
-          type: 'any'
-        },
       },
       relations: {
         posts: {
@@ -176,30 +167,6 @@ export class Campaign implements CampaignInterface {
           relationType: 'embedsMany',
                   keyFrom: 'mediaFiles',
           keyTo: 'id'
-        },
-        campaignComments: {
-          name: 'campaignComments',
-          type: 'Comments[]',
-          model: 'Comments',
-          relationType: 'hasMany',
-                  keyFrom: 'id',
-          keyTo: 'campaignId'
-        },
-        campaignStatuses: {
-          name: 'campaignStatuses',
-          type: 'CampaignStatus',
-          model: 'CampaignStatus',
-          relationType: 'belongsTo',
-                  keyFrom: 'statusId',
-          keyTo: 'id'
-        },
-        invites: {
-          name: 'invites',
-          type: 'Invites[]',
-          model: 'Invites',
-          relationType: 'hasMany',
-                  keyFrom: 'id',
-          keyTo: 'campaignId'
         },
       }
     }

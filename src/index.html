@@ -10,7 +10,8 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!-- For Dropbox Chooser-->
-  <script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs" data-app-key="2truwpjlf5zwky2"></script>
+  <script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs"
+    data-app-key="2truwpjlf5zwky2"></script>
   <!-- For Google/GAPI Picker-->
   <script src="https://apis.google.com/js/api.js"></script>
   <script src="https://apis.google.com/js/client.js"></script>
@@ -25,7 +26,12 @@
 
   <script>
     window.fbAsyncInit = function () {
-      FB.init({ appId: '196750267603734', cookie: true, xfbml: true, version: 'v3.0' });
+      FB.init({
+        appId: '612367679148277',
+        cookie: true,
+        xfbml: true,
+        version: 'v3.0'
+      });
       FB
         .AppEvents
         .logPageView();
@@ -33,6 +39,7 @@
         console.log("fb login status" + response);
         // statusChangeCallback(response);
       });
+
       function checkLoginState() {
         FB
           .getLoginStatus(function (response) {
@@ -53,9 +60,8 @@
         .parentNode
         .insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
-
   </script>
-<!-- <script type="text/javascript" src="//platform.linkedin.com/in.js">
+  <!-- <script type="text/javascript" src="//platform.linkedin.com/in.js">
   api_key:   "77g7k13xjls3dk"
   onLoad:    onLinkedInLoad
   authorize: true

@@ -1,42 +1,45 @@
 import {
-  Component, OnInit, Input, Output, ElementRef,
-  EventEmitter, ChangeDetectionStrategy, ViewChild
-} from '@angular/core';
-import { Observable, BehaviorSubject } from 'rxjs';
+  Component,
+  OnInit,
+  Input,
+  Output,
+  ElementRef,
+  EventEmitter,
+  ChangeDetectionStrategy,
+  ViewChild
+} from "@angular/core";
+import { Observable, BehaviorSubject } from "rxjs";
 import { CampaignStatusEnum } from "./model/status.model";
-import { MatDialog } from '@angular/material';
+import { MatDialog } from "@angular/material";
 import * as _ from "lodash";
-import { UUID } from 'angular2-uuid';
-import { ImageTaggingComponent } from './image-tagging/image-tagging.component';
-import { CampaignViewModel } from '../../models/campaignViewModel';
+import { UUID } from "angular2-uuid";
+import { ImageTaggingComponent } from "./image-tagging/image-tagging.component";
+import { CampaignViewModel } from "../../models/campaignViewModel";
 import { ValidationModel } from "./model/validationModel";
-import { MediaFileAssetViewModel } from '../../models/mediaFileAssetViewModel';
+import { MediaFileAssetViewModel } from "../../models/mediaFileAssetViewModel";
 import { Router } from "@angular/router";
 import { MediaAssetConversionUtil } from "./../../../../shared/mediaAssetUtil/mediaAssetConversionUtil";
-import { CampaignStatus } from '../../../../shared/sdk';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UserProfile } from 'src/app/store/user-profile';
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { UserProfile } from "src/app/store/user-profile";
 // import { ElementDef } from '@angular/core/src/view';
-let errors = require('./message.json')
+let errors = require("./message.json");
 
 @Component({
-  selector: 'campaign-definition',
-  templateUrl: './campaign-definition.component.html',
-  styleUrls: ['./campaign-definition.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: "campaign-definition",
+  templateUrl: "./campaign-definition.component.html",
+  styleUrls: ["./campaign-definition.component.css"],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-
 export class CreateCampaignComponent implements OnInit {
-  @ViewChild('visualization') visualization: ElementRef;
-  @ViewChild('imageSelector') imageSelector: ElementRef;
-  @ViewChild('videoSelector') videoSelector: ElementRef;
-  @Input() customStatuses$: Observable<Array<CampaignStatus>>;
+  @ViewChild("visualization") visualization: ElementRef;
+  @ViewChild("imageSelector") imageSelector: ElementRef;
+  @ViewChild("videoSelector") videoSelector: ElementRef;
   @Input() selectedSocialNetwork$: Observable<Array<any>>;
   @Output() onRemoveMediaFile: EventEmitter<object> = new EventEmitter();
   @Output() onAddMediaFile: EventEmitter<any> = new EventEmitter();
   @Output() onThumbnailAdd: EventEmitter<any> = new EventEmitter();
   @Output() onCropImage: EventEmitter<any> = new EventEmitter();
-  @Output() onAddOrRemoveTags: EventEmitter<any> = new EventEmitter()
+  @Output() onAddOrRemoveTags: EventEmitter<any> = new EventEmitter();
   @Output() onChangeDescription: EventEmitter<string> = new EventEmitter();
   @Output() onCampaignSave: EventEmitter<object> = new EventEmitter();
   @Input() campaign$: Observable<CampaignViewModel>;
@@ -44,15 +47,22 @@ export class CreateCampaignComponent implements OnInit {
   campaignForm: FormGroup;
   mediaFilesToShow$: BehaviorSubject<Array<MediaFileAssetViewModel>>;
   imageForCropper$: BehaviorSubject<any>;
-  createButtonState: string = 'Save as draft';
-  createCampaignStates: Array<string> = ['Save as draft', 'Post Now', 'Schedule', 'Add To Queue'];
+  createButtonState: string = "Save as draft";
+  createCampaignStates: Array<string> = [
+    "Save as draft",
+    "Post Now",
+    "Schedule",
+    "Add To Queue"
+  ];
   validationModel: ValidationModel;
-  errors = require("../../../../shared/config/specificError.json").specificError;
-  groupRights = require("../../../../shared/config/group-rights.json").groupRights;
+  errors = require("../../../../shared/config/specificError.json")
+    .specificError;
+  groupRights = require("../../../../shared/config/group-rights.json")
+    .groupRights;
 
   campaignViewModel: CampaignViewModel;
   dropActive: boolean = false;
-  imagePath: string = '';
+  imagePath: string = "";
   formFieldsError$: BehaviorSubject<string>;
   icons: object = {};
 
@@ -61,19 +71,20 @@ export class CreateCampaignComponent implements OnInit {
     private dialog: MatDialog,
     public route: Router,
     public mediaAssetUtil: MediaAssetConversionUtil,
-    public profileStore: UserProfile) {
+    public profileStore: UserProfile
+  ) {
     this.validationModel = new ValidationModel();
     this.campaignViewModel = new CampaignViewModel();
-    this.mediaFilesToShow$ = new BehaviorSubject(this.campaignViewModel.mediaFiles);
-    this.formFieldsError$ = new BehaviorSubject('');
+    this.mediaFilesToShow$ = new BehaviorSubject(
+      this.campaignViewModel.mediaFiles
+    );
+    this.formFieldsError$ = new BehaviorSubject("");
   }
 
-
-
   ngOnInit() {
-    this.errors = require('./message.json').errors;
+    this.errors = require("./message.json").errors;
     this.icons = require("./../../../../shared/config/icons.json").icons;
-    this.imagePath = require("./../../../../shared/config/urls.json").IMAGE_DOWNLOAD_END_POINT_URL
+    this.imagePath = require("./../../../../shared/config/urls.json").IMAGE_DOWNLOAD_END_POINT_URL;
 
     if (this.campaign$) {
       this.campaign$.subscribe(res => {
@@ -83,8 +94,7 @@ export class CreateCampaignComponent implements OnInit {
         } else {
           this.emptyForm();
         }
-      })
-
+      });
     }
 
     this.imageForCropper$ = new BehaviorSubject(null);
@@ -105,7 +115,7 @@ export class CreateCampaignComponent implements OnInit {
     // this.campaignViewModel.description.toLowerCase().replace(/ {1,}/g," ").trim()
     // this.campaignViewModel.description = this.campaignViewModel.description.trim();
     this.campaignViewModel.description.trim();
-    this.onChangeDescription.emit(this.campaignViewModel.description)
+    this.onChangeDescription.emit(this.campaignViewModel.description);
   }
   // setCampaignStatus(status: CampaignStatus) {
   //   this.campaignViewModel.campaignStatuses = status;
@@ -117,49 +127,38 @@ export class CreateCampaignComponent implements OnInit {
   convertToFiles(tempFilesToConvert) {
     let convertedFiles: Array<File> = [];
     tempFilesToConvert.forEach(file => {
-      let cFile = { name: '', src: '', type: '' };
+      let cFile = { name: "", src: "", type: "" };
       cFile.src = this.imagePath + file.name;
       cFile.name = file.originalFilename;
       cFile.type = file.type;
       this.mediaAssetUtil.base64ToFile(cFile).then(file => {
         this.fileRead([file]);
-      })
-    })
+      });
+    });
   }
 
   fillCampaignForm(inputCampaignViewmodel) {
     this.emptyForm();
 
-    let tempCampaign: CampaignViewModel = Object.assign({}, inputCampaignViewmodel);
+    let tempCampaign: CampaignViewModel = Object.assign(
+      {},
+      inputCampaignViewmodel
+    );
     this.campaignViewModel.title = tempCampaign.title;
     this.campaignViewModel.description = tempCampaign.description;
-    this.campaignViewModel.scheduledAt = (tempCampaign.state != 'Posted' ? new Date(tempCampaign.scheduledAt) : new Date());
-    this.campaignViewModel.campaignStatuses = tempCampaign.campaignStatuses;
+    this.campaignViewModel.scheduledAt =
+      tempCampaign.state != "Posted"
+        ? new Date(tempCampaign.scheduledAt)
+        : new Date();
     this.campaignViewModel.mediaFiles = [...tempCampaign.mediaFiles];
     this.mediaFilesToShow$.next(this.campaignViewModel.mediaFiles);
-    // let tempFilesToConvert = [...tempCampaign.mediaFiles];
 
-    // if (inputCampaignViewmodel.state == 'Scheduled' || inputCampaignViewmodel.state == 'Draft') {
-    //   this.drawOnCanwas(tempFilesToConvert);
-    // }
-    // else {
-    //   if (tempFilesToConvert.length >= 1 ) {
-    //     this.convertToFiles(tempFilesToConvert);
-    //     }
-    // tempFilesToConvert.forEach((file: MediaFileAssetViewModel) => {
-    //   let newFile: MediaFileAssetViewModel = new MediaFileAssetViewModel();
-    //   newFile.base64File = Object.assign({}, file.base64File);
-    //   newFile.name = file.name;
-    //   newFile.type = file.type;
-    //   newFile.file = Object.assign({}, file.file);
-    //   this.campaignViewModel.mediaFiles.push(newFile);
-    //   this.mediaFilesToShow$.next(this.campaignViewModel.mediaFiles);
-    // })
-    // }
-    // }
-
-    this.createButtonState = (tempCampaign.state == 'Posted' || tempCampaign.state == 'Draft' ? 'Save as draft' : tempCampaign.state == 'Scheduled' ? 'Schedule' : 'Save as draft');
-
+    this.createButtonState =
+      tempCampaign.state == "Posted" || tempCampaign.state == "Draft"
+        ? "Save as draft"
+        : tempCampaign.state == "Scheduled"
+        ? "Schedule"
+        : "Save as draft";
   }
 
   isTitleChanged(event) {
@@ -171,10 +170,16 @@ export class CreateCampaignComponent implements OnInit {
   }
 
   redirect() {
-    this.route.navigateByUrl('campaign/campaign-list');
+    this.route.navigateByUrl("campaign/campaign-list");
   }
   onCancel() {
-    if (this.campaign$._value.id) {
+    let VALID = {};
+    this.campaign$.subscribe((res: any) => {
+      console.log(res);
+      VALID = res;
+    });
+
+    if (VALID) {
       this.redirect();
     } else {
       this.emptyForm();
@@ -188,19 +193,24 @@ export class CreateCampaignComponent implements OnInit {
     this.validationModel.isDescription = false;
   }
 
-  deleteFile = (file) => {
+  deleteFile = file => {
     this.onRemoveMediaFile.emit(file);
-    let foundIndex = this.campaignViewModel.mediaFiles.findIndex(x => x.name == file.name);
+    let foundIndex = this.campaignViewModel.mediaFiles.findIndex(
+      x => x.name == file.name
+    );
     if (foundIndex > -1) {
       this.campaignViewModel.mediaFiles.splice(foundIndex, 1);
     }
-  }
+  };
 
   errorForForm(errorMessage: string): void {
     this.formFieldsError$.next(errorMessage);
-    setTimeout(function () {
-      this.formFieldsError$.next('');
-    }.bind(this), 4000);
+    setTimeout(
+      function() {
+        this.formFieldsError$.next("");
+      }.bind(this),
+      4000
+    );
   }
 
   dragenter(e) {
@@ -228,21 +238,23 @@ export class CreateCampaignComponent implements OnInit {
     if (event.target) {
       this.fileRead(event.target.files);
     } else {
-      this.fileRead(event)
+      this.fileRead(event);
     }
   }
 
-
-
   fileRead(files) {
-    let totalMediaFiles = this.campaignViewModel.mediaFiles.length + files.length;
-    if (this.campaignViewModel.mediaFiles.length > 5 || files.lenght > 5 || totalMediaFiles > 5) {
+    let totalMediaFiles =
+      this.campaignViewModel.mediaFiles.length + files.length;
+    if (
+      this.campaignViewModel.mediaFiles.length > 5 ||
+      files.lenght > 5 ||
+      totalMediaFiles > 5
+    ) {
       this.errorForForm(errors.errors.mediaFilesMaxError);
     } else {
       if (files.length <= 5) {
         for (let i = 0; i < files.length; i++) {
-
-          Object.defineProperty(files[i], 'name', {
+          Object.defineProperty(files[i], "name", {
             writable: true,
             value: UUID.UUID() + files[i].name
           });
@@ -250,26 +262,24 @@ export class CreateCampaignComponent implements OnInit {
           let newFile: MediaFileAssetViewModel = new MediaFileAssetViewModel();
           newFile.name = files[i].name;
           newFile.base64File.name = files[i].name;
-          this.mediaAssetUtil.fileToBase64(files[i]).then(res => {
-            newFile.base64File.src = res;
-            newFile.base64File.type = files[i].type;
-            newFile.file = files[i];
-            newFile.type = files[i].type;
-            this.campaignViewModel.mediaFiles.push(newFile);
-            this.mediaFilesToShow$.next(this.campaignViewModel.mediaFiles);
-            this.onAddMediaFile.emit(newFile);
+          this.mediaAssetUtil
+            .fileToBase64(files[i])
+            .then(res => {
+              newFile.base64File.src = res;
+              newFile.base64File.type = files[i].type;
+              newFile.file = files[i];
+              newFile.type = files[i].type;
+              this.campaignViewModel.mediaFiles.push(newFile);
+              this.mediaFilesToShow$.next(this.campaignViewModel.mediaFiles);
+              this.onAddMediaFile.emit(newFile);
 
-            if (i == files.length - 1) {
-              this.imageSelector.nativeElement.value = "";
-              this.videoSelector.nativeElement.value = "";
-            }
-
-
-          }).catch(
-            error => console.log(error)
-          )
+              if (i == files.length - 1) {
+                this.imageSelector.nativeElement.value = "";
+                this.videoSelector.nativeElement.value = "";
+              }
+            })
+            .catch(error => console.log(error));
         }
-
       }
     }
   }
@@ -284,14 +294,19 @@ export class CreateCampaignComponent implements OnInit {
 
   setThumbnailArray(thumbnail) {
     this.campaignViewModel.mediaFiles.forEach(viewFile => {
-
-      if (viewFile.base64File.name.substr(0, viewFile.base64File.name.lastIndexOf('.')) == thumbnail.file.name.substr(0, thumbnail.file.name.lastIndexOf('.')) && !viewFile.thumbnailFile) {
+      if (
+        viewFile.base64File.name.substr(
+          0,
+          viewFile.base64File.name.lastIndexOf(".")
+        ) ==
+          thumbnail.file.name.substr(0, thumbnail.file.name.lastIndexOf(".")) &&
+        !viewFile.thumbnailFile
+      ) {
         viewFile.thumbnailFile = thumbnail;
         this.onThumbnailAdd.emit(viewFile);
       }
-    })
+    });
   }
-
 
   getbase64CroppedImage(b64Data) {
     this.onCropImage.emit(b64Data);
@@ -300,14 +315,17 @@ export class CreateCampaignComponent implements OnInit {
 
   campaignTypeWRTSelectedArtifacts() {
     let allowToCrreateCampaignWithoutImage = false;
-    this.selectedSocialNetwork$.subscribe(res => {
+    this.selectedSocialNetwork$.subscribe((res: any) => {
       // res.forEach(artifact => {
-      if (res.type == 'PI') {
+      if (res.type == "PI") {
         allowToCrreateCampaignWithoutImage = true;
       }
       // })
-    })
-    if (allowToCrreateCampaignWithoutImage && this.campaignViewModel.mediaFiles.length == 0) {
+    });
+    if (
+      allowToCrreateCampaignWithoutImage &&
+      this.campaignViewModel.mediaFiles.length == 0
+    ) {
       allowToCrreateCampaignWithoutImage = false;
     } else {
       allowToCrreateCampaignWithoutImage = true;
@@ -317,111 +335,121 @@ export class CreateCampaignComponent implements OnInit {
 
   checkIfPageSelected() {
     let pageExist = false;
-    if (this.selectedSocialNetwork$._value.length >= 1) {
-
+    let VALID = [];
+    this.selectedSocialNetwork$.subscribe((res: any) => {
+      console.log(res);
+      VALID = res;
+    });
+    if (VALID.length >= 1) {
       if (this.campaignTypeWRTSelectedArtifacts() == true) {
-        pageExist = true
+        pageExist = true;
       } else {
         pageExist = false;
         this.errorForForm(errors.errors.mediaFilesPintrestError);
       }
-    }
-    else {
+    } else {
       this.errorForForm(errors.errors.mediaFilesForScheduleError);
       pageExist = false;
     }
     return pageExist;
   }
 
-
   checkScheduleValidation() {
-    if (this.createButtonState == 'Schedule') {
-      if (this.campaignViewModel.scheduledAt < new Date() || !this.campaignViewModel.scheduledAt) {
+    if (this.createButtonState == "Schedule") {
+      if (
+        this.campaignViewModel.scheduledAt < new Date() ||
+        !this.campaignViewModel.scheduledAt
+      ) {
         this.errorForForm(errors.errors.mediaFilesForDateTime);
       } else {
         if (this.checkIfPageSelected() == true) {
           this.emitCampaign();
         }
       }
-    } else if (this.createButtonState == 'Post Now') {
+    } else if (this.createButtonState == "Post Now") {
       this.campaignViewModel.scheduledAt = new Date();
-      this.campaignViewModel.scheduledAt.setMinutes(this.campaignViewModel.scheduledAt.getMinutes() + 1);
+      this.campaignViewModel.scheduledAt.setMinutes(
+        this.campaignViewModel.scheduledAt.getMinutes() + 1
+      );
       if (this.checkIfPageSelected() == true) {
         this.emitCampaign();
       }
-    } else if (this.createButtonState == 'Add To Queue') {
+    } else if (this.createButtonState == "Add To Queue") {
       if (this.checkIfPageSelected() == true) {
         this.emitCampaign();
       }
     } else {
       this.emitCampaign();
     }
-
   }
 
   emitCampaign() {
-    this.campaignViewModel.state = (this.createButtonState == 'Save as draft' ?
-      CampaignStatusEnum.draft : this.createButtonState == 'Schedule' ?
-        CampaignStatusEnum.scheduled : this.createButtonState == 'Add To Queue' ?
-          CampaignStatusEnum.addToQueue : this.createButtonState == 'Post Now' ?
-            CampaignStatusEnum.postNow : CampaignStatusEnum.draft),
-      this.campaignViewModel.createdAt = new Date(),
+    (this.campaignViewModel.state =
+      this.createButtonState == "Save as draft"
+        ? CampaignStatusEnum.draft
+        : this.createButtonState == "Schedule"
+        ? CampaignStatusEnum.scheduled
+        : this.createButtonState == "Add To Queue"
+        ? CampaignStatusEnum.addToQueue
+        : this.createButtonState == "Post Now"
+        ? CampaignStatusEnum.postNow
+        : CampaignStatusEnum.draft),
+      (this.campaignViewModel.createdAt = new Date()),
       this.onCampaignSave.emit(this.campaignViewModel);
-
   }
   createCampaignValidation() {
     this.campaignViewModel.title = this.campaignViewModel.title.trim();
     this.campaignViewModel.description = this.campaignViewModel.description.trim();
-    if (this.campaignViewModel.title == '' || this.campaignViewModel.description == '') {
-
-      if (this.campaignViewModel.title == '') {
+    if (
+      this.campaignViewModel.title == "" ||
+      this.campaignViewModel.description == ""
+    ) {
+      if (this.campaignViewModel.title == "") {
         this.validationModel.isTitle = true;
-      }
-      else {
+      } else {
         this.validationModel.isDescription = true;
       }
-    }
-    else if (this.createButtonState == 'Schedule' || 'Post Now' || 'Add To Queue') {
+    } else if (
+      this.createButtonState == "Schedule" ||
+      "Post Now" ||
+      "Add To Queue"
+    ) {
       this.checkScheduleValidation();
-    }
-    else {
+    } else {
       this.emitCampaign();
     }
   }
   imageTaggingPopup(img, index) {
     const dialogRef = this.dialog.open(ImageTaggingComponent, {
-      width: '500px',
+      width: "500px",
       data: {
-        "img": img,
-        "files": this.campaignViewModel.mediaFiles[index],
-        "imgIndex": index
+        img: img,
+        files: this.campaignViewModel.mediaFiles[index],
+        imgIndex: index
       }
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('image tags', result);
+      console.log("image tags", result);
       if (this.campaignViewModel.mediaFiles.length >= 1 && result) {
         this.campaignViewModel.mediaFiles[index].tags = result.tags;
       }
       if (result) {
         this.campaignViewModel.mediaFiles[index].base64File.tags = result.tags;
-        if (this.campaignViewModel.mediaFiles[index].file) {
-          this.campaignViewModel.mediaFiles[index].file.tags = result.tags;
-        }
+        // if (this.campaignViewModel.mediaFiles[index].file) {
+        //   this.campaignViewModel.mediaFiles[index].file.tags = result.tags;
+        // }
         this.mediaFilesToShow$.next(this.campaignViewModel.mediaFiles);
       }
       if (this.campaign$ && result) {
-        this.processImageTags(this.campaignViewModel.mediaFiles[index])
+        this.processImageTags(this.campaignViewModel.mediaFiles[index]);
       }
-      console.log('image after tags', this.campaignViewModel.mediaFiles[index]);
-
+      console.log("image after tags", this.campaignViewModel.mediaFiles[index]);
     });
   }
 
   processImageTags(imageWithEditedTags) {
-
     this.onAddOrRemoveTags.emit(imageWithEditedTags);
-
   }
 
   // changeCropBox(value) {
@@ -440,7 +468,6 @@ export class CreateCampaignComponent implements OnInit {
   // playSelectedFile = (files) => {
   //   let file = files[0]
   //   let type = file.type
-
 
   //   let fileURL = this.domSanitizer.bypassSecurityTrustResourceUrl(URL.createObjectURL(file));
   //   let obj = {
@@ -471,7 +498,6 @@ export class CreateCampaignComponent implements OnInit {
 
   //     })
 
-
   //   // }
   // }
 
@@ -490,7 +516,6 @@ export class CreateCampaignComponent implements OnInit {
   //       console.log(result);
   //     });
   //   }
-
 
   // }
 
@@ -546,10 +571,6 @@ export class CreateCampaignComponent implements OnInit {
 
   // }
 
-
-
-
-
   // openDialog = () => {
   //   console.log(this.cropOption);
   //   const dialogRef = this.dialog.open(PopUpComponent, {
@@ -602,8 +623,6 @@ export class CreateCampaignComponent implements OnInit {
   //       }
   //     }
 
-
-
   //     // if (this.campaignViewModel.base64FilesToShow.length > 0) {
   //     //   let array = [];
   //     //   array = this.campaignViewModel.base64FilesToShow;
@@ -618,8 +637,3 @@ export class CreateCampaignComponent implements OnInit {
 
   // }
 }
-
-
-
-
-

@@ -1,8 +1,0 @@
-<!-- {{(newCampaignCommetns | async).campaignComments | json}} -->
-<div class="partial-comment" *ngIf="(newCampaignCommetns | async) && (newCampaignCommetns | async).campaignComments && (newCampaignCommetns | async).campaignComments.length > 0">
-  <div *ngFor="let c of ((newCampaignCommetns | async).campaignComments )">
-    <dami-comment (commentId) ="showChildMsg($event)" (commentReply)="commentNewReply($event)" [comment]="c"></dami-comment>
-    
-  </div>
-
-</div>

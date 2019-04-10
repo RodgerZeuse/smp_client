@@ -13,7 +13,6 @@
 (onCropImage)="onCropImage($event)"
 (onAddOrRemoveTags)="onAddOrRemoveTags($event)"
 [campaign$]="inputCampaign$"
-[customStatuses$]="campaignStatusStore.publishableStatuses"
 [selectedSocialNetwork$]="selectedNetworks$"
 (onCancelCampaign)="refreshAllVariables($event)"
 (onCampaignSave)="onCreate($event)">

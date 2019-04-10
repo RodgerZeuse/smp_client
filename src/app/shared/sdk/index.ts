@@ -55,28 +55,8 @@ import { CampaignApi } from './services/custom/Campaign';
 import { ContainerApi } from './services/custom/Container';
 import { SocialMediaAccountApi } from './services/custom/SocialMediaAccount';
 import { PostApi } from './services/custom/Post';
-import { CompanyMemberSocialAccountApi } from './services/custom/CompanyMemberSocialAccount';
-import { ActivityStreamApi } from './services/custom/ActivityStream';
 import { MediaFileAssetApi } from './services/custom/MediaFileAsset';
-import { CommentsApi } from './services/custom/Comments';
 import { TagApi } from './services/custom/Tag';
-import { CompanyApi } from './services/custom/Company';
-import { PostToQueueApi } from './services/custom/PostToQueue';
-import { CampaignStatusApi } from './services/custom/CampaignStatus';
-import { SlotApi } from './services/custom/Slot';
-import { SingleUserApi } from './services/custom/SingleUser';
-import { SlotTimeApi } from './services/custom/SlotTime';
-import { CampaignStatusValuesApi } from './services/custom/CampaignStatusValues';
-import { SystemPermissionsApi } from './services/custom/SystemPermissions';
-import { SecurityGroupApi } from './services/custom/SecurityGroup';
-import { ExternalUsersApi } from './services/custom/ExternalUsers';
-import { InvitesApi } from './services/custom/Invites';
-import { TaskManagerApi } from './services/custom/TaskManager';
-import { PostAnalyticsApi } from './services/custom/PostAnalytics';
-import { PaymentsApi } from './services/custom/Payments';
-import { PaymentGatewayApi } from './services/custom/PaymentGateway';
-import { CampaignArchiveApi } from './services/custom/CampaignArchive';
-import { PostArchiveApi } from './services/custom/PostArchive';
 /**
 * @module SDKBrowserModule
 * @description
@@ -114,28 +94,8 @@ export class SDKBrowserModule {
         ContainerApi,
         SocialMediaAccountApi,
         PostApi,
-        CompanyMemberSocialAccountApi,
-        ActivityStreamApi,
         MediaFileAssetApi,
-        CommentsApi,
         TagApi,
-        CompanyApi,
-        PostToQueueApi,
-        CampaignStatusApi,
-        SlotApi,
-        SingleUserApi,
-        SlotTimeApi,
-        CampaignStatusValuesApi,
-        SystemPermissionsApi,
-        SecurityGroupApi,
-        ExternalUsersApi,
-        InvitesApi,
-        TaskManagerApi,
-        PostAnalyticsApi,
-        PaymentsApi,
-        PaymentGatewayApi,
-        CampaignArchiveApi,
-        PostArchiveApi,
         internalStorageProvider,
         { provide: SDKStorage, useClass: StorageBrowser },
         { provide: SocketDriver, useClass: SocketBrowser }

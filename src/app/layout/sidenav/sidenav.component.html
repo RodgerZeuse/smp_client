@@ -1,8 +1,4 @@
 <mat-list role="list">
-    <mat-list-item role="listitem"  (click)="gotoCamapign()">My Campaigns</mat-list-item>
-    <mat-list-item role="listitem" *ngIf="(profileStore.userAccountType === 'company' || profileStore.haveAccess(groupRights.managesmaccounts))"  (click)="gotoMyNetworks()">My Networks</mat-list-item>
-    <mat-list-item role="listitem" *ngIf="(profileStore.userAccountType === 'company' || profileStore.haveAccess(groupRights.managesmaccounts))"  (click)="gotoNetworkDetails()">Network Details</mat-list-item>
-    <mat-list-item role="listitem" (click)="gotoPostToQueue()">Posts to Queue</mat-list-item>
-    <mat-list-item role="listitem" (click)="gotoCamapignStatus()">Campaign Status</mat-list-item>
-    <mat-list-item role="listitem" *ngIf="(profileStore.userAccountType === 'company' || profileStore.haveAccess(groupRights.managecompany))" (click)="gotoCompanyManagment()">Manage Company</mat-list-item>
+    <mat-list-item role="listitem" (click)="gotoCamapign()">My Campaigns</mat-list-item>
+    <mat-list-item role="listitem" (click)="gotoMyNetworks()">My Networks</mat-list-item>
 </mat-list>

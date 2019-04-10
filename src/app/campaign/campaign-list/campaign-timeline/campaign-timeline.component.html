@@ -72,18 +72,18 @@
                     <div>
                       <td style="padding-right: 50px"> {{campaign.title}}</td>
                       <td style="width: 44vw">{{campaign.description}}</td>
-                      <div *ngIf="(campaign.ownerId==profileStore.userId && profileStore.haveAccess(groupRights.deletemy)) || profileStore.haveAccess(groupRights.deleteany) || profileStore.userAccountType == 'company'">
+                      <div >
                         <td style="width: 5vw;">
                           <delete-campaign *ngIf="campaign.state!='Post Now'" [campaign]="(campaign)" (removeCampain)="removeCampaign($event)"></delete-campaign>
                         </td>
                       </div>
                         
                       <td>
-                       <div *ngIf="(campaign.ownerId==profileStore.userId && profileStore.haveAccess(groupRights.updatemy)) || profileStore.haveAccess(groupRights.updateany) || profileStore.userAccountType == 'company'">
+                       <div >
                           <mat-icon *ngIf="campaign.state=='Draft' || campaign.state=='Scheduled'" (click)="editCampaign(campaign)"> edit</mat-icon>
                       </div>
 
-                      <div *ngIf="(campaign.ownerId==profileStore.userId && profileStore.haveAccess(groupRights.reschedulemy)) || profileStore.haveAccess(groupRights.rescheduleany) || profileStore.userAccountType == 'company'">
+                      <div>
                           <i class="fa fa-fw fa-repeat" *ngIf="campaign.state=='Posted' || campaign.state=='Canceled'" (click)="editCampaign(campaign)"></i>
                       </div>
                     </td> 

@@ -7,26 +7,28 @@
       <div class="example-container">
         <div>
           <mat-form-field>
-            <input matInput placeholder="First Name" #fn="ngModel" required minlength="4" ngModel name="fn" [(ngModel)]="editProfile.firstName">
+            <input matInput placeholder="First Name" #fn="ngModel" required minlength="4" ngModel name="fn"
+              [(ngModel)]="editProfile.firstName">
           </mat-form-field>
           <mat-error *ngIf="((fn.touched && editProfile.firstName=='') || (!fn.value &&fNameError))">
             {{errors.firstNameError}}
           </mat-error>
           <mat-error *ngIf="fn.value && editProfile.firstName.length<3">
-              {{errors.nameLength}}
+            {{errors.nameLength}}
           </mat-error>
         </div>
         <div>
           <mat-form-field>
 
-            <input matInput placeholder="Last Name" #ln="ngModel" required minlength="4" ngModel [(ngModel)]="editProfile.lastName" name="ln">
+            <input matInput placeholder="Last Name" #ln="ngModel" required minlength="4" ngModel
+              [(ngModel)]="editProfile.lastName" name="ln">
           </mat-form-field>
         </div>
         <mat-error *ngIf="((ln.touched && editProfile.lastName=='')|| (!ln.value && lNameError))">
-            {{errors.lastNameError}}
+          {{errors.lastNameError}}
         </mat-error>
         <mat-error *ngIf="(ln.value && editProfile.lastName.length<3)">
-            {{errors.nameLength}}
+          {{errors.nameLength}}
         </mat-error>
 
         <div class="dist-end">
@@ -55,9 +57,6 @@
           </mat-form-field> 
         </div> -->
 
-
-
-      <payment-information [paymentInformationForm]="paymentInformationForm" [user]="user"></payment-information>
       <button mat-raised-button color="primary">Update</button>
     </mat-tab>
   </mat-tab-group>

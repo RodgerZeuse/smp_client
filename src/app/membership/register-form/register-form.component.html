@@ -4,8 +4,8 @@
   </mat-card-header>
   <mat-horizontal-stepper linear #stepper>
     <mat-step [stepControl]="loginForm">
-      <login-information [loginForm]="loginForm" (isEmailValidated)="isEmailValidated($event)" (isCompanyValidated)="isCompanyValidated($event)"
-        [user]="user"></login-information>
+      <login-information [loginForm]="loginForm" (isEmailValidated)="isEmailValidated($event)"
+        (isCompanyValidated)="isCompanyValidated($event)" [user]="user"></login-information>
       <div class="btn-wrapper">
         <button [disabled]='!loginForm.valid || isEmailInvalid || isCompanyInvalid' mat-raised-button mat-button
           matStepperNext color="primary">Next</button>
@@ -18,21 +18,12 @@
       <personal-information [personInformationForm]="personInformationForm" [user]="user"></personal-information>
       <div class="btn-wrapper">
         <button mat-raised-button mat-button matStepperPrevious>Back</button>
-        <button mat-raised-button mat-button [disabled]="!personInformationForm.valid" matStepperNext color="primary">Next</button>
+        <button mat-raised-button mat-button [disabled]="(!loginForm.valid || !personInformationForm.valid)"
+          color="primary" type="button" (click)="signUp()">Sign Up</button>
         <button mat-raised-button mat-button (click)=toLogin() style="margin-left:60%" color="primary">Login</button>
       </div>
       <ng-template matStepLabel>Personal Information</ng-template>
     </mat-step>
 
-    <mat-step [stepControl]="paymentInformationForm">
-      <payment-information [paymentInformationForm]="paymentInformationForm" [user]="user"></payment-information>
-      <ng-template matStepLabel>Payment Information</ng-template>
-      <mat-error *ngFor="let message of (alertModel$ | async).messages">{{message}}</mat-error>
-      <div class="btn-wrapper">
-        <button mat-raised-button mat-button matStepperPrevious>Back</button>
-        <button mat-raised-button mat-button [disabled]="(!loginForm.valid || !personInformationForm.valid)" color="primary" type="button" (click)="signUp()">Sign Up</button>
-        <button mat-raised-button mat-button (click)=toLogin() style="margin-left:60%" color="primary">Login</button>
-      </div>
-    </mat-step>
   </mat-horizontal-stepper>
 </mat-card>

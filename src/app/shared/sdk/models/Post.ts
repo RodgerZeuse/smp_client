@@ -1,10 +1,7 @@
 /* tslint:disable */
 import {
   SocialMediaAccount,
-  MediaFileAsset,
-  Comments,
-  CampaignStatus,
-  PostAnalytics
+  MediaFileAsset
 } from '../index';
 
 declare var Object: any;
@@ -24,13 +21,8 @@ export interface PostInterface {
   "createdOn"?: Date;
   "updatedOn"?: Date;
   "mediaFiles"?: Array<any>;
-  "campaignStatusId"?: any;
-  "statusId"?: any;
   socialMediaAccounts?: SocialMediaAccount;
   mediaFile?: MediaFileAsset[];
-  postComments?: Comments[];
-  campaignStatuses?: CampaignStatus;
-  postAnalytics?: PostAnalytics;
 }
 
 export class Post implements PostInterface {
@@ -49,13 +41,8 @@ export class Post implements PostInterface {
   "createdOn": Date;
   "updatedOn": Date;
   "mediaFiles": Array<any>;
-  "campaignStatusId": any;
-  "statusId": any;
   socialMediaAccounts: SocialMediaAccount;
   mediaFile: MediaFileAsset[];
-  postComments: Comments[];
-  campaignStatuses: CampaignStatus;
-  postAnalytics: PostAnalytics;
   constructor(data?: PostInterface) {
     Object.assign(this, data);
   }
@@ -152,14 +139,6 @@ export class Post implements PostInterface {
           type: 'Array&lt;any&gt;',
           default: <any>[]
         },
-        "campaignStatusId": {
-          name: 'campaignStatusId',
-          type: 'any'
-        },
-        "statusId": {
-          name: 'statusId',
-          type: 'any'
-        },
       },
       relations: {
         socialMediaAccounts: {
@@ -177,30 +156,6 @@ export class Post implements PostInterface {
           relationType: 'embedsMany',
                   keyFrom: 'mediaFiles',
           keyTo: 'id'
-        },
-        postComments: {
-          name: 'postComments',
-          type: 'Comments[]',
-          model: 'Comments',
-          relationType: 'hasMany',
-                  keyFrom: 'id',
-          keyTo: 'postId'
-        },
-        campaignStatuses: {
-          name: 'campaignStatuses',
-          type: 'CampaignStatus',
-          model: 'CampaignStatus',
-          relationType: 'belongsTo',
-                  keyFrom: 'statusId',
-          keyTo: 'id'
-        },
-        postAnalytics: {
-          name: 'postAnalytics',
-          type: 'PostAnalytics',
-          model: 'PostAnalytics',
-          relationType: 'hasOne',
-                  keyFrom: 'id',
-          keyTo: 'postId'
         },
       }
     }

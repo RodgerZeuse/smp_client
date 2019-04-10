@@ -73,7 +73,7 @@
       <mat-datepicker #pi></mat-datepicker>
     </mat-form-field>
 
-    <div *ngIf="(profileStore.userAccountType === 'company' || profileStore.haveAccess(groupRights.showarchive))">
+    <div>
       <section class="example-section">
         <mat-slide-toggle class="example-margin" (change)="showArchive()" [checked]="isArchiveOn" >
           Show Archive
